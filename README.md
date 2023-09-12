@@ -17,3 +17,13 @@ npx prettier . --check
 ```
 # Vitest 
 
+To run all tests run:
+
+```
+npm test
+```
+To run test coverage run:
+
+```
+npm run coverage
+```
