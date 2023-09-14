@@ -12,54 +12,41 @@ function PokemonInfoPage() {
   const maxNumPokemon = 151;
   const [cardColor, setCardColor] = useState({});
   const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
-  const { data: pokemonDetails, isLoading, error } = useQuery(['pokemon', url], () =>
-    getPokemonData(url)
-  );
+  const {
+    data: pokemonDetails,
+    isLoading,
+    error,
+  } = useQuery(['pokemon', url], () => getPokemonData(url));
   const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
   const { data: speciesData, isLoading: isLoadingSpecies } = useQuery(
     ['species', speciesUrl],
     () => getPokemonData(speciesUrl)
   );
 
-  const { data: nextData} = useQuery(['pokemon'], () =>
-    getPokemonData(`https://pokeapi.co/api/v2/pokemon/${id+1}/`)
-  );
-  const { data: nextSpeciesData} = useQuery(['species'], () =>
-    getPokemonData(`https://pokeapi.co/api/v2/pokemon-species/${id+1}/`)
-  );
-
-  console.log(nextData);
-  console.log(nextSpeciesData);
   console.log(pokemonDetails);
   console.log(speciesData);
   useEffect(() => {
-    if(!pokemonDetails) return;
+    if (!pokemonDetails) {
+      console.log("no pokemon details");
+      return
+    };
     const typeColorGradient = getTypeColorGradient(pokemonDetails.types);
-    setCardColor({ 
-      background: `linear-gradient(to bottom, ${typeColorGradient[0]} 10%, ${typeColorGradient[1]} 100%` 
+    setCardColor({
+      background: `linear-gradient(to bottom, ${typeColorGradient[0]} 10%, ${typeColorGradient[1]} 100%`,
     });
   }, [pokemonDetails]);
 
-  if (isLoading || isLoadingSpecies) {
-    return <div>Loading...</div>;
-  }
-  
   if (error) {
     return <div>Something went wrong...</div>;
   }
   return (
     <>
+    {!isLoading && !isLoadingSpecies && pokemonDetails && speciesData && (
       <div className="info-bg-container">
         <div className="info-home-btn">
           <Link to="/">
             <button>Home</button>
           </Link>
-          <button onClick={() => setId(id - 1)} disabled={id === 1}>
-            Previous
-          </button>
-          <button onClick={() => setId(id + 1)} disabled={id === maxNumPokemon}>
-            Next
-          </button>
         </div>
 
         {/* <input
@@ -68,44 +55,56 @@ function PokemonInfoPage() {
       min={1}
       max={maxNumPokemon}
       onChange={e => setId(parseInt(e.target.value))}
-    />  */} 
-    <div 
-      className="pokemon-card info"
-      style={cardColor}>
-        <div className="pokemon-name-id">
-          <h1>{formatPokemonName(pokemonDetails?.name)}</h1>
-          <h4 className="pokemon-text">
-            {'#' + ('00' + pokemonDetails?.id).slice(-3)}
-          </h4>
-        </div>
-        <div className="info-pokemon-img">
-          <img className="pokeball-icon" src={pokeBall} alt="pokeball icon" />
-          <img
-            className="pokemon-sprite"
-            src={
-              pokemonDetails?.sprites?.other?.['official-artwork']
-                ?.front_default || '#'
-            }
-            alt={pokemonDetails.name}
-          />
-        </div>
-        <div className="info-pokemon-data">
-          <div className="type-list">
-            {pokemonDetails.types.map((type: PokemonType) => (
-              <span
-                key={type.slot}
-                className="type-badge"
-                style={{ backgroundColor: `${TYPE_COLORS[type.type.name]}` }}
-              >
-                {type.type.name.charAt(0).toUpperCase() +
-                  type.type.name.slice(1)}
-              </span>
-            ))}
+    />  */}
+        <div className="pokemon-card info" style={cardColor}>
+          <div className="pokemon-name-id">
+            <h1>{formatPokemonName(pokemonDetails?.name)}</h1>
+            <h4 className="pokemon-text">
+              {'#' + ('00' + pokemonDetails?.id).slice(-3)}
+            </h4>
           </div>
-          <div className="pokemon-genus">
-            {isLoadingSpecies ? 'Loading...' : speciesData?.genera[7]?.genus}
+          <div className="info-pokemon-img">
+            <img className="pokeball-icon" src={pokeBall} alt="pokeball icon" />
+            <img
+              className="pokemon-sprite"
+              src={
+                pokemonDetails?.sprites?.other?.['official-artwork']
+                  ?.front_default || '#'
+              }
+              alt={pokemonDetails.name}
+            />
+          </div>
+          <div className="info-pokemon-data">
+            <div className="type-list">
+              {pokemonDetails.types.map((type: PokemonType) => (
+                <span
+                  key={type.slot}
+                  className="type-badge"
+                  style={{ backgroundColor: `${TYPE_COLORS[type.type.name]}` }}
+                >
+                  {type.type.name.charAt(0).toUpperCase() +
+                    type.type.name.slice(1)}
+                </span>
+              ))}
+            </div>
+            <div className="pokemon-genus">
+              {isLoadingSpecies ? 'Loading...' : speciesData?.genera[7]?.genus}
+            </div>
           </div>
         </div>
+        <div>
+          <button 
+            onClick={() => setId(id - 1)} 
+            disabled={id === 1}
+            className="prev-btn">
+            Prev
+          </button>
+          <button 
+            onClick={() => setId(id + 1)} 
+            disabled={id === maxNumPokemon}
+            className="next-btn">
+            Next
+          </button>
         </div>
         <div className="pokemon-description">
           <h5 className="pokemon-text info-text">Description</h5>
@@ -206,6 +205,7 @@ function PokemonInfoPage() {
           </div>
         </div>
       </div>
+      )}
     </>
   );
 }
