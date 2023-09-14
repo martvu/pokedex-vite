@@ -1,17 +1,18 @@
 import { getPokemonData } from '../utils/pokeApi';
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TYPE_COLORS, STAT_COLORS } from '../utils/constants';
 import pokeBall from '../assets/img/pb-icon.svg';
 import { FlavorText, PokemonStat, PokemonType } from '../utils/pokeApiTypes';
+import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
 
 function PokemonInfoPage() {
   const [id, setId] = useState(1);
   const maxNumPokemon = 151;
-
+  const [cardColor, setCardColor] = useState({});
   const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
-  const { data: pokemonDetails, isLoading } = useQuery(['pokemon', url], () =>
+  const { data: pokemonDetails, isLoading, error } = useQuery(['pokemon', url], () =>
     getPokemonData(url)
   );
   const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
@@ -20,10 +21,31 @@ function PokemonInfoPage() {
     () => getPokemonData(speciesUrl)
   );
 
+  const { data: nextData} = useQuery(['pokemon'], () =>
+    getPokemonData(`https://pokeapi.co/api/v2/pokemon/${id+1}/`)
+  );
+  const { data: nextSpeciesData} = useQuery(['species'], () =>
+    getPokemonData(`https://pokeapi.co/api/v2/pokemon-species/${id+1}/`)
+  );
+
+  console.log(nextData);
+  console.log(nextSpeciesData);
   console.log(pokemonDetails);
   console.log(speciesData);
-  if (isLoading) {
+  useEffect(() => {
+    if(!pokemonDetails) return;
+    const typeColorGradient = getTypeColorGradient(pokemonDetails.types);
+    setCardColor({ 
+      background: `linear-gradient(to bottom, ${typeColorGradient[0]} 10%, ${typeColorGradient[1]} 100%` 
+    });
+  }, [pokemonDetails]);
+
+  if (isLoading || isLoadingSpecies) {
     return <div>Loading...</div>;
+  }
+  
+  if (error) {
+    return <div>Something went wrong...</div>;
   }
   return (
     <>
@@ -46,9 +68,12 @@ function PokemonInfoPage() {
       min={1}
       max={maxNumPokemon}
       onChange={e => setId(parseInt(e.target.value))}
-    /> */}
-        <div>
-          <h1>{pokemonDetails?.name}</h1>
+    />  */} 
+    <div 
+      className="pokemon-card info"
+      style={cardColor}>
+        <div className="pokemon-name-id">
+          <h1>{formatPokemonName(pokemonDetails?.name)}</h1>
           <h4 className="pokemon-text">
             {'#' + ('00' + pokemonDetails?.id).slice(-3)}
           </h4>
@@ -80,6 +105,7 @@ function PokemonInfoPage() {
           <div className="pokemon-genus">
             {isLoadingSpecies ? 'Loading...' : speciesData?.genera[7]?.genus}
           </div>
+        </div>
         </div>
         <div className="pokemon-description">
           <h5 className="pokemon-text info-text">Description</h5>
