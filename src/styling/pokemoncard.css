@@ -43,11 +43,5 @@
     margin-right: 4px;
   }
   
-  .pokemon-picture {
-    width: 100px; 
-    height: 100px; 
-    background-image: url('pokemon-image.png'); /*TODO add actual image*/
-    background-size: cover;
-    margin: 8px auto;
-  }
+
     
