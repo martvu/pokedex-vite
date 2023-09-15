@@ -1,8 +1,20 @@
 import { Pokemon, PokemonType } from '../utils/pokeApiTypes'
+import '../styling/pokemoncard.css'
 
-// This function might have to be replaced into some other class
+
+interface PokemoncardProps {
+  pokemonInfo: Pokemon;
+}
+
+export default function Pokemoncard ({pokemonInfo}: PokemoncardProps){
+  // Name, type and number can be derived from the Pokemon
+  const id: number = pokemonInfo.id
+  const types: PokemonType[] = pokemonInfo.types
+  const name: string = pokemonInfo.name
+
+  // This function might have to be replaced into some other class
 // If id exists in localstorage, id is removed
-export function setFavorite(pokemonId:number){
+function setFavorite(pokemonId:number){
   // Retrieving the string
   let favoritesString:string|null = localStorage.getItem("favorites")
 
@@ -42,7 +54,7 @@ export function setFavorite(pokemonId:number){
 }
 
 // Favorite is derived from local storage
-export function isFavorite(pokemonId:number){
+function isFavorite(pokemonId:number){
   const idToCheck:string = pokemonId.toString()
 
   // Retrieving the string
@@ -64,22 +76,12 @@ export function isFavorite(pokemonId:number){
   // use conditional css classes to render the heart
 }
 
-interface PokemoncardProps {
-  pokemonInfo: Pokemon;
-}
-
-export default function Pokemoncard ({pokemonInfo}: PokemoncardProps){
-  // Name, type and number can be derived from the Pokemon
-  const id: number = pokemonInfo.id
-  const types: PokemonType[] = pokemonInfo.types
-  const name: string = pokemonInfo.name
-
-
   return (
     <div className='pokemon-card'>
       <div className='header'>
         <p>{name}</p>
         <div className='heart'></div>
+        <button className={`heart ${isFavorite(id) ? 'active' : ''}`}></button>
       </div>
       <div className='pokemon-types'>
       {types.map((type, index) => (
