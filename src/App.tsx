@@ -1,6 +1,7 @@
 import './App.css';
-import Pokemoncard from './components/pokemoncard';
+import Pokemoncard, { setFavorite, isFavorite } from './components/pokemoncard';
 import { Pokemon, NamedAPIResource, PokemonAbility, PokemonSprites, PokemonType, PokemonStat } from './utils/pokeApiTypes';  // Replace with the actual path to your types file
+
 
 const pikachu: Pokemon = {
   id: 25, 
@@ -69,11 +70,22 @@ const pikachu: Pokemon = {
   ],
 };
 
+function toggleFavorite(){
+  setFavorite(25)
+}
+
+function isFav(){
+  isFavorite(25)
+}
 function App() {
   return (
     <div>
       <div> Hello</div>
       <Pokemoncard pokemonInfo={pikachu}></Pokemoncard>
+      <button onClick={() => toggleFavorite()}>
+      </button>
+      <button onClick={() => isFav()}>
+      </button>
     </div>
   )
 }
