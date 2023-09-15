@@ -79,7 +79,7 @@ const pikachu: Pokemon = {
 
 function App() {
   return (
-    <div>
+    <div className='container'>
       <div> Hello</div>
       <Pokemoncard pokemonInfo={pikachu}></Pokemoncard>
     </div>
