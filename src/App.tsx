@@ -61,10 +61,17 @@ const pikachu: Pokemon = {
 
   types: [
     {
-      slot: 1, // Replace with the desired slot
+      slot: 1, 
       type: {
-        name: "electric", // Replace with the type name
-        url: "https://pokeapi.co/api/v2/type/13/", // Replace with the actual URL
+        name: "electric", 
+        url: "https://pokeapi.co/api/v2/type/13/", 
+      },
+    } as PokemonType,
+    {
+      slot: 2, 
+      type: {
+        name: "fire",
+        url: "https://pokeapi.co/api/v2/type/13/", 
       },
     } as PokemonType,
   ],

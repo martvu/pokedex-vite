@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Pokemon, PokemonType } from '../utils/pokeApiTypes'
 import '../styling/pokemoncard.css'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-
+import { colors } from '../utils/mapping/cardBackground';
 
 interface PokemoncardProps {
   pokemonInfo: Pokemon;
@@ -15,9 +15,13 @@ export default function Pokemoncard ({pokemonInfo}: PokemoncardProps){
   const types: PokemonType[] = pokemonInfo.types
   const name: string = pokemonInfo.name
 
+  // Generate a CSS gradient based on Pokémon types
+  const gradientColors = types.map((type) => colors[type.type.name] || 'white');
+  const gradient = `linear-gradient(to right, ${gradientColors.join(', ')})`
+
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
 
-  // This function might have to be replaced into some other class
+// This function might have to be replaced into some other class
 // If id exists in localstorage, id is removed
 function setFavorite(){
   // Retrieving the string
@@ -95,7 +99,7 @@ function isFavorite(){
 
 
   return (
-    <div className='pokemon-card'>
+    <div className='pokemon-card' style={{ background: gradient }}>
       <div className='header'>
         <p>{name}</p>
         <button onClick={setFavorite} className='transparent-button'>
@@ -111,7 +115,9 @@ function isFavorite(){
           </div>
       ))}
       </div>
-      <div className='pokemon-picture'></div>
+      <div>
+        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
+      </div>
       <div>{id}</div>
     </div>
   )
