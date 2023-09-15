@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Pokemon, PokemonType } from '../utils/pokeApiTypes'
 import '../styling/pokemoncard.css'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 
 interface PokemoncardProps {
@@ -7,29 +9,37 @@ interface PokemoncardProps {
 }
 
 export default function Pokemoncard ({pokemonInfo}: PokemoncardProps){
+  
   // Name, type and number can be derived from the Pokemon
   const id: number = pokemonInfo.id
   const types: PokemonType[] = pokemonInfo.types
   const name: string = pokemonInfo.name
 
+  const [isFavorited, setIsFavorited] = useState<boolean>(false);
+
   // This function might have to be replaced into some other class
 // If id exists in localstorage, id is removed
-function setFavorite(pokemonId:number){
+function setFavorite(){
   // Retrieving the string
   let favoritesString:string|null = localStorage.getItem("favorites")
 
   if (favoritesString == null){
     // Create array of favorites
-    const idAsArray:number[] = [pokemonId]
+    const idAsArray:number[] = [id]
     const idAsString:string = JSON.stringify(idAsArray)
+
+    // Favorite to localstorage and to state
     localStorage.setItem("favorites", idAsString)
+    setIsFavorited(true)
+
+    console.log("Creating new array and setting id:", id)
     return
   }
 
   else{ 
     // Retrieve and mutate array
     const favoritesArray:string[] = JSON.parse(favoritesString)
-    const index = favoritesArray.indexOf(pokemonId.toString());
+    const index = favoritesArray.indexOf(id.toString());
 
     if (index !== -1) {
       // This function has been called on a card that was already favorited
@@ -38,14 +48,19 @@ function setFavorite(pokemonId:number){
 
       //localStorage.removeItem("favorites")
       localStorage.setItem("favorites", favorites)
+      setIsFavorited(false)
+      console.log("Removing id:", id)
+
       return
     }
     else {
       // Add this id to favorites
-      const newFavoritesArray:string[] =[...favoritesArray, pokemonId.toString()]
+      const newFavoritesArray:string[] =[...favoritesArray, id.toString()]
       const favorites:string = JSON.stringify(newFavoritesArray)
-  
+      console.log("Adding id:", id)
+
       localStorage.removeItem("favorites")
+      setIsFavorited(true)
       localStorage.setItem("favorites", favorites)
 
       return
@@ -53,9 +68,10 @@ function setFavorite(pokemonId:number){
   }
 }
 
+//TODO not necessary to use this function as of right now (using state instead)
 // Favorite is derived from local storage
-function isFavorite(pokemonId:number){
-  const idToCheck:string = pokemonId.toString()
+function isFavorite(){
+  const idToCheck:string = id.toString()
 
   // Retrieving the string
   const favoritesAsString: string|null = localStorage.getItem("favorites")
@@ -76,12 +92,17 @@ function isFavorite(pokemonId:number){
   // use conditional css classes to render the heart
 }
 
+
+
   return (
     <div className='pokemon-card'>
       <div className='header'>
         <p>{name}</p>
-        <div className='heart'></div>
-        <button className={`heart ${isFavorite(id) ? 'active' : ''}`}></button>
+        <button onClick={setFavorite} className='transparent-button'>
+          <span className={isFavorited ? "favorite-icon-active" : "favorite-icon-inactive"}>
+            <FavoriteBorderIcon />
+          </span>
+        </button>
       </div>
       <div className='pokemon-types'>
       {types.map((type, index) => (
