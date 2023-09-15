@@ -1,11 +1,41 @@
+
+/*
 .pokemon-card {
+    display: inline-block;
+    position: relative; 
+    width: 100px;
+    height: 180px;
     border: 2px solid #ddd;
     padding: 16px;
     margin: 16px;
     background-color: #f9f9f9;
     border-radius: 8px;
-    display: inline-block;
     text-align: center;
+  }
+*/
+
+/* Default styles for screens wider than 400px */
+.pokemon-card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: calc(20% - 32px); 
+    max-width: 400px; /* Limit the maximum width to 400px */
+    height: 35vh;
+    border: 2px solid #ddd;
+    padding: 16px;
+    margin: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  /* Media query for screens less than 400px wide */
+  @media screen and (max-width: 400px) {
+    .pokemon-card {
+      width: 80%; 
+      margin: 0;
+    }
   }
   
   .header {
@@ -15,6 +45,7 @@
     font-weight: bold;
   }
   
+
   .transparent-button {
     background: transparent;
     border: none;
@@ -34,6 +65,15 @@
     flex-wrap: wrap;
     margin-top: 8px;
   }
+
+  @media screen and (max-width: 400px) {
+    .pokemon-types {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 24px;
+      justify-content: center;
+    }
+  }
   
   .type {
     background-color: #ffcc00;
@@ -43,5 +83,14 @@
     margin-right: 4px;
   }
   
+  p {
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+  }
+  img {
+    max-width: 100%; /* Ensure the image doesn't exceed its parent's width */
+    height: auto; /* Maintain aspect ratio */
+  }
 
     
