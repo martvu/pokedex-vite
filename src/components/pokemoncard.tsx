@@ -111,14 +111,16 @@ function isFavorite(){
       <div className='pokemon-types'>
       {types.map((type, index) => (
           <div key={index} className="type">
-            {type.type.name}
+            <p>
+              {type.type.name}
+            </p>
           </div>
       ))}
       </div>
-      <div>
+      <div style={{maxHeight: '80px'}}>
         <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
       </div>
-      <div>{id}</div>
+      <div>#{id}</div>
     </div>
   )
 
