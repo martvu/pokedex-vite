@@ -25,7 +25,7 @@ export default function Pokemoncard ({pokemonInfo}: PokemoncardProps){
 // If id exists in localstorage, id is removed
 function setFavorite(){
   // Retrieving the string
-  let favoritesString:string|null = localStorage.getItem("favorites")
+  const favoritesString:string|null = localStorage.getItem("favorites")
 
   if (favoritesString == null){
     // Create array of favorites
@@ -73,7 +73,7 @@ function setFavorite(){
 }
 
 //TODO not necessary to use this function as of right now (using state instead)
-// Favorite is derived from local storage
+/* Favorite is derived from local storage
 function isFavorite(){
   const idToCheck:string = id.toString()
 
@@ -96,7 +96,7 @@ function isFavorite(){
   // use conditional css classes to render the heart
 }
 
-
+*/
 
   return (
     <div className='pokemon-card' style={{ background: gradient }}>
