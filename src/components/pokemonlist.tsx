@@ -1,19 +1,25 @@
 import { getPokemonData, getPokemonDataList } from "../utils/pokeApi"
 import { useState, useEffect } from "react";
+import { Pokemon } from "../utils/pokeApiTypes";
 import Pokemoncard from "./pokemoncard";
 
 export default function PokemonList(){
-    const [pokemonData, setPokemonData] = useState(null);
+    const [pokemonList, setPokemonList] = useState<Pokemon[]>([]); // State to store the list of Pokémon
+    const [selectedPokemon, setSelectedPokemon] = useState<Pokemon>(); //TODO could possibly be moved out one layer
 
-    async function getAll(){
-        const data = getPokemonDataList("https://pokeapi.co/api/v2/pokemon?limit=151")
-        console.log(data)
-        return;
+    async function getAll() {
+        try {
+            const data = await getPokemonDataList("https://pokeapi.co/api/v2/pokemon?limit=151")
+            setPokemonList(data);
+        } catch (error) {
+            console.error("Error fetching Pokémon:", error);
+        }
     }
+    
     async function getOne() {
         try {
             const data = await getPokemonData("https://pokeapi.co/api/v2/pokemon/1/");
-            setPokemonData(data);
+            setSelectedPokemon(data);
         } catch (error) {
             console.error("Error fetching Pokémon:", error);
         }
@@ -21,14 +27,21 @@ export default function PokemonList(){
 
     useEffect(() => {
         // Fetch the Pokémon when the component mounts
-        getOne();
+        getAll();
       }, []);
 
     return (
         <div>
             <button onClick={getAll}>get all</button>
             <button onClick={getOne}>get one</button>
-            {pokemonData && <Pokemoncard pokemonInfo={pokemonData} />}
+            <div>
+                <h2>Pokémon List</h2>
+                <div className="pokemon-card-container">
+                    {pokemonList.map((pokemon, index) => (
+                        <Pokemoncard key={index + 1} pokemonInfo={pokemon} />
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import './App.css';
-import PokemonCard from './components/PokemonCard';
-import { usePokemonData } from './utils/pokeApi';
+import PokemonList from './components/pokemonlist';
 
 function App() {
   // access data from the usePokemonData hook
@@ -19,7 +18,8 @@ function App() {
   }
   return (
     <div className='container'>
-      <PokemonCard pokemonInfo={data}/>
+      <div> Hello</div>
+      <PokemonList></PokemonList>
     </div>
   )
 }
