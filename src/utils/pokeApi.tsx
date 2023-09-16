@@ -19,7 +19,7 @@ export function usePokemonDataList(limit: string) {
   );
 }
 
-const getPokemonData = async (url: string) => {
+export const getPokemonData = async (url: string) => {
   try {
     const response = await fetch(url);
     if (!response.ok) {

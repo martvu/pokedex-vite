@@ -1,4 +1,4 @@
-import { getPokemonData } from '../utils/pokeApi';
+import { getPokemonData, usePokemonData } from '../utils/pokeApi';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -11,12 +11,11 @@ function PokemonInfoPage() {
   const [id, setId] = useState(1);
   const maxNumPokemon = 151;
   const [cardColor, setCardColor] = useState({});
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
   const {
     data: pokemonDetails,
     isLoading,
     error,
-  } = useQuery(['pokemon', url], () => getPokemonData(url));
+  } = usePokemonData(id.toString());
   const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
   const { data: speciesData, isLoading: isLoadingSpecies } = useQuery(
     ['species', speciesUrl],

@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Pokemon } from '../utils/pokeApiTypes';
-import { getPokemonDataList } from '../utils/pokeApi';
-import { useQuery } from '@tanstack/react-query';
+import { usePokemonDataList } from '../utils/pokeApi';
 
 function PokemonListPage() {
-  const url = `https://pokeapi.co/api/v2/pokemon?limit=151`;
-  const { data: pokemonDataList, isLoading } = useQuery(['pokemonList', url], () =>
-    getPokemonDataList(url)
-  );
+  const NUM_POKEMON = 151;
+  const { data: pokemonDataList, isLoading } = usePokemonDataList(NUM_POKEMON.toString());
 
   if (isLoading) {
     return <div>Loading...</div>;
