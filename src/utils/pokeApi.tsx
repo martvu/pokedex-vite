@@ -8,7 +8,7 @@ const SPECIES_URL = 'https://pokeapi.co/api/v2/pokemon-species';
 export function usePokemonData(pokemonId: string) {
   return useQuery(
     ['pokemonData', pokemonId], 
-    () => getPokemonData(BASE_URL + '/' + pokemonId)
+    () => getPokemonData(BASE_URL + '/' + pokemonId + '/')
   );
 }
 
@@ -23,7 +23,7 @@ export function usePokemonDataList(limit: number) {
 export function useSpeciesData(pokemonId: number) {
   return useQuery(
     ['speciesData', pokemonId.toString()], 
-    () => getPokemonData(SPECIES_URL + '/' + pokemonId.toString())
+    () => getPokemonData(SPECIES_URL + '/' + pokemonId.toString() + '/')
   );
 }
 
