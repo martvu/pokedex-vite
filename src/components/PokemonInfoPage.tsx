@@ -53,7 +53,7 @@ function PokemonInfoPage() {
         {error || speciesError && (<div>Error fetching data </div>)}
         {pokemonDetails && speciesData && (
           <>
-            <div className="pokemon-card info" style={cardColor}>
+            <div className="info-pokemon-card" style={cardColor}>
               <div className="pokemon-name-id">
                 <h1>{formatPokemonName(pokemonDetails?.name)}</h1>
                 <h4 className="pokemon-text">
@@ -62,12 +62,12 @@ function PokemonInfoPage() {
               </div>
               <div className="info-pokemon-img">
                 <img
-                  className="pokeball-icon"
+                  className="info-pokeball-icon"
                   src={pokeBall}
                   alt="pokeball icon"
                 />
                 <img
-                  className="pokemon-sprite"
+                  className="info-pokemon-sprite"
                   src={
                     pokemonDetails?.sprites?.other?.['official-artwork']
                       ?.front_default || '#'
@@ -76,11 +76,11 @@ function PokemonInfoPage() {
                 />
               </div>
               <div className="info-pokemon-data">
-                <div className="type-list">
+                <div className="info-type-list">
                   {pokemonDetails.types.map((type: PokemonType) => (
                     <span
                       key={type.slot}
-                      className="type-badge"
+                      className="info-type-badge"
                       style={{
                         backgroundColor: `${TYPE_COLORS[type.type.name]}`,
                       }}
