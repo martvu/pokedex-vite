@@ -15,13 +15,15 @@ To check if all files are formatted run:
 ```
 npx prettier . --check
 ```
-# Vitest 
+
+# Vitest
 
 To run all tests run:
 
 ```
 npm test
 ```
+
 To run test coverage run:
 
 ```

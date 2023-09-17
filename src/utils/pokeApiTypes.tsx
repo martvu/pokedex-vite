@@ -134,7 +134,7 @@ export interface VersionGroupFlavorText {
   version_group: NamedAPIResource;
 }
 
-// 
+//
 export interface Ability {
   /** The identifier for this resource. */
   id: number;
@@ -340,9 +340,9 @@ export interface Pokemon {
   types: PokemonType[];
 }
 
-export const emptyPokemon:Pokemon = {
+export const emptyPokemon: Pokemon = {
   id: 0,
-  name: "",
+  name: '',
   base_experience: 0,
   height: 0,
   is_default: false,
@@ -352,25 +352,25 @@ export const emptyPokemon:Pokemon = {
   forms: [],
   game_indices: [],
   held_items: [],
-  location_area_encounters: "",
+  location_area_encounters: '',
   moves: [],
   sprites: {
-    front_default: "",
-    front_shiny: "",
-    back_default: "",
-    back_shiny: "",
-    front_female: "",
-    front_shiny_female: "",
-    back_female: "",
-    back_shiny_female: ""
+    front_default: '',
+    front_shiny: '',
+    back_default: '',
+    back_shiny: '',
+    front_female: '',
+    front_shiny_female: '',
+    back_female: '',
+    back_shiny_female: '',
   },
   species: {
-    name: "",
-    url: ""
+    name: '',
+    url: '',
   },
   stats: [],
   types: [],
-}
+};
 
 export interface PokemonAbility {
   /** Whether or not this is a hidden ability. */
@@ -446,17 +446,17 @@ export interface PokemonSprites {
   back_shiny_female: string;
   /** Undocumented property. Might contain keys = "dream_world", "home", "official-artwork". */
   other?: {
-      [key in string]?: {
-          [spriteName in string]?: string | null;
-      };
+    [key in string]?: {
+      [spriteName in string]?: string | null;
+    };
   };
   /** Undocumented property. Might contain keys = "generation-i", "generation-ii", ... */
   versions?: {
-      [version in string]?: {
-          [gameTitle in string]?: {
-              [spriteName in string]?: string;
-          };
+    [version in string]?: {
+      [gameTitle in string]?: {
+        [spriteName in string]?: string;
       };
+    };
   };
 }
 
@@ -606,14 +606,14 @@ export interface PokemonSpecies {
   varieties: PokemonSpeciesVariety[];
 }
 
-export const emptyNamedAPIResource:NamedAPIResource = {
-  name: "",
-  url: ""
-}
+export const emptyNamedAPIResource: NamedAPIResource = {
+  name: '',
+  url: '',
+};
 
-export const emptyPokemonSpecies:PokemonSpecies = {
+export const emptyPokemonSpecies: PokemonSpecies = {
   id: 0,
-  name: "",
+  name: '',
   order: 0,
   gender_rate: 0,
   capture_rate: 0,
@@ -646,8 +646,8 @@ export const emptyPokemonSpecies:PokemonSpecies = {
   evolves_from_species: emptyNamedAPIResource,
   /** (EvolutionChain) The evolution chain this Pokémon species is a member of. */
   evolution_chain: {
-    url: ""
-    },
+    url: '',
+  },
   /** (PokemonHabitat) The habitat this Pokémon species can be encountered in. */
   habitat: emptyNamedAPIResource,
   /** (Generation) The generation this Pokémon species was introduced in. */
@@ -659,10 +659,10 @@ export const emptyPokemonSpecies:PokemonSpecies = {
   /** A list of flavor text entries for this Pokémon species. */
   flavor_text_entries: [
     {
-      flavor_text: "",
+      flavor_text: '',
       language: emptyNamedAPIResource,
-      version: emptyNamedAPIResource
-    }
+      version: emptyNamedAPIResource,
+    },
   ],
   /** Descriptions of different forms Pokémon take on within the Pokémon species. */
   form_descriptions: [],
@@ -670,8 +670,7 @@ export const emptyPokemonSpecies:PokemonSpecies = {
   genera: [],
   /** A list of the Pokémon that exist within this Pokémon species. */
   varieties: [],
-}
-
+};
 
 export interface Genus {
   /** The localized genus for the referenced Pokémon species */

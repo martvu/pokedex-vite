@@ -17,11 +17,11 @@ function App() {
     return <div>No data available yet...</div>;
   }
   return (
-    <div className='container'>
+    <div className="container">
       <div> Hello</div>
       <PokemonList></PokemonList>
     </div>
-  )
+  );
 }
 
 export default App;
