@@ -2,7 +2,6 @@ import { usePokemonData, useSpeciesData } from '../utils/pokeApi';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TYPE_COLORS, STAT_COLORS } from '../utils/constants';
-import pokeBall from '../assets/img/pb-icon.svg';
 import { FlavorText, PokemonStat, PokemonType } from '../utils/pokeApiTypes';
 import { formatPokemonName } from '../utils/utils';
 
@@ -59,11 +58,6 @@ export default function PokemonInfoPage() {
                 </h4>
               </div>
               <div className="info-pokemon-img">
-                <img
-                  className="info-pokeball-icon"
-                  src={pokeBall}
-                  alt="pokeball icon"
-                />
                 <img
                   className="info-pokemon-sprite"
                   src={
