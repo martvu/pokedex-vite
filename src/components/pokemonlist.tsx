@@ -32,7 +32,6 @@ export default function PokemonList() {
     }
   }
 
-
   /*
   async function getOne() {
     try {
