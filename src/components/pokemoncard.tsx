@@ -15,9 +15,9 @@ export default function Pokemoncard ({pokemonInfo}: PokemoncardProps){
   const types: PokemonType[] = pokemonInfo.types
   const name: string = pokemonInfo.name
 
-  // Generate a CSS gradient based on Pokémon types
-  const gradientColors = types.map((type) => colors[type.type.name] || 'white');
-  const gradient = `linear-gradient(to right, ${gradientColors.join(', ')})`
+  // Calculate the background color based on the first type
+  const type = types[0].type.name;
+  const backgroundColor = colors[type] || "white";
 
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
 
@@ -99,7 +99,10 @@ function isFavorite(){
 */
 
   return (
-    <div className='pokemon-card' style={{ background: gradient }}>
+    <div className='pokemon-card' 
+      style={{ 
+        background: types.length === 2 ? `linear-gradient(45deg, ${backgroundColor}, ${colors[types[1].type.name]})` : backgroundColor, 
+      }}>
       <div className='header'>
         <p>{name}</p>
         <button onClick={setFavorite} className='transparent-button'>
