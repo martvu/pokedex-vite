@@ -13,6 +13,7 @@ export default function PokemonList() {
         'https://pokeapi.co/api/v2/pokemon?limit=151'
       );
       setPokemonList(data);
+      console.log(data)
     } catch (error) {
       console.error('Error fetching Pokémon:', error);
     }
@@ -34,8 +35,6 @@ export default function PokemonList() {
 
   return (
     <div>
-      <button onClick={getAll}>get all</button>
-      <button onClick={getOne}>get one</button>
       <div>
         <h2>Pokémon List</h2>
         <div className="pokemon-card-container">
