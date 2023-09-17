@@ -10,9 +10,7 @@ export default defineConfig({
     },
     environment: 'jsdom',
     environmentMatchGlobs: [
-      // all tests in tests/dom will run in jsdom
       ['__test__/pokemonCard.test.tsx', 'jsdom'],
-      ['/src/utils/__test__/pokemonCard.test.tsx', 'jsdom'],
     ]
   },
 });
