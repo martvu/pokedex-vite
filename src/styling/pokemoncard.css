@@ -35,7 +35,7 @@
   border-radius: 8px;
   text-align: center;
 
-  :hover{
+  :hover {
     cursor: pointer;
   }
 }
@@ -50,8 +50,8 @@
   }
 }
 
-@media only screen and (max-width: 600px) and (min-width: 428px){
-  .pokemon-card{
+@media only screen and (max-width: 600px) and (min-width: 428px) {
+  .pokemon-card {
   }
 }
 
