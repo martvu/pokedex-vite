@@ -10,6 +10,7 @@ export const formatPokemonName = (name: string) => {
     .replace(/(\w)(\w*)/g, (_, first, rest) => first.toUpperCase() + rest);
 };
 
+// Remove if not needed
 export const getTypeColorGradient = (typesArray: PokemonType[]) => {
   if (typesArray.length === 1) {
     return [

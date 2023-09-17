@@ -1,37 +1,48 @@
-import { getPokemonDataList } from '../utils/pokeApi';
-import { useState, useEffect } from 'react';
-import { Pokemon } from '../utils/pokeApiTypes';
-import Pokemoncard from './pokemoncard';
+import { Link } from 'react-router-dom';
+import { usePokemonDataList } from '../utils/pokeApi';
+import Pokemoncard from './PokemonCard';
+import { useEffect, useState } from 'react';
 
 export default function PokemonList() {
-    const [pokemonList, setPokemonList] = useState<Pokemon[]>([]); // State to store the list of Pokémon  
-  async function getAll() {
-    try {
-      const data = await getPokemonDataList(
-        'https://pokeapi.co/api/v2/pokemon?limit=151'
-      );
-      setPokemonList(data);
-      console.log(data);
-    } catch (error) {
-      console.error('Error fetching Pokémon:', error);
+  const NUM_POKEMON = 151;
+  const { data: pokemonDataList, isLoading } = usePokemonDataList(NUM_POKEMON);
+  const [favoritesArray, setFavoritesArray] = useState<number[]>(
+    JSON.parse(localStorage.getItem("favoritesArray") || "[]")
+  );
+  // handle favoritesArray
+  const onToggleFavorite = (pokemonId: number) => {
+    if (favoritesArray.includes(pokemonId)) {
+      setFavoritesArray(favoritesArray.filter((id:number) => id !== pokemonId));
+    } else {
+      setFavoritesArray([...favoritesArray, pokemonId]);
     }
-  }
+  };
 
+  // save favoritesArray
   useEffect(() => {
-    // Fetch the Pokémon when the component mounts
-    getAll();
-  }, []);
-
+    localStorage.setItem("favoritesArray", JSON.stringify(favoritesArray));
+  }, [favoritesArray]);
+  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div>
+      <Link to="/pokemon">
+        <button>Pokemon Info Page</button>
+      </Link>
       <div>
-        <h2>Pokémon List</h2>
-        <div className="pokemon-card-container">
-          {pokemonList.map((pokemon, index) => (
-            <Pokemoncard key={index + 1} pokemonInfo={pokemon} />
-          ))}
+        <div>
+          <h1>Pokemon List</h1>
+          <div className="pokemon-card-container">
+            {pokemonDataList &&
+              pokemonDataList.map((pokemon, index) => (
+                <Pokemoncard key={index + 1} pokemonInfo={pokemon} favoritesArray={favoritesArray} onToggleFavorite={onToggleFavorite}/>
+              ))}
+          </div>
         </div>
       </div>
     </div>
   );
 }
+

@@ -1,30 +1,20 @@
-import {
-  usePokemonData,
-  useSpeciesData,
-} from '../utils/pokeApi';
+import { usePokemonData, useSpeciesData } from '../utils/pokeApi';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TYPE_COLORS, STAT_COLORS } from '../utils/constants';
 import pokeBall from '../assets/img/pb-icon.svg';
 import { FlavorText, PokemonStat, PokemonType } from '../utils/pokeApiTypes';
-import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
+import { formatPokemonName } from '../utils/utils';
 
-function PokemonInfoPage() {
+export default function PokemonInfoPage() {
   const [id, setId] = useState(1);
   const maxNumPokemon = 151;
   const [cardColor, setCardColor] = useState({});
-  const { data: pokemonDetails, isLoading, error } = usePokemonData(id.toString());
-  /* const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${id}/`;
-  const { data: pokemonDetails, isLoading, error } = useQuery(
-    ['pokemon', pokemonUrl],
-    () => getPokemonData(pokemonUrl)
-  );
-
-  const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
-    const { data: speciesData, isLoading: isLoadingSpecies, error: speciesError } = useQuery(
-    ['species', speciesUrl],
-    () => getPokemonData(speciesUrl)
-  ); */
+  const {
+    data: pokemonDetails,
+    isLoading,
+    error,
+  } = usePokemonData(id.toString());
   const {
     data: speciesData,
     isLoading: isLoadingSpecies,
@@ -35,9 +25,17 @@ function PokemonInfoPage() {
     if (!pokemonDetails) {
       return;
     }
-    const typeColorGradient = getTypeColorGradient(pokemonDetails.types);
+    const types: PokemonType[] = pokemonDetails.types;
+
+    const gradientColors = types.map(
+      type => TYPE_COLORS[type.type.name] || 'white'
+    );
+    if (gradientColors.length === 1) {
+      gradientColors.push('white');
+    }
+    const gradient = `linear-gradient(45deg, ${gradientColors.join(', ')})`;
     setCardColor({
-      background: `linear-gradient(to bottom, ${typeColorGradient[0]} 10%, ${typeColorGradient[1]} 100%`,
+      background: gradient,
     });
   }, [pokemonDetails]);
 
@@ -50,7 +48,7 @@ function PokemonInfoPage() {
           </Link>
         </div>
         {isLoading && <div>Loading...</div>}
-        {error || speciesError && (<div>Error fetching data </div>)}
+        {error || (speciesError && <div>Error fetching data </div>)}
         {pokemonDetails && speciesData && (
           <>
             <div className="info-pokemon-card" style={cardColor}>
@@ -169,5 +167,3 @@ function PokemonInfoPage() {
     </>
   );
 }
-
-export default PokemonInfoPage;
