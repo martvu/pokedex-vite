@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Pokemon, PokemonType } from '../utils/pokeApiTypes'
-import '../styling/pokemoncard.css'
+import { Pokemon, PokemonType } from '../utils/pokeApiTypes';
+import '../styling/pokemoncard.css';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { colors } from '../utils/mapping/cardBackground';
 
@@ -8,72 +8,68 @@ interface PokemoncardProps {
   pokemonInfo: Pokemon;
 }
 
-export default function Pokemoncard ({pokemonInfo}: PokemoncardProps){
-  
+export default function Pokemoncard({ pokemonInfo }: PokemoncardProps) {
   // Name, type and number can be derived from the Pokemon
-  const id: number = pokemonInfo.id
-  const types: PokemonType[] = pokemonInfo.types
-  const name: string = pokemonInfo.name
+  const id: number = pokemonInfo.id;
+  const types: PokemonType[] = pokemonInfo.types;
+  const name: string = pokemonInfo.name;
 
   // Calculate the background color based on the first type
   const type = types[0].type.name;
-  const backgroundColor = colors[type] || "white";
+  const backgroundColor = colors[type] || 'white';
 
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
 
-// This function might have to be replaced into some other class
-// If id exists in localstorage, id is removed
-function setFavorite(){
-  // Retrieving the string
-  const favoritesString:string|null = localStorage.getItem("favorites")
+  // This function might have to be replaced into some other class
+  // If id exists in localstorage, id is removed
+  function setFavorite() {
+    // Retrieving the string
+    const favoritesString: string | null = localStorage.getItem('favorites');
 
-  if (favoritesString == null){
-    // Create array of favorites
-    const idAsArray:number[] = [id]
-    const idAsString:string = JSON.stringify(idAsArray)
+    if (favoritesString == null) {
+      // Create array of favorites
+      const idAsArray: number[] = [id];
+      const idAsString: string = JSON.stringify(idAsArray);
 
-    // Favorite to localstorage and to state
-    localStorage.setItem("favorites", idAsString)
-    setIsFavorited(true)
+      // Favorite to localstorage and to state
+      localStorage.setItem('favorites', idAsString);
+      setIsFavorited(true);
 
-    console.log("Creating new array and setting id:", id)
-    return
-  }
+      console.log('Creating new array and setting id:', id);
+      return;
+    } else {
+      // Retrieve and mutate array
+      const favoritesArray: string[] = JSON.parse(favoritesString);
+      const index = favoritesArray.indexOf(id.toString());
 
-  else{ 
-    // Retrieve and mutate array
-    const favoritesArray:string[] = JSON.parse(favoritesString)
-    const index = favoritesArray.indexOf(id.toString());
+      if (index !== -1) {
+        // This function has been called on a card that was already favorited
+        favoritesArray.splice(index, 1);
+        const favorites: string = JSON.stringify(favoritesArray);
 
-    if (index !== -1) {
-      // This function has been called on a card that was already favorited
-      favoritesArray.splice(index, 1)
-      const favorites:string = JSON.stringify(favoritesArray)
+        //localStorage.removeItem("favorites")
+        localStorage.setItem('favorites', favorites);
+        setIsFavorited(false);
+        console.log('Removing id:', id);
 
-      //localStorage.removeItem("favorites")
-      localStorage.setItem("favorites", favorites)
-      setIsFavorited(false)
-      console.log("Removing id:", id)
+        return;
+      } else {
+        // Add this id to favorites
+        const newFavoritesArray: string[] = [...favoritesArray, id.toString()];
+        const favorites: string = JSON.stringify(newFavoritesArray);
+        console.log('Adding id:', id);
 
-      return
-    }
-    else {
-      // Add this id to favorites
-      const newFavoritesArray:string[] =[...favoritesArray, id.toString()]
-      const favorites:string = JSON.stringify(newFavoritesArray)
-      console.log("Adding id:", id)
+        localStorage.removeItem('favorites');
+        setIsFavorited(true);
+        localStorage.setItem('favorites', favorites);
 
-      localStorage.removeItem("favorites")
-      setIsFavorited(true)
-      localStorage.setItem("favorites", favorites)
-
-      return
+        return;
+      }
     }
   }
-}
 
-//TODO not necessary to use this function as of right now (using state instead)
-/* Favorite is derived from local storage
+  //TODO not necessary to use this function as of right now (using state instead)
+  /* Favorite is derived from local storage
 function isFavorite(){
   const idToCheck:string = id.toString()
 
@@ -99,33 +95,42 @@ function isFavorite(){
 */
 
   return (
-    <div className='pokemon-card' 
-      style={{ 
-        background: types.length === 2 ? `linear-gradient(45deg, ${backgroundColor}, ${colors[types[1].type.name]})` : backgroundColor, 
-      }}>
-      <div className='header'>
+    <div
+      className="pokemon-card"
+      style={{
+        background:
+          types.length === 2
+            ? `linear-gradient(45deg, ${backgroundColor}, ${
+                colors[types[1].type.name]
+              })`
+            : backgroundColor,
+      }}
+    >
+      <div className="header">
         <p>{name}</p>
-        <button onClick={setFavorite} className='transparent-button'>
-          <span className={isFavorited ? "favorite-icon-active" : "favorite-icon-inactive"}>
+        <button onClick={setFavorite} className="transparent-button">
+          <span
+            className={
+              isFavorited ? 'favorite-icon-active' : 'favorite-icon-inactive'
+            }
+          >
             <FavoriteBorderIcon />
           </span>
         </button>
       </div>
-      <div className='pokemon-types'>
-      {types.map((type, index) => (
+      <div className="pokemon-types">
+        {types.map((type, index) => (
           <div key={index} className="type">
-            <p>
-              {type.type.name}
-            </p>
+            <p>{type.type.name}</p>
           </div>
-      ))}
+        ))}
       </div>
-      <div style={{maxHeight: '80px'}}>
-        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} />
+      <div style={{ maxHeight: '80px' }}>
+        <img
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+        />
       </div>
       <div>#{id}</div>
     </div>
-  )
-
-
+  );
 }

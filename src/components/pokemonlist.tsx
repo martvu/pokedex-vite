@@ -1,11 +1,11 @@
-import { getPokemonData, getPokemonDataList } from '../utils/pokeApi';
+import { getPokemonDataList } from '../utils/pokeApi';
 import { useState, useEffect } from 'react';
 import { Pokemon } from '../utils/pokeApiTypes';
 import Pokemoncard from './pokemoncard';
 
 export default function PokemonList() {
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]); // State to store the list of Pokémon
-  const [selectedPokemon, setSelectedPokemon] = useState<Pokemon>(); //TODO could possibly be moved out one layer
+  //const [selectedPokemon, setSelectedPokemon] = useState<Pokemon>(); //TODO could possibly be moved out one layer
 
   async function getAll() {
     try {
@@ -13,12 +13,13 @@ export default function PokemonList() {
         'https://pokeapi.co/api/v2/pokemon?limit=151'
       );
       setPokemonList(data);
-      console.log(data)
+      console.log(data);
     } catch (error) {
       console.error('Error fetching Pokémon:', error);
     }
   }
 
+  /*
   async function getOne() {
     try {
       const data = await getPokemonData('https://pokeapi.co/api/v2/pokemon/1/');
@@ -27,7 +28,7 @@ export default function PokemonList() {
       console.error('Error fetching Pokémon:', error);
     }
   }
-
+  */
   useEffect(() => {
     // Fetch the Pokémon when the component mounts
     getAll();
