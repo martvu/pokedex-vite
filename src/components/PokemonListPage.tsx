@@ -4,7 +4,7 @@ import { usePokemonDataList } from '../utils/pokeApi';
 
 function PokemonListPage() {
   const NUM_POKEMON = 151;
-  const { data: pokemonDataList, isLoading } = usePokemonDataList(NUM_POKEMON.toString());
+  const { data: pokemonDataList, isLoading } = usePokemonDataList(NUM_POKEMON);
 
   if (isLoading) {
     return <div>Loading...</div>;

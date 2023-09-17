@@ -1,9 +1,11 @@
-import { getPokemonData, usePokemonData } from '../utils/pokeApi';
-import { useQuery } from '@tanstack/react-query';
+import {
+  usePokemonData,
+  useSpeciesData,
+} from '../utils/pokeApi';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TYPE_COLORS, STAT_COLORS } from '../utils/constants';
-/* import pokeBall from '../assets/img/pb-icon.svg'; */
+import pokeBall from '../assets/img/pb-icon.svg';
 import { FlavorText, PokemonStat, PokemonType } from '../utils/pokeApiTypes';
 import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
 
@@ -11,22 +13,26 @@ function PokemonInfoPage() {
   const [id, setId] = useState(1);
   const maxNumPokemon = 151;
   const [cardColor, setCardColor] = useState({});
-  const {
-    data: pokemonDetails,
-    isLoading,
-    error,
-  } = usePokemonData(id.toString());
-  const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
-  const { data: speciesData, isLoading: isLoadingSpecies, error: speciesError } = useQuery(
-    ['species', speciesUrl],
-    () => getPokemonData(speciesUrl)
+  const { data: pokemonDetails, isLoading, error } = usePokemonData(id.toString());
+  /* const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${id}/`;
+  const { data: pokemonDetails, isLoading, error } = useQuery(
+    ['pokemon', pokemonUrl],
+    () => getPokemonData(pokemonUrl)
   );
 
-  console.log(pokemonDetails);
-  console.log(speciesData);
+  const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
+    const { data: speciesData, isLoading: isLoadingSpecies, error: speciesError } = useQuery(
+    ['species', speciesUrl],
+    () => getPokemonData(speciesUrl)
+  ); */
+  const {
+    data: speciesData,
+    isLoading: isLoadingSpecies,
+    error: speciesError,
+  } = useSpeciesData(id);
+
   useEffect(() => {
     if (!pokemonDetails) {
-      console.log('no pokemon details');
       return;
     }
     const typeColorGradient = getTypeColorGradient(pokemonDetails.types);
@@ -43,16 +49,8 @@ function PokemonInfoPage() {
             <button>Home</button>
           </Link>
         </div>
-
-        {/* <input
-      type="number"
-      value={id}
-      min={1}
-      max={maxNumPokemon}
-      onChange={e => setId(parseInt(e.target.value))}
-    />  */}
         {isLoading && <div>Loading...</div>}
-        {error || speciesError && <div>Error fetching data </div>}
+        {error || speciesError && (<div>Error fetching data </div>)}
         {pokemonDetails && speciesData && (
           <>
             <div className="pokemon-card info" style={cardColor}>
@@ -63,11 +61,11 @@ function PokemonInfoPage() {
                 </h4>
               </div>
               <div className="info-pokemon-img">
-                {/* <img
+                <img
                   className="pokeball-icon"
                   src={pokeBall}
                   alt="pokeball icon"
-                /> */}
+                />
                 <img
                   className="pokemon-sprite"
                   src={
@@ -163,62 +161,6 @@ function PokemonInfoPage() {
                     </div>
                   );
                 })}
-              </div>
-            </div>
-            <div className="pokemon-gender">
-              <h5>Gender Ratio</h5>
-              <div className="gender-ratio-container">
-                {isLoadingSpecies ? (
-                  <span>Loading...</span>
-                ) : speciesData.gender_rate === -1 ? (
-                  <span>Gender Unknown</span>
-                ) : (
-                  <>
-                    <div
-                      className="gender-ratio-segment"
-                      style={{
-                        backgroundColor: '#3355FF',
-                        width: `${100 - speciesData.gender_rate * 12.5}%`,
-                        borderRadius:
-                          speciesData.gender_rate === 0
-                            ? '1rem'
-                            : '1rem 0 0 1rem',
-                      }}
-                    ></div>
-                    <div
-                      className="gender-ratio-segment"
-                      style={{
-                        backgroundColor: '#FF77DD',
-                        width: `${speciesData.gender_rate * 12.5}%`,
-                        borderRadius:
-                          speciesData.gender_rate === 8
-                            ? '1rem'
-                            : '0 1rem 1rem 0',
-                      }}
-                    ></div>
-                  </>
-                )}
-              </div>
-              <div
-                className="gender-percentages"
-                style={{
-                  opacity: isLoadingSpecies
-                    ? 0
-                    : speciesData.gender_rate === -1
-                    ? 0
-                    : 1,
-                }}
-              >
-                <span style={{ color: '#6982ff' }}>
-                  {isLoadingSpecies
-                    ? '-'
-                    : 100 - speciesData.gender_rate * 12.5}
-                  % male,{' '}
-                </span>
-                <span style={{ color: '#FF77DD' }}>
-                  {isLoadingSpecies ? '-' : speciesData.gender_rate * 12.5}%
-                  female
-                </span>
               </div>
             </div>
           </>
