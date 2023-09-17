@@ -50,11 +50,6 @@
   }
 }
 
-@media only screen and (max-width: 600px) and (min-width: 428px) {
-  .pokemon-card {
-  }
-}
-
 .header {
   display: flex;
   align-items: center;
