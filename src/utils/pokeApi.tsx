@@ -41,7 +41,7 @@ export const getPokemonData = async (url: string) => {
   }
 };
 
-const getPokemonDataList = async (url: string) => {
+export const getPokemonDataList = async (url: string) => {
   try {
     const response = await fetch(url);
     if (!response.ok) {
