@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 export default function PokemonList() {
   const NUM_POKEMON = 151;
-  const { data: pokemonDataList, isLoading } = usePokemonDataList(NUM_POKEMON);
+  const { data: pokemonDataList, isLoading, error } = usePokemonDataList(NUM_POKEMON);
   const [favoritesArray, setFavoritesArray] = useState<number[]>(
     JSON.parse(localStorage.getItem("favoritesArray") || "[]")
   );
@@ -26,6 +26,10 @@ export default function PokemonList() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+  if(error) {
+    return <div>Error fetching data </div>;
+  }
+  
   return (
     <div>
       <Link to="/pokemon">

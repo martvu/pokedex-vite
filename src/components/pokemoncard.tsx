@@ -52,7 +52,6 @@ export default function PokemonCard({ pokemonInfo, favoritesArray, onToggleFavor
         <Link to="/pokemon">
         <img
           src={pokemonInfo.sprites.front_default}
-          /* src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} */
         />
         </Link>
         

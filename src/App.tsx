@@ -10,6 +10,8 @@ function App() {
         <Routes>
           <Route path="/" element={<PokemonListPage />} />
           <Route path="/pokemon" element={<PokemonInfoPage />} />
+          {/* TODO create Not Found page if time*/}
+          <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </Router>
     </div>
