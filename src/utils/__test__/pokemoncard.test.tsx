@@ -75,4 +75,3 @@ const mockPikachu: Pokemon = {
     ],
   };
   */
- 

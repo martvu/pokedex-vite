@@ -1,4 +1,4 @@
-import { NamedAPIResource } from "./pokeApiTypes";
+import { NamedAPIResource } from './pokeApiTypes';
 
 export const getPokemonData = async (url: string) => {
   try {
