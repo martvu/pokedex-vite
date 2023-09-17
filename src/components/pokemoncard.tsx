@@ -14,101 +14,40 @@ export default function Pokemoncard({ pokemonInfo }: PokemoncardProps) {
   const types: PokemonType[] = pokemonInfo.types;
   const name: string = pokemonInfo.name;
 
-  // Calculate the background color based on the first type
-  const type = types[0].type.name;
-  const backgroundColor = colors[type] || 'white';
 
+  const gradientColors = types.map((type) => colors[type.type.name] || 'white');
+
+  if (gradientColors.length === 1) {
+    gradientColors.push('white');
+  }
+
+  const gradient = `linear-gradient(45deg, ${gradientColors.join(', ')})`;
   const [isFavorited, setIsFavorited] = useState<boolean>(false);
 
-  // This function might have to be replaced into some other class
-  // If id exists in localstorage, id is removed
   function setFavorite() {
-    // Retrieving the string
-    const favoritesString: string | null = localStorage.getItem('favorites');
+    const favoritesString = localStorage.getItem('favorites');
+    let favoritesArray = favoritesString ? JSON.parse(favoritesString) : [];
+    const index = favoritesArray.indexOf(id.toString());
 
-    if (favoritesString == null) {
-      // Create array of favorites
-      const idAsArray: number[] = [id];
-      const idAsString: string = JSON.stringify(idAsArray);
-
-      // Favorite to localstorage and to state
-      localStorage.setItem('favorites', idAsString);
-      setIsFavorited(true);
-
-      console.log('Creating new array and setting id:', id);
-      return;
+    if (index !== -1) {
+      favoritesArray.splice(index, 1);
+      setIsFavorited(false);
     } else {
-      // Retrieve and mutate array
-      const favoritesArray: string[] = JSON.parse(favoritesString);
-      const index = favoritesArray.indexOf(id.toString());
-
-      if (index !== -1) {
-        // This function has been called on a card that was already favorited
-        favoritesArray.splice(index, 1);
-        const favorites: string = JSON.stringify(favoritesArray);
-
-        //localStorage.removeItem("favorites")
-        localStorage.setItem('favorites', favorites);
-        setIsFavorited(false);
-        console.log('Removing id:', id);
-
-        return;
-      } else {
-        // Add this id to favorites
-        const newFavoritesArray: string[] = [...favoritesArray, id.toString()];
-        const favorites: string = JSON.stringify(newFavoritesArray);
-        console.log('Adding id:', id);
-
-        localStorage.removeItem('favorites');
-        setIsFavorited(true);
-        localStorage.setItem('favorites', favorites);
-
-        return;
-      }
+      favoritesArray.push(id.toString());
+      setIsFavorited(true);
     }
+
+    localStorage.setItem('favorites', JSON.stringify(favoritesArray));
   }
-
-  //TODO not necessary to use this function as of right now (using state instead)
-  /* Favorite is derived from local storage
-function isFavorite(){
-  const idToCheck:string = id.toString()
-
-  // Retrieving the string
-  const favoritesAsString: string|null = localStorage.getItem("favorites")
-  
-  // Retrieved array
-  if (favoritesAsString != null) {
-    const favoritesArray:string[] = JSON.parse(favoritesAsString)
-
-    //Check to see if id exists in array
-    if (favoritesArray.includes(idToCheck)) {
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
-  return false;
-  // use conditional css classes to render the heart
-}
-
-*/
 
   return (
     <div
       className="pokemon-card"
-      style={{
-        background:
-          types.length === 2
-            ? `linear-gradient(45deg, ${backgroundColor}, ${
-                colors[types[1].type.name]
-              })`
-            : backgroundColor,
-      }}
+      style={{background: gradient }}
     >
       <div className="header">
         <p>{name}</p>
-        <button onClick={setFavorite} className="transparent-button">
+        <button type='button' onClick={setFavorite} className="transparent-button">
           <span
             className={
               isFavorited ? 'favorite-icon-active' : 'favorite-icon-inactive'
