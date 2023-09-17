@@ -139,6 +139,10 @@ body {
   background: linear-gradient(to bottom, rgba(60, 60, 60, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
 }
 
+.pokemon-description h5 {
+  margin: 0.5rem 0;
+}
+
 .next-btn, .prev-btn {
   background-color: rgba(104, 104, 104, 0.5); /* Darken the background color */
   border: none;
