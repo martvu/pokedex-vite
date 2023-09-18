@@ -20,10 +20,10 @@ export function usePokemonDataList(limit: number) {
   );
 }
 // use this Hook to fetch species data for a single pokemon  
-export function useSpeciesData(pokemonId: number) {
+export function useSpeciesData(pokemonId: string) {
   return useQuery(
     ['speciesData', pokemonId.toString()], 
-    () => getPokemonData(SPECIES_URL + '/' + pokemonId.toString() + '/')
+    () => getPokemonData(SPECIES_URL + '/' + pokemonId + '/')
   );
 }
 

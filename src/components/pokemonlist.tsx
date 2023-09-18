@@ -32,7 +32,7 @@ export default function PokemonList() {
   
   return (
     <div>
-      <Link to="/pokemon">
+      <Link to="/pokemon/1">
         <button>Pokemon Info Page</button>
       </Link>
       <div>
