@@ -1,24 +1,26 @@
 import { usePokemonData, useSpeciesData } from '../utils/pokeApi';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { TYPE_COLORS, STAT_COLORS } from '../utils/constants';
 import { FlavorText, PokemonStat, PokemonType } from '../utils/pokeApiTypes';
 import { formatPokemonName } from '../utils/utils';
 
 export default function PokemonInfoPage() {
-  const [id, setId] = useState(1);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [currentId, setCurrentId] = useState<number>(id ? parseInt(id) : 1);
   const maxNumPokemon = 151;
   const [cardColor, setCardColor] = useState({});
   const {
     data: pokemonDetails,
     isLoading,
     error,
-  } = usePokemonData(id.toString());
+  } = usePokemonData(currentId.toString());
   const {
     data: speciesData,
     isLoading: isLoadingSpecies,
     error: speciesError,
-  } = useSpeciesData(id);
+  } = useSpeciesData(currentId.toString());
 
   useEffect(() => {
     if (!pokemonDetails) {
@@ -37,6 +39,16 @@ export default function PokemonInfoPage() {
       background: gradient,
     });
   }, [pokemonDetails]);
+
+  const handleNextPokemon = () => {
+    setCurrentId(currentId + 1);
+    navigate('/pokemon/' + (currentId + 1));
+  };
+  
+  const handlePreviousPokemon = () => {
+    setCurrentId(currentId - 1);
+    navigate('/pokemon/' + (currentId - 1));
+  }
 
   return (
     <>
@@ -91,15 +103,15 @@ export default function PokemonInfoPage() {
             </div>
             <div>
               <button
-                onClick={() => setId(id - 1)}
-                disabled={id === 1}
+                onClick={handlePreviousPokemon}
+                disabled={currentId === 1}
                 className="prev-btn"
               >
                 Prev
               </button>
               <button
-                onClick={() => setId(id + 1)}
-                disabled={id === maxNumPokemon}
+                onClick={handleNextPokemon}
+                disabled={currentId === maxNumPokemon}
                 className="next-btn"
               >
                 Next

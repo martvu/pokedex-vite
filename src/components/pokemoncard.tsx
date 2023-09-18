@@ -49,9 +49,9 @@ export default function PokemonCard({ pokemonInfo, favoritesArray, onToggleFavor
         ))}
       </div>
       <div style={{ maxHeight: '80px' }}>
-        <Link to="/pokemon">
+        <Link to={`/pokemon/${pokemonInfo.id}`}>
         <img
-          src={pokemonInfo.sprites.front_default}
+          src={pokemonInfo.sprites?.front_default || ''} 
         />
         </Link>
         
