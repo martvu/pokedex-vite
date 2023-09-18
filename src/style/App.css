@@ -16,6 +16,21 @@
   align-items: center;
 }
 
+@font-face {
+  font-family: "Flexo-Demi";
+  src: url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.eot");
+  src: url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.woff2")
+      format("woff2"),
+    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.woff")
+      format("woff"),
+    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.ttf")
+      format("truetype"),
+    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.svg#Flexo-Demi")
+      format("svg");
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -25,19 +40,19 @@
 
 html, body {
   height: 100%;
-  margin: 0px;
+  margin: 0px; 
   background-color: var(--bg-color);
 }
 
 html {
   font-size: 16px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 body {
   overflow: auto;
   height: auto;
-  color: var(--text-color);
-  background-color: var(--bg-color);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -56,6 +71,18 @@ body {
   background-color: var(--bg-color);
 }
 
+.dark-mode {
+  --bg-color: rgb(67, 70, 81);
+  --card-color: rgb(63, 63, 63);
+  --primary-color: rgb(78, 81, 92);
+  --secondary-color: rgb(63, 63, 63);
+  --text-color: rgba(255,255,255,0.87);
+  --white-color: rgb(255, 255, 255, 0.87);
+  --accent-colot: #606060;
+  --gradient-one: rgb(63, 63, 63);
+  --gradient-two: rgb(78, 81, 92);
+}
+
 /* Loading screen */
 .loading-screen {
   margin-top: 2rem;
@@ -66,6 +93,10 @@ body {
   filter: invert(0.7);
 }
 
+.dark-mode .loading-screen img{
+  filter: invert(0);
+}
+
 /* Header */
 .header {
   width: 100%;
@@ -74,11 +105,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: sticky; /* Make it stick to the top */
-  top: 0; /* Stick to the top */
-  left: 0; /* Stick to the left */
-  right: 0; /* Stick to the right */
-  z-index: 102; /* Stay on top of everything */
+  position: sticky; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  z-index: 102; 
   background-color: var(--secondary-color);
   overflow:hidden;
   box-shadow: 0 0 10px 1px rgb(0, 0, 0, 0.5);
@@ -170,6 +201,27 @@ body {
 
 .link {
   text-decoration: none;
+}
+
+.theme-switch {
+  position: absolute;
+  margin: 0;
+  top: 20px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--secondary-color);
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  box-shadow: 0 0 5px 2px rgba(0,0,0, 0.3);
+  color: var(--text-color);
+  background-color: var(--secondary-color);
+}
+
+.theme-switch:hover {
+  transform: scale(1.1);
 }
 
 /* Filters */
@@ -286,13 +338,12 @@ body {
   left: 0;
   width: 100%;
   max-width: 1500px;
-  height: auto;
   display: flex; 
   justify-content: center;
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
-  background-color: transparent;
+  background-color: var(--bg-color);
 }
 
 .pokemon-list-container {

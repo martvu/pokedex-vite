@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import pokeball from '../assets/img/pb-icon.svg';
+import ThemeSwitch from './ThemeSwitch';
 
 function Header() {
   return (
@@ -11,6 +12,9 @@ function Header() {
             <h1>Pokedex</h1>
           </Link>
         </div>
+        <span className="switch-container"> 
+        <ThemeSwitch />
+      </span>
       </div>
     </header>
   );
