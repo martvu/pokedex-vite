@@ -20,7 +20,12 @@ export default function PokemonInfoPage() {
     error: speciesError,
   } = useSpeciesData(currentId.toString());
 
-  const gradient = getTypeColorGradient(pokemonDetails);
+  let gradient = 'black';
+  if (pokemonDetails) {
+    gradient = getTypeColorGradient(pokemonDetails);
+  }
+  
+  
 
   const handleNextPokemon = () => {
     setCurrentId(currentId + 1);

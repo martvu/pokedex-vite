@@ -1,62 +1,80 @@
-import { Pokemon, PokemonType } from '../utils/pokeApiTypes';
-import '../styling/pokemoncard.css';
+import { Pokemon } from '../utils/pokeApiTypes';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { colors } from '../utils/mapping/cardBackground';
 import { Link } from 'react-router-dom';
+import { TYPE_COLORS, TYPE_ICONS } from '../utils/constants';
+import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
+import pokeballIcon from '../assets/img/pb-icon.svg';
 
 interface PokemonCardProps {
-  pokemonInfo: Pokemon;
+  pokemonDetails: Pokemon;
   favoritesArray: number[];
   onToggleFavorite: (id: number) => void;
 }
 
-export default function PokemonCard({ pokemonInfo, favoritesArray, onToggleFavorite }: PokemonCardProps) {
-  // Name, type and number can be derived from the Pokemon
-  const id: number = pokemonInfo.id;
-  const types: PokemonType[] = pokemonInfo.types;
-  const name: string = pokemonInfo.name;
-
-  const gradientColors = types.map((type) => colors[type.type.name] || 'white');
-  if (gradientColors.length === 1) {
-    gradientColors.push('white');
-  }
-  const gradient = `linear-gradient(45deg, ${gradientColors.join(', ')})`;
-
+export default function PokemonCard({
+  pokemonDetails,
+  onToggleFavorite,
+  favoritesArray,
+}: PokemonCardProps) {
+  
+  const gradient = getTypeColorGradient(pokemonDetails);
+  
   return (
-    <div
-      className="pokemon-card"
-      style={{background: gradient }}
-    >
-      <div className="header">
-        <p>{name}</p>
-        <button
-        className="transparent-button"
-        onClick={() => onToggleFavorite(pokemonInfo.id)}
+    <div className="pokemon-card-container" style={{background: gradient}}>
+      <div className="poketext pokemon-name">
+        {formatPokemonName(pokemonDetails.name) || "Missing name"}
+      </div>
+      <div className="poketext pokemon-id">
+        {"#" + ("000" + pokemonDetails.id).slice(-4)}
+      </div>
+      <div
+        className="favorite-button"
+        onClick={() => onToggleFavorite(pokemonDetails.id)}
       >
-        {favoritesArray.includes(pokemonInfo.id) ? (
+      {favoritesArray.includes(pokemonDetails.id) ? (
           <FavoriteIcon className="favorite-icon-active" />
         ) : (
           <FavoriteBorderIcon className="favorite-icon-inactive" />
         )}
-      </button>
       </div>
-      <div className="pokemon-types">
-        {types.map((type, index) => (
-          <div key={index} className="type">
-            <p>{type.type.name}</p>
-          </div>
+      <div className="sprite-bg-container">
+        <img
+          loading="lazy"
+          className="sprite-bg"
+          src={pokeballIcon}
+          alt="pokeball background"
+        />
+      </div>
+      <Link to={`/pokemon/${pokemonDetails.id}`}>
+        <div className="sprite-container">
+          <img
+            loading="lazy"
+            className="pokemon-sprite"
+            src={
+              pokemonDetails?.sprites?.other?.["official-artwork"]
+                ?.front_default || "#"
+            }
+            alt={pokemonDetails.name}
+          />
+        </div>
+      </Link>
+      <div className="type-container">
+        {pokemonDetails.types.map((type) => (
+          <span
+            key={type.slot}
+            className="poketext type-icon"
+            style={{ backgroundColor: `${TYPE_COLORS[type.type.name]}` }}
+          >
+            <img
+              loading="lazy"
+              src={TYPE_ICONS[type.type.name]}/* { '../assets/icons/' + type.type.name + '.svg'} */
+              alt={type.type.name}
+            />
+            {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
+          </span>
         ))}
       </div>
-      <div style={{ maxHeight: '80px' }}>
-        <Link to={`/pokemon/${pokemonInfo.id}`}>
-        <img
-          src={pokemonInfo.sprites?.front_default || ''} 
-        />
-        </Link>
-        
-      </div>
-      <div>#{id}</div>
     </div>
   );
 }
