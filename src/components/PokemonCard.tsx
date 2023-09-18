@@ -1,6 +1,5 @@
 import { Pokemon } from '../utils/pokeApiTypes';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { TYPE_COLORS, TYPE_ICONS } from '../utils/constants';
 import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
@@ -17,25 +16,24 @@ export default function PokemonCard({
   onToggleFavorite,
   favoritesArray,
 }: PokemonCardProps) {
-  
   const gradient = getTypeColorGradient(pokemonDetails);
-  
+
   return (
-    <div className="pokemon-card-container" style={{background: gradient}}>
+    <div className="pokemon-card-container" style={{ background: gradient }}>
       <div className="poketext pokemon-name">
-        {formatPokemonName(pokemonDetails.name) || "Missing name"}
+        {formatPokemonName(pokemonDetails.name) || 'Missing name'}
       </div>
       <div className="poketext pokemon-id">
-        {"#" + ("00" + pokemonDetails.id).slice(-3)}
+        {'#' + ('00' + pokemonDetails.id).slice(-3)}
       </div>
       <div
         className="favorite-button"
         onClick={() => onToggleFavorite(pokemonDetails.id)}
       >
-      {favoritesArray.includes(pokemonDetails.id) ? (
-          <FavoriteIcon className="favorite-icon-active" />
+        {favoritesArray.includes(pokemonDetails.id) ? (
+          <MdFavorite className="favorite-icon-active" />
         ) : (
-          <FavoriteBorderIcon className="favorite-icon-inactive" />
+          <MdFavoriteBorder className="favorite-icon-inactive" />
         )}
       </div>
       <div className="sprite-bg-container">
@@ -46,21 +44,21 @@ export default function PokemonCard({
           alt="pokeball background"
         />
       </div>
-      <Link to={`/pokemon/${pokemonDetails.id}`} >
+      <Link to={`/pokemon/${pokemonDetails.id}`}>
         <div className="sprite-container" data-testid="link-infopage">
           <img
             loading="lazy"
             className="pokemon-sprite"
             src={
-              pokemonDetails?.sprites?.other?.["official-artwork"]
-                ?.front_default || "#"
+              pokemonDetails?.sprites?.other?.['official-artwork']
+                ?.front_default || '#'
             }
             alt={pokemonDetails.name}
           />
         </div>
       </Link>
       <div className="type-container">
-        {pokemonDetails.types.map((type) => (
+        {pokemonDetails.types.map(type => (
           <span
             key={type.slot}
             className="poketext type-icon"
@@ -68,7 +66,9 @@ export default function PokemonCard({
           >
             <img
               loading="lazy"
-              src={TYPE_ICONS[type.type.name]}/* { '../assets/icons/' + type.type.name + '.svg'} */
+              src={
+                TYPE_ICONS[type.type.name]
+              } /* { '../assets/icons/' + type.type.name + '.svg'} */
               alt={type.type.name}
             />
             {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
