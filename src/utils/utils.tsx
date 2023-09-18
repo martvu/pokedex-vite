@@ -1,5 +1,5 @@
-import { TYPE_COLORS, TYPE_SECONDARY_COLORS } from "./constants";
-import { PokemonType } from "./pokeApiTypes";
+import { TYPE_COLORS } from "./constants";
+import { Pokemon, PokemonType } from "./pokeApiTypes";
 
 
 export const formatPokemonName = (name: string) => {
@@ -10,17 +10,13 @@ export const formatPokemonName = (name: string) => {
     .replace(/(\w)(\w*)/g, (_, first, rest) => first.toUpperCase() + rest);
 };
 
-// Remove if not needed
-export const getTypeColorGradient = (typesArray: PokemonType[]) => {
-  if (typesArray.length === 1) {
-    return [
-      TYPE_COLORS[typesArray[0].type.name],
-      TYPE_SECONDARY_COLORS[typesArray[0].type.name],
-    ];
-  } else {
-    return [
-      TYPE_COLORS[typesArray[0].type.name],
-      TYPE_COLORS[typesArray[1].type.name],
-    ];
-  } 
+export const getTypeColorGradient = (pokemonDetails: Pokemon) => {
+  const types: PokemonType[] = pokemonDetails.types;
+  const gradientColors = types.map(
+    type => TYPE_COLORS[type.type.name] || 'white'
+  );
+  if (gradientColors.length === 1) {
+    gradientColors.push('white');
+  }
+  return `linear-gradient(45deg, ${gradientColors.join(', ')})`;
 }; 

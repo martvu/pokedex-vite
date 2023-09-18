@@ -2,7 +2,7 @@ import { act, render, screen } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import userEvent from "@testing-library/user-event";
-import PokemonList from './PokemonList';
+import PokemonList from '../components/PokemonList';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import App from '../App';
 

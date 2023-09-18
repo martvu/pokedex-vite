@@ -1,16 +1,14 @@
 import { usePokemonData, useSpeciesData } from '../utils/pokeApi';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { TYPE_COLORS, STAT_COLORS } from '../utils/constants';
+import { TYPE_COLORS, STAT_COLORS, MAX_NO_OF_POKEMON } from '../utils/constants';
 import { FlavorText, PokemonStat, PokemonType } from '../utils/pokeApiTypes';
-import { formatPokemonName } from '../utils/utils';
+import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
 
 export default function PokemonInfoPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [currentId, setCurrentId] = useState<number>(id ? parseInt(id) : 1);
-  const maxNumPokemon = 151;
-  const [cardColor, setCardColor] = useState({});
   const {
     data: pokemonDetails,
     isLoading,
@@ -22,33 +20,17 @@ export default function PokemonInfoPage() {
     error: speciesError,
   } = useSpeciesData(currentId.toString());
 
-  useEffect(() => {
-    if (!pokemonDetails) {
-      return;
-    }
-    const types: PokemonType[] = pokemonDetails.types;
-
-    const gradientColors = types.map(
-      type => TYPE_COLORS[type.type.name] || 'white'
-    );
-    if (gradientColors.length === 1) {
-      gradientColors.push('white');
-    }
-    const gradient = `linear-gradient(45deg, ${gradientColors.join(', ')})`;
-    setCardColor({
-      background: gradient,
-    });
-  }, [pokemonDetails]);
+  const gradient = getTypeColorGradient(pokemonDetails);
 
   const handleNextPokemon = () => {
     setCurrentId(currentId + 1);
     navigate('/pokemon/' + (currentId + 1));
   };
-  
+
   const handlePreviousPokemon = () => {
     setCurrentId(currentId - 1);
     navigate('/pokemon/' + (currentId - 1));
-  }
+  };
 
   return (
     <>
@@ -62,7 +44,7 @@ export default function PokemonInfoPage() {
         {error || (speciesError && <div>Error fetching data </div>)}
         {pokemonDetails && speciesData && (
           <>
-            <div className="info-pokemon-card" style={cardColor}>
+            <div className="info-pokemon-card" style={{background: gradient}}>
               <div className="pokemon-name-id">
                 <h1>{formatPokemonName(pokemonDetails?.name)}</h1>
                 <h4 className="pokemon-text">
@@ -111,7 +93,7 @@ export default function PokemonInfoPage() {
               </button>
               <button
                 onClick={handleNextPokemon}
-                disabled={currentId === maxNumPokemon}
+                disabled={currentId === MAX_NO_OF_POKEMON}
                 className="next-btn"
               >
                 Next

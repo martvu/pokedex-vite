@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { getPokemonData, getPokemonDataList } from '../pokeApi';
+import { getPokemonData, getPokemonDataList } from '../utils/pokeApi';
 
 // TODO: Mock fetch calls
 describe('getPokemonData', () => {
