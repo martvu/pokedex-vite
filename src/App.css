@@ -56,6 +56,16 @@ body {
   background-color: var(--bg-color);
 }
 
+/* Loading screen */
+.loading-screen {
+  margin-top: 2rem;
+}
+
+.loading-screen img{
+  width: 300px;
+  filter: invert(0.7);
+}
+
 /* Header */
 .header {
   width: 100%;
