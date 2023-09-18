@@ -12,7 +12,6 @@ interface PokemonCardProps {
 }
 
 export default function PokemonCard({ pokemonInfo, favoritesArray, onToggleFavorite }: PokemonCardProps) {
-  // Name, type and number can be derived from the Pokemon
   const id: number = pokemonInfo.id;
   const types: PokemonType[] = pokemonInfo.types;
   const name: string = pokemonInfo.name;
@@ -52,6 +51,7 @@ export default function PokemonCard({ pokemonInfo, favoritesArray, onToggleFavor
         <Link to="/pokemon">
         <img
           src={pokemonInfo.sprites.front_default}
+          alt='pokemon'
         />
         </Link>
         

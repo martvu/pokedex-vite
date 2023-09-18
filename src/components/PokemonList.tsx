@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { usePokemonDataList } from '../utils/pokeApi';
-import Pokemoncard from './PokemonCard';
+import PokemonCard from './PokemonCard';
 import { useEffect, useState } from 'react';
 
 export default function PokemonList() {
@@ -41,7 +41,7 @@ export default function PokemonList() {
           <div className="pokemon-card-container">
             {pokemonDataList &&
               pokemonDataList.map((pokemon, index) => (
-                <Pokemoncard key={index + 1} pokemonInfo={pokemon} favoritesArray={favoritesArray} onToggleFavorite={onToggleFavorite}/>
+                <PokemonCard key={index + 1} pokemonInfo={pokemon} favoritesArray={favoritesArray} onToggleFavorite={onToggleFavorite}/>
               ))}
           </div>
         </div>
