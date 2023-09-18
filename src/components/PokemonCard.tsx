@@ -26,7 +26,7 @@ export default function PokemonCard({
         {formatPokemonName(pokemonDetails.name) || "Missing name"}
       </div>
       <div className="poketext pokemon-id">
-        {"#" + ("000" + pokemonDetails.id).slice(-4)}
+        {"#" + ("00" + pokemonDetails.id).slice(-3)}
       </div>
       <div
         className="favorite-button"

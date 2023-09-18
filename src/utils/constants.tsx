@@ -86,7 +86,7 @@ export const TYPE_SECONDARY_COLORS: Record<string, string> = {
   fairy: '#f1a2c9',
 };
 
-export const SORT_BY: string[] = ['id', 'name', 'high to low'];
+export const SORT_BY: string[] = ['ID', 'A-Z', 'high to low'];
 
 export const STAT_COLORS: Record<string, string> = {
   hp: '#ff0100',

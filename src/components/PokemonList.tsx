@@ -1,8 +1,24 @@
-import { Link } from 'react-router-dom';
 import { usePokemonDataList } from '../utils/pokeApi';
 import PokemonCard from './PokemonCard';
 import { useEffect, useState } from 'react';
 import { Pokemon } from '../utils/pokeApiTypes';
+import Header from './Header';
+import Filters from './Filters';
+import { formatPokemonName } from '../utils/utils';
+
+interface FilterType {
+  search: string;
+  showFavorites: boolean;
+  type: string;
+  sortBy: string;
+}
+
+const emptyFilters: FilterType = {
+  search: '',
+  showFavorites: false,
+  type: 'all',
+  sortBy: 'id',
+};
 
 export default function PokemonList() {
   const NUM_POKEMON = 151;
@@ -14,6 +30,7 @@ export default function PokemonList() {
   const [favoritesArray, setFavoritesArray] = useState<number[]>(
     JSON.parse(localStorage.getItem('favoritesArray') || '[]')
   );
+
   // handle favoritesArray
   const onToggleFavorite = (pokemonId: number) => {
     if (favoritesArray.includes(pokemonId)) {
@@ -30,9 +47,65 @@ export default function PokemonList() {
     localStorage.setItem('favoritesArray', JSON.stringify(favoritesArray));
   }, [favoritesArray]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // handle filters
+  const [displayedPokemonList, setDisplayedPokemonList] = useState<Pokemon[]>(
+    []
+  );
+  const [filters, setFilters] = useState(
+    sessionStorage.getItem('filters')
+      ? JSON.parse(sessionStorage.getItem('filters') || '{}')
+      : emptyFilters
+  );
+
+  useEffect(() => {
+    // filter on type
+    let filteredPokemon = pokemonDataList?.filter((pokemon: Pokemon) => {
+      return (
+        filters.type === 'all' ||
+        pokemon.types
+          .map((type: { type: { name: string } }) => type.type.name)
+          .includes(filters.type)
+      );
+    });
+
+    // filter on search
+    if (filters?.search !== '') {
+      filteredPokemon =
+        pokemonDataList?.filter(
+          (pokemon: Pokemon) =>
+            formatPokemonName(pokemon.name)
+              ?.toLowerCase()
+              .includes(filters?.search.toLowerCase())
+        ) || [];
+    }
+    // filter on favorites
+    if (filters.showFavorites) {
+      filteredPokemon =
+        filteredPokemon?.filter((pokemon: Pokemon) =>
+          favoritesArray.includes(pokemon.id)
+        ) || [];
+    }
+    // Sort
+    if (filters.sortBy === "A-Z") {
+      filteredPokemon?.sort((p1, p2) =>
+        p1.species.name.localeCompare(p2.species.name)
+      )
+    } else if (filters.sortBy === "high to low") {
+      filteredPokemon?.sort((p1, p2) => p2.id - p1.id);
+    }
+
+    setDisplayedPokemonList(filteredPokemon || []);
+  }, [pokemonDataList, filters, favoritesArray]);
+
+  const updateFilters = (newFilters?: Record<string, unknown>) => {
+    setFilters({ ...filters, ...newFilters });
+    // Store the updated filters in sessionStorage
+    sessionStorage.setItem(
+      'filters',
+      JSON.stringify({ ...filters, ...newFilters })
+    );
+  };
+
   if (error) {
     return <div>Error fetching data </div>;
   }
@@ -40,9 +113,8 @@ export default function PokemonList() {
   return (
     <>
       <div className="bg-container">
-        <Link to="/pokemon/1">
-          <button>Pokemon Info Page</button>
-        </Link>
+        <Header />
+        <Filters updateFilters={updateFilters} filters={filters} />
         <div className="pokemon-list">
           {isLoading && <div>Loading...</div>}
           {(error as Error) && (
@@ -50,14 +122,14 @@ export default function PokemonList() {
               <h3>An error has occured</h3>
             </div>
           )}
-          {!error && !isLoading && pokemonDataList?.length === 0 && (
+          {!error && !isLoading && displayedPokemonList?.length === 0 && (
             <div className="no-results pokemon-text">
               <h3>No Pokemon Found!</h3>
             </div>
           )}
           {!isLoading && (
             <ul className="pokemon-list-container">
-              {pokemonDataList?.map((pokemon: Pokemon) => (
+              {displayedPokemonList?.map((pokemon: Pokemon) => (
                 <PokemonCard
                   key={pokemon.id}
                   pokemonDetails={pokemon}
