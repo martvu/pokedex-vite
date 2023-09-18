@@ -1,4 +1,4 @@
-// Type definitions for PokeAPI v2 2.0
+// Type definitions for PokeAPI v2 2.0, source: https://github.com/lokshunhung/pokeapi-types
 
 // TODO: Remove unused types
 export interface NamedAPIResourceList {

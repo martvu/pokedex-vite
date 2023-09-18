@@ -1,12 +1,19 @@
 import './App.css';
-import PokemonList from './components/pokemonlist';
+import PokemonInfoPage from './components/PokemonInfoPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PokemonList from './components/PokemonList';
+
 
 function App() {
-
   return (
-    <div className="container">
-      <div> Hello</div>
-      <PokemonList></PokemonList>
+    <div className="app">
+      <Router>
+        <Routes>
+          <Route path="/" element={<PokemonList />} />
+          <Route path="/pokemon" element={<PokemonInfoPage />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
+        </Routes>
+      </Router>
     </div>
   );
 }
