@@ -5,7 +5,7 @@ import { Pokemon } from '../utils/pokeApiTypes';
 import Header from './Header';
 import Filters from './Filters';
 import { formatPokemonName } from '../utils/utils';
-
+import loadingIcon from '../assets/img/poke-loading.gif';
 interface FilterType {
   search: string;
   showFavorites: boolean;
@@ -86,11 +86,11 @@ export default function PokemonList() {
         ) || [];
     }
     // Sort
-    if (filters.sortBy === "A-Z") {
+    if (filters.sortBy === 'A-Z') {
       filteredPokemon?.sort((p1, p2) =>
         p1.species.name.localeCompare(p2.species.name)
-      )
-    } else if (filters.sortBy === "high to low") {
+      );
+    } else if (filters.sortBy === 'high to low') {
       filteredPokemon?.sort((p1, p2) => p2.id - p1.id);
     }
 
@@ -116,7 +116,11 @@ export default function PokemonList() {
         <Header />
         <Filters updateFilters={updateFilters} filters={filters} />
         <div className="pokemon-list">
-          {isLoading && <div>Loading...</div>}
+          {isLoading && (
+            <div className={`loading-screen pokemon-text`}>
+              <img src={loadingIcon} alt="loading icon" />
+            </div>
+          )}
           {(error as Error) && (
             <div className="error-screen pokemon-text">
               <h3>An error has occured</h3>

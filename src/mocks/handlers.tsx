@@ -42,7 +42,15 @@ export const handlers = [
                 url: 'https://pokeapi.co/api/v2/stat/2/',
               },
             }
-          ]
+          ],
+          sprites: {
+            other: {
+              'official-artwork': {
+                front_default:
+                  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png',
+              },
+            },
+          },
         })
       );
     }

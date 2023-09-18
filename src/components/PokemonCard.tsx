@@ -46,8 +46,8 @@ export default function PokemonCard({
           alt="pokeball background"
         />
       </div>
-      <Link to={`/pokemon/${pokemonDetails.id}`}>
-        <div className="sprite-container">
+      <Link to={`/pokemon/${pokemonDetails.id}`} >
+        <div className="sprite-container" data-testid="link-infopage">
           <img
             loading="lazy"
             className="pokemon-sprite"
