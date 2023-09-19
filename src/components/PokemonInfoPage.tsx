@@ -1,56 +1,61 @@
 import { usePokemonData, useSpeciesData } from '../utils/pokeApi';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { TYPE_COLORS, STAT_COLORS } from '../utils/constants';
+import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import {
+  TYPE_COLORS,
+  STAT_COLORS,
+  MAX_NO_OF_POKEMON,
+} from '../utils/constants';
 import { FlavorText, PokemonStat, PokemonType } from '../utils/pokeApiTypes';
-import { formatPokemonName } from '../utils/utils';
+import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
+import Header from './Header';
 
 export default function PokemonInfoPage() {
-  const [id, setId] = useState(1);
-  const maxNumPokemon = 151;
-  const [cardColor, setCardColor] = useState({});
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [currentId, setCurrentId] = useState<number>(id ? parseInt(id) : 1);
   const {
     data: pokemonDetails,
     isLoading,
     error,
-  } = usePokemonData(id.toString());
+  } = usePokemonData(currentId.toString());
   const {
     data: speciesData,
     isLoading: isLoadingSpecies,
     error: speciesError,
-  } = useSpeciesData(id);
+  } = useSpeciesData(currentId.toString());
 
-  useEffect(() => {
-    if (!pokemonDetails) {
-      return;
-    }
-    const types: PokemonType[] = pokemonDetails.types;
+  let gradient = 'black';
+  if (pokemonDetails) {
+    gradient = getTypeColorGradient(pokemonDetails);
+  }
 
-    const gradientColors = types.map(
-      type => TYPE_COLORS[type.type.name] || 'white'
-    );
-    if (gradientColors.length === 1) {
-      gradientColors.push('white');
-    }
-    const gradient = `linear-gradient(45deg, ${gradientColors.join(', ')})`;
-    setCardColor({
-      background: gradient,
-    });
-  }, [pokemonDetails]);
+  const handleNextPokemon = () => {
+    setCurrentId(currentId + 1);
+    navigate('/pokemon/' + (currentId + 1));
+  };
+
+  const handlePreviousPokemon = () => {
+    setCurrentId(currentId - 1);
+    navigate('/pokemon/' + (currentId - 1));
+  };
 
   return (
     <>
-      <div className="info-bg-container">
+      <Header />
+      <div className="filler-div"></div>
+      <div className="info-page-container">
+        
         <div className="info-home-btn">
-          <Link to="/">
-            <button>Home</button>
-          </Link>
         </div>
         {isLoading && <div>Loading...</div>}
         {error || (speciesError && <div>Error fetching data </div>)}
         {pokemonDetails && speciesData && (
           <>
-            <div className="info-pokemon-card" style={cardColor}>
+            <div
+              className="info-pokemon-card"
+              style={{ background: gradient }}
+            >
               <div className="pokemon-name-id">
                 <h1>{formatPokemonName(pokemonDetails?.name)}</h1>
                 <h4 className="pokemon-text">
@@ -91,15 +96,15 @@ export default function PokemonInfoPage() {
             </div>
             <div>
               <button
-                onClick={() => setId(id - 1)}
-                disabled={id === 1}
+                onClick={handlePreviousPokemon}
+                disabled={currentId === 1}
                 className="prev-btn"
               >
                 Prev
               </button>
               <button
-                onClick={() => setId(id + 1)}
-                disabled={id === maxNumPokemon}
+                onClick={handleNextPokemon}
+                disabled={currentId === MAX_NO_OF_POKEMON}
                 className="next-btn"
               >
                 Next
@@ -116,7 +121,8 @@ export default function PokemonInfoPage() {
                       .slice()
                       .reverse()
                       .find(
-                        (flavor: FlavorText) => flavor?.language?.name === 'en'
+                        (flavor: FlavorText) =>
+                          flavor?.language?.name === 'en'
                       )?.flavor_text
                   }
                 </p>

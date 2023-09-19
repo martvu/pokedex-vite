@@ -1,18 +1,29 @@
-import { Link } from 'react-router-dom';
 import { usePokemonDataList } from '../utils/pokeApi';
 import PokemonCard from './PokemonCard';
 import { useEffect, useState } from 'react';
+import { Pokemon } from '../utils/pokeApiTypes';
+import Header from './Header';
+import Filters from './Filters';
+import loadingIcon from '../assets/img/poke-loading.gif';
+
 
 export default function PokemonList() {
   const NUM_POKEMON = 151;
-  const { data: pokemonDataList, isLoading, error } = usePokemonDataList(NUM_POKEMON);
+  const {
+    data: pokemonDataList,
+    isLoading,
+    error,
+  } = usePokemonDataList(NUM_POKEMON);
   const [favoritesArray, setFavoritesArray] = useState<number[]>(
-    JSON.parse(localStorage.getItem("favoritesArray") || "[]")
+    JSON.parse(localStorage.getItem('favoritesArray') || '[]')
   );
+
   // handle favoritesArray
   const onToggleFavorite = (pokemonId: number) => {
     if (favoritesArray.includes(pokemonId)) {
-      setFavoritesArray(favoritesArray.filter((id:number) => id !== pokemonId));
+      setFavoritesArray(
+        favoritesArray.filter((id: number) => id !== pokemonId)
+      );
     } else {
       setFavoritesArray([...favoritesArray, pokemonId]);
     }
@@ -20,33 +31,51 @@ export default function PokemonList() {
 
   // save favoritesArray
   useEffect(() => {
-    localStorage.setItem("favoritesArray", JSON.stringify(favoritesArray));
+    localStorage.setItem('favoritesArray', JSON.stringify(favoritesArray));
   }, [favoritesArray]);
-  
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-  if(error) {
+
+  // handle filters
+  const [displayedPokemonList, setDisplayedPokemonList] = useState<Pokemon[]>(
+    []
+  );
+
+  if (error) {
     return <div>Error fetching data </div>;
   }
-  
+
   return (
-    <div>
-      <Link to="/pokemon">
-        <button>Pokemon Info Page</button>
-      </Link>
-      <div>
-        <div>
-          <h1>Pokemon List</h1>
-          <div className="pokemon-card-container">
-            {pokemonDataList &&
-              pokemonDataList.map((pokemon, index) => (
-                <PokemonCard key={index + 1} pokemonInfo={pokemon} favoritesArray={favoritesArray} onToggleFavorite={onToggleFavorite}/>
+    <>
+        <Header />
+        <Filters pokemonDataList={pokemonDataList as Pokemon[]} favoritesArray={favoritesArray} setDisplayedPokemonList={setDisplayedPokemonList} />
+        <div className="pokemon-list">
+          {isLoading && (
+            <div className={`loading-screen pokemon-text`}>
+              <img src={loadingIcon} alt="loading icon" />
+            </div>
+          )}
+          {(error as Error) && (
+            <div className="error-screen pokemon-text">
+              <h3>An error has occured</h3>
+            </div>
+          )}
+          {!error && !isLoading && displayedPokemonList?.length === 0 && (
+            <div className="no-results pokemon-text">
+              <h3>No Pokemon Found!</h3>
+            </div>
+          )}
+          {!isLoading && (
+            <ul className="pokemon-list-container">
+              {displayedPokemonList?.map((pokemon: Pokemon) => (
+                <PokemonCard
+                  key={pokemon.id}
+                  pokemonDetails={pokemon}
+                  onToggleFavorite={onToggleFavorite}
+                  favoritesArray={favoritesArray}
+                />
               ))}
-          </div>
+            </ul>
+          )}
         </div>
-      </div>
-    </div>
+    </>
   );
 }
-
