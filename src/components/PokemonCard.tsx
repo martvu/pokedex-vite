@@ -1,41 +1,30 @@
-import { Pokemon } from '../utils/pokeApiTypes';
-import { MdFavoriteBorder, MdFavorite } from 'react-icons/md';
-import { Link } from 'react-router-dom';
-import { TYPE_COLORS, TYPE_ICONS } from '../utils/constants';
-import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
+import {Pokemon} from '../utils/pokeApiTypes';
+import {Link} from 'react-router-dom';
+import {TYPE_COLORS, TYPE_ICONS} from '../utils/constants';
+import {formatPokemonName, getTypeColorGradient} from '../utils/utils';
 import pokeballIcon from '../assets/img/pb-icon.svg';
+import {FavoriteIcon} from "./FavoriteIcon.tsx";
 
-interface PokemonCardProps {
+export interface PokemonCardProps {
   pokemonDetails: Pokemon;
-  favoritesArray: number[];
-  onToggleFavorite: (id: number) => void;
 }
 
 export default function PokemonCard({
-  pokemonDetails,
-  onToggleFavorite,
-  favoritesArray,
+  pokemonDetails
 }: PokemonCardProps) {
   const gradient = getTypeColorGradient(pokemonDetails);
 
+
   return (
-    <Link to={`/pokemon/${pokemonDetails.id}`} className="pokemon-card-container" style={{ background: gradient }}>
+    <Link to={`/project1/pokemon/${pokemonDetails.id}`} className="pokemon-card-container"
+          style={{background: gradient}}>
       <div className="poketext pokemon-name">
         {formatPokemonName(pokemonDetails.name) || 'Missing name'}
       </div>
       <div className="poketext pokemon-id">
         {'#' + ('00' + pokemonDetails.id).slice(-3)}
       </div>
-      <div
-        className="favorite-button"
-        onClick={() => onToggleFavorite(pokemonDetails.id)}
-      >
-        {favoritesArray.includes(pokemonDetails.id) ? (
-          <MdFavorite className="favorite-icon-active" />
-        ) : (
-          <MdFavoriteBorder className="favorite-icon-inactive" />
-        )}
-      </div>
+      <FavoriteIcon pokemonDetails={pokemonDetails}/>
       <div className="sprite-bg-container">
         <img
           loading="lazy"
@@ -44,23 +33,23 @@ export default function PokemonCard({
           alt="pokeball background"
         />
       </div>
-        <div className="sprite-container" data-testid="link-infopage">
-          <img
-            loading="lazy"
-            className="pokemon-sprite"
-            src={
-              pokemonDetails?.sprites?.other?.['official-artwork']
-                ?.front_default || '#'
-            }
-            alt={pokemonDetails.name}
-          />
-        </div>
+      <div className="sprite-container" data-testid="link-infopage">
+        <img
+          loading="lazy"
+          className="pokemon-sprite"
+          src={
+            pokemonDetails?.sprites?.other?.['official-artwork']
+              ?.front_default || '#'
+          }
+          alt={pokemonDetails.name}
+        />
+      </div>
       <div className="type-container">
         {pokemonDetails.types.map(type => (
           <span
             key={type.slot}
             className="poketext type-icon"
-            style={{ backgroundColor: `${TYPE_COLORS[type.type.name]}` }}
+            style={{backgroundColor: `${TYPE_COLORS[type.type.name]}`}}
           >
             <img
               loading="lazy"

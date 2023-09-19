@@ -1,6 +1,6 @@
 import { usePokemonData, useSpeciesData } from '../utils/pokeApi';
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   TYPE_COLORS,
   STAT_COLORS,
@@ -9,10 +9,11 @@ import {
 import { FlavorText, PokemonStat, PokemonType } from '../utils/pokeApiTypes';
 import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
 import Header from './Header';
+import {FavoriteIcon} from "./FavoriteIcon.tsx";
+import {FavoriteContext} from "./PokemonList.tsx";
 
 export default function PokemonInfoPage() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [currentId, setCurrentId] = useState<number>(id ? parseInt(id) : 1);
   const {
     data: pokemonDetails,
@@ -24,38 +25,28 @@ export default function PokemonInfoPage() {
     isLoading: isLoadingSpecies,
     error: speciesError,
   } = useSpeciesData(currentId.toString());
-
+  const [favoritesArray, setFavoritesArray] = useState<number[]>(
+    JSON.parse(localStorage.getItem('favoritesArray') || '[]')
+  );
+  if (error) {
+    return <div>Error fetching data </div>;
+  }
   let gradient = 'black';
   if (pokemonDetails) {
     gradient = getTypeColorGradient(pokemonDetails);
   }
 
-  const handleNextPokemon = () => {
-    setCurrentId(currentId + 1);
-    navigate('/pokemon/' + (currentId + 1));
-  };
-
-  const handlePreviousPokemon = () => {
-    setCurrentId(currentId - 1);
-    navigate('/pokemon/' + (currentId - 1));
-  };
-
   return (
-    <>
+    <FavoriteContext.Provider value={{favoritesArray, setFavoritesArray}}>
       <Header />
       <div className="filler-div"></div>
       <div className="info-page-container">
-        
-        <div className="info-home-btn">
-        </div>
-        {isLoading && <div>Loading...</div>}
+        {isLoading || isLoadingSpecies && <div>Loading...</div>}
         {error || (speciesError && <div>Error fetching data </div>)}
         {pokemonDetails && speciesData && (
           <>
-            <div
-              className="info-pokemon-card"
-              style={{ background: gradient }}
-            >
+            <div className="info-pokemon-card" style={{ background: gradient }}>
+              <FavoriteIcon pokemonDetails={pokemonDetails} />
               <div className="pokemon-name-id">
                 <h1>{formatPokemonName(pokemonDetails?.name)}</h1>
                 <h4 className="pokemon-text">
@@ -88,45 +79,42 @@ export default function PokemonInfoPage() {
                   ))}
                 </div>
                 <div className="pokemon-genus">
-                  {isLoadingSpecies
-                    ? 'Loading...'
-                    : speciesData?.genera[7]?.genus}
+                  {speciesData?.genera[7]?.genus}
                 </div>
               </div>
             </div>
             <div>
-              <button
-                onClick={handlePreviousPokemon}
-                disabled={currentId === 1}
-                className="prev-btn"
-              >
-                Prev
-              </button>
-              <button
-                onClick={handleNextPokemon}
-                disabled={currentId === MAX_NO_OF_POKEMON}
-                className="next-btn"
-              >
-                Next
-              </button>
+              <Link to={`/project1/pokemon/${(currentId - 1).toString()}`}>
+                <button
+                  onClick={() => setCurrentId(currentId - 1)}
+                  disabled={currentId === 1}
+                  className="prev-btn"
+                >
+                  Prev
+                </button>
+              </Link>
+              <Link to={`/project1/pokemon/${(currentId + 1).toString()}`}>
+                <button
+                  onClick={() => setCurrentId(currentId + 1)}
+                  disabled={currentId === MAX_NO_OF_POKEMON}
+                  className="next-btn"
+                >
+                  Next
+                </button>
+              </Link>
             </div>
             <div className="pokemon-description">
               <h5 className="pokemon-text info-text">Description</h5>
-              {isLoadingSpecies ? (
-                <p>Loading...</p>
-              ) : (
                 <p>
                   {
                     speciesData?.flavor_text_entries
                       .slice()
                       .reverse()
                       .find(
-                        (flavor: FlavorText) =>
-                          flavor?.language?.name === 'en'
+                        (flavor: FlavorText) => flavor?.language?.name === 'en'
                       )?.flavor_text
                   }
                 </p>
-              )}
             </div>
             <div className="pokemon-dimensions">
               <div className="pokemon-height">
@@ -164,6 +152,6 @@ export default function PokemonInfoPage() {
           </>
         )}
       </div>
-    </>
+    </FavoriteContext.Provider>
   );
 }

@@ -1,7 +1,7 @@
 #root {
   font-family: "Flexo-Demi", Arial, Helvetica, sans-serif;
   height: 100%;
-  --bg-color: rgb(255, 255, 255); 
+  --bg-color: rgb(255, 255, 255);
   --card-color: rgba(146, 149, 158, 0.73);
   --primary-color:#ba5050;
   --secondary-color: rgb(255, 255, 255);
@@ -59,12 +59,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-} 
+}
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 0;
   background: transparent;
-  height: 0px;
+  height: 0;
 }
 
 .app {
@@ -74,7 +74,6 @@ body {
     width: 100%;
     background-color: var(--bg-color);
     min-height: 100vh;
-    justify-content: center;
     align-items: center;
 }
 
@@ -112,11 +111,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: sticky; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  z-index: 102; 
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 102;
   background-color: var(--secondary-color);
   overflow:hidden;
   box-shadow: 0 0 10px 1px rgb(0, 0, 0, 0.5);
@@ -136,62 +135,62 @@ body {
   margin: 0.5rem 0;
   color: var(--header-text);
 
-  text-shadow: rgb(61, 125, 202) 2px 0px 0px,
-    rgb(61, 125, 202) 1.75517px 0.958851px 0px,
-    rgb(61, 125, 202) 1.0806px 1.68294px 0px,
-    rgb(61, 125, 202) 0.141474px 1.99499px 0px,
-    rgb(61, 125, 202) -0.832294px 1.81859px 0px,
-    rgb(61, 125, 202) -1.60229px 1.19694px 0px,
-    rgb(61, 125, 202) -1.97998px 0.28224px 0px,
-    rgb(61, 125, 202) -1.87291px -0.701566px 0px,
-    rgb(61, 125, 202) -1.30729px -1.5136px 0px,
-    rgb(61, 125, 202) -0.421592px -1.95506px 0px,
-    rgb(61, 125, 202) 0.567324px -1.91785px 0px,
-    rgb(61, 125, 202) 1.41734px -1.41108px 0px,
-    rgb(61, 125, 202) 1.92034px -0.558831px 0px, rgb(0, 58, 112) 7px 0px 0px,
-    rgb(0, 58, 112) 6.92869px 0.996602px 0px,
-    rgb(0, 58, 112) 6.71622px 1.9729px 0px,
-    rgb(0, 58, 112) 6.36692px 2.909px 0px,
-    rgb(0, 58, 112) 5.8879px 3.78584px 0px,
-    rgb(0, 58, 112) 5.28893px 4.58555px 0px,
-    rgb(0, 58, 112) 4.5822px 5.29183px 0px,
-    rgb(0, 58, 112) 3.78212px 5.8903px 0px,
-    rgb(0, 58, 112) 2.90498px 6.36876px 0px,
-    rgb(0, 58, 112) 1.96865px 6.71747px 0px,
-    rgb(0, 58, 112) 0.992221px 6.92932px 0px,
-    rgb(0, 58, 112) -0.00442571px 7px 0px,
-    rgb(0, 58, 112) -1.00098px 6.92806px 0px,
-    rgb(0, 58, 112) -1.97715px 6.71498px 0px,
-    rgb(0, 58, 112) -2.91303px 6.36508px 0px,
-    rgb(0, 58, 112) -3.78956px 5.88551px 0px,
-    rgb(0, 58, 112) -4.58889px 5.28603px 0px,
-    rgb(0, 58, 112) -5.29472px 4.57885px 0px,
-    rgb(0, 58, 112) -5.89269px 3.77839px 0px,
-    rgb(0, 58, 112) -6.3706px 2.90095px 0px,
-    rgb(0, 58, 112) -6.71871px 1.96441px 0px,
-    rgb(0, 58, 112) -6.92995px 0.98784px 0px,
-    rgb(0, 58, 112) -6.99999px -0.00885142px 0px,
-    rgb(0, 58, 112) -6.92743px -1.00536px 0px,
-    rgb(0, 58, 112) -6.71372px -1.98139px 0px,
-    rgb(0, 58, 112) -6.36324px -2.91705px 0px,
-    rgb(0, 58, 112) -5.88311px -3.79328px 0px,
-    rgb(0, 58, 112) -5.28313px -4.59223px 0px,
-    rgb(0, 58, 112) -4.57551px -5.29762px 0px,
-    rgb(0, 58, 112) -3.77466px -5.89507px 0px,
-    rgb(0, 58, 112) -2.89692px -6.37243px 0px,
-    rgb(0, 58, 112) -1.96016px -6.71995px 0px,
-    rgb(0, 58, 112) -0.983458px -6.93057px 0px,
-    rgb(0, 58, 112) 0.0132771px -6.99999px 0px,
-    rgb(0, 58, 112) 1.00974px -6.92679px 0px,
-    rgb(0, 58, 112) 1.98564px -6.71247px 0px,
-    rgb(0, 58, 112) 2.92107px -6.36139px 0px,
-    rgb(0, 58, 112) 3.797px -5.88071px 0px,
-    rgb(0, 58, 112) 4.59557px -5.28022px 0px,
-    rgb(0, 58, 112) 5.30051px -4.57215px 0px,
-    rgb(0, 58, 112) 5.89746px -3.77094px 0px,
-    rgb(0, 58, 112) 6.37426px -2.89289px 0px,
-    rgb(0, 58, 112) 6.72119px -1.95591px 0px,
-    rgb(0, 58, 112) 6.93119px -0.979076px 0px;
+  text-shadow: rgb(61, 125, 202) 2px 0 0,
+    rgb(61, 125, 202) 1.75517px 0.958851px 0,
+    rgb(61, 125, 202) 1.0806px 1.68294px 0,
+    rgb(61, 125, 202) 0.141474px 1.99499px 0,
+    rgb(61, 125, 202) -0.832294px 1.81859px 0,
+    rgb(61, 125, 202) -1.60229px 1.19694px 0,
+    rgb(61, 125, 202) -1.97998px 0.28224px 0,
+    rgb(61, 125, 202) -1.87291px -0.701566px 0,
+    rgb(61, 125, 202) -1.30729px -1.5136px 0,
+    rgb(61, 125, 202) -0.421592px -1.95506px 0,
+    rgb(61, 125, 202) 0.567324px -1.91785px 0,
+    rgb(61, 125, 202) 1.41734px -1.41108px 0,
+    rgb(61, 125, 202) 1.92034px -0.558831px 0, rgb(0, 58, 112) 7px 0 0,
+    rgb(0, 58, 112) 6.92869px 0.996602px 0,
+    rgb(0, 58, 112) 6.71622px 1.9729px 0,
+    rgb(0, 58, 112) 6.36692px 2.909px 0,
+    rgb(0, 58, 112) 5.8879px 3.78584px 0,
+    rgb(0, 58, 112) 5.28893px 4.58555px 0,
+    rgb(0, 58, 112) 4.5822px 5.29183px 0,
+    rgb(0, 58, 112) 3.78212px 5.8903px 0,
+    rgb(0, 58, 112) 2.90498px 6.36876px 0,
+    rgb(0, 58, 112) 1.96865px 6.71747px 0,
+    rgb(0, 58, 112) 0.992221px 6.92932px 0,
+    rgb(0, 58, 112) -0.00442571px 7px 0,
+    rgb(0, 58, 112) -1.00098px 6.92806px 0,
+    rgb(0, 58, 112) -1.97715px 6.71498px 0,
+    rgb(0, 58, 112) -2.91303px 6.36508px 0,
+    rgb(0, 58, 112) -3.78956px 5.88551px 0,
+    rgb(0, 58, 112) -4.58889px 5.28603px 0,
+    rgb(0, 58, 112) -5.29472px 4.57885px 0,
+    rgb(0, 58, 112) -5.89269px 3.77839px 0,
+    rgb(0, 58, 112) -6.3706px 2.90095px 0,
+    rgb(0, 58, 112) -6.71871px 1.96441px 0,
+    rgb(0, 58, 112) -6.92995px 0.98784px 0,
+    rgb(0, 58, 112) -6.99999px -0.00885142px 0,
+    rgb(0, 58, 112) -6.92743px -1.00536px 0,
+    rgb(0, 58, 112) -6.71372px -1.98139px 0,
+    rgb(0, 58, 112) -6.36324px -2.91705px 0,
+    rgb(0, 58, 112) -5.88311px -3.79328px 0,
+    rgb(0, 58, 112) -5.28313px -4.59223px 0,
+    rgb(0, 58, 112) -4.57551px -5.29762px 0,
+    rgb(0, 58, 112) -3.77466px -5.89507px 0,
+    rgb(0, 58, 112) -2.89692px -6.37243px 0,
+    rgb(0, 58, 112) -1.96016px -6.71995px 0,
+    rgb(0, 58, 112) -0.983458px -6.93057px 0,
+    rgb(0, 58, 112) 0.0132771px -6.99999px 0,
+    rgb(0, 58, 112) 1.00974px -6.92679px 0,
+    rgb(0, 58, 112) 1.98564px -6.71247px 0,
+    rgb(0, 58, 112) 2.92107px -6.36139px 0,
+    rgb(0, 58, 112) 3.797px -5.88071px 0,
+    rgb(0, 58, 112) 4.59557px -5.28022px 0,
+    rgb(0, 58, 112) 5.30051px -4.57215px 0,
+    rgb(0, 58, 112) 5.89746px -3.77094px 0,
+    rgb(0, 58, 112) 6.37426px -2.89289px 0,
+    rgb(0, 58, 112) 6.72119px -1.95591px 0,
+    rgb(0, 58, 112) 6.93119px -0.979076px 0;
 }
 
 .header-link-container {
@@ -218,7 +217,6 @@ body {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: var(--secondary-color);
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
@@ -243,7 +241,7 @@ body {
   position: sticky;
   top: 80px;
   z-index: 103;
-  box-shadow:0px 5px 10px 0.2px rgb(0, 0, 0, 0.5) ;
+  box-shadow:0 5px 10px 0.2px rgb(0, 0, 0, 0.5) ;
 }
 
 .filter-reset-btn {
@@ -387,7 +385,7 @@ body {
   margin: 0.8rem;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 5px 20px 2px rgb(0 0 0 / 50%);
-  cursor: pointer; 
+  cursor: pointer;
   position: relative;
   overflow: hidden;
   background-color: var(--card-color);
@@ -428,7 +426,7 @@ body {
 }
 .favorite-icon-active {
   color: red;
-  animation: heart-beat 0.5s; 
+  animation: heart-beat 0.5s;
 }
 
 .pokemon-id {
@@ -518,7 +516,7 @@ body {
   align-items: center;
   flex-direction: column;
   padding-bottom: 4rem;
-} 
+}
 
 .info-bg-container h5 {
   font-size: 1.1rem;
@@ -556,6 +554,7 @@ body {
   border: solid 1px #a7a7a7;
   box-shadow: 0 0 10px 1px rgb(0, 0, 0, 0.5);
   padding: 1rem;
+  position: relative;
   /* background: linear-gradient(to bottom, rgba(60, 60, 60, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%); */
 }
 
@@ -692,7 +691,6 @@ body {
 
 .statbar-segment {
   height: 18px;
-  display: inline-block;
   border-radius: 1rem;
   display: flex;
   justify-content: center;
@@ -703,16 +701,16 @@ body {
   animation: statSlideIn 2s ease-in-out;
   filter: hue-rotate(15deg);
 }
-  
+
 @media screen and (max-width: 768px) {
   #root {
-    padding: 0rem;
+    padding: 0;
   }
 
   .header {
     height: 60px;
   }
-  
+
   .filler-div {
     top: 60px;
   }
@@ -734,8 +732,8 @@ body {
 }
 
 @media screen and (max-width: 500px) {
-  .pokemon-card, 
-  .info-pokemon-card, 
+  .pokemon-card,
+  .info-pokemon-card,
   .pokemon-description,
   .pokemon-stats,
   .pokemon-card-info{
@@ -745,7 +743,7 @@ body {
 
 @media screen and (max-width: 450px) {
   #root {
-    padding: 0rem;
+    padding: 0;
   }
   .pokemon-list-container {
     margin: 0;
