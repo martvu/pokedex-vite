@@ -35,8 +35,8 @@ export default function PokemonInfoPage() {
       <div className="filler-div"></div>
       <div className="info-page-container">
         <div className="info-home-btn"></div>
-        {isLoading && <div>Loading...</div>}
-        {error || (speciesError && <div>Error fetching data </div>)}
+        {isLoading || isLoadingSpecies && <div>Loading...</div>}
+        {error || speciesError && <div>Error fetching data</div>}
         {pokemonDetails && speciesData && (
           <>
             <div className="info-pokemon-card" style={{ background: gradient }}>

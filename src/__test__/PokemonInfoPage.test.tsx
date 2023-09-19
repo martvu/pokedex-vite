@@ -1,39 +1,52 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import PokemonList from '../components/PokemonList';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import App from '../App';
-
+import PokemonInfoPage from '../components/PokemonInfoPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '../context/ThemeContext';
+import { act } from 'react-dom/test-utils';
+import { userEvent } from '@testing-library/user-event';
 const queryClient = new QueryClient();
 
-describe('PokemonList', () => {
-  test('pokemonlist renders', async () => {
+describe('PokemonInfoPage', () => {
+  test('pokemonInfoPage renders', async () => {
     render(
       <QueryClientProvider client={queryClient}>
-        <Router>
-          <Routes>
-            <Route path="/" element={<PokemonList />} />
-          </Routes>
-        </Router>
+        <ThemeProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<PokemonInfoPage />} />
+            </Routes>
+          </Router>
+        </ThemeProvider>
       </QueryClientProvider>
-      );
-    
-      expect(await screen.findByText(/bulbasaur/i)).toBeInTheDocument();
-      expect(await screen.findByText(/#001/i)).toBeInTheDocument();
-      expect(await screen.findByText(/type/i)).toBeInTheDocument();
-      expect(await screen.findByText(/pokedex/i)).toBeInTheDocument();
+    );
+
+    expect(await screen.findByText(/#001/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Seed Pokémon/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Grass/i)).toBeInTheDocument();
+    expect(await screen.findByText(/Description/i)).toBeInTheDocument();
+
+    await act(async () => {
+      userEvent.click(screen.getByText(/Next/i));
+    });
+
   });
-}) 
+});
 
-
-describe('Snapshot test', () => {
-  test('snapshot', async () => {
+describe('Snapshot PokemonInfoPage', () => {
+  test('snapshot of pokemonInfoPage', async () => {
     const { asFragment } = render(
       <QueryClientProvider client={queryClient}>
-        <App />
+        <ThemeProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<PokemonInfoPage />} />
+            </Routes>
+          </Router>
+        </ThemeProvider>
       </QueryClientProvider>
-      );
+    );
     expect(asFragment()).toMatchSnapshot();
-  })
+  });
 });

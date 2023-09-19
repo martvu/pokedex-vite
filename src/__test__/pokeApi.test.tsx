@@ -1,7 +1,6 @@
 import { describe, test, expect } from 'vitest';
 import { getPokemonData, getPokemonDataList } from '../utils/pokeApi';
 
-// TODO: Mock fetch calls
 describe('getPokemonData', () => {
   test('should return pokemon data', async () => {
     const url = 'https://pokeapi.co/api/v2/pokemon/1/';
@@ -11,7 +10,6 @@ describe('getPokemonData', () => {
   });
 });
 
-//TODO: Mock fetch calls
 describe('getPokemonDataList', () => {
   test('should return list of pokemon data', async () => {
     const url = 'https://pokeapi.co/api/v2/pokemon?limit=151';
