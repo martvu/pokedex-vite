@@ -11,8 +11,8 @@ function App() {
     <div className={`app bg-container ${darkMode ? "dark-mode" : ""}`}>
       <Router>
         <Routes>
-          <Route path="/" element={<PokemonList />} />
-          <Route path="/pokemon/:id" element={<PokemonInfoPage />} />
+          <Route path="/project1" element={<PokemonList />} />
+          <Route path="/project1/pokemon/:id" element={<PokemonInfoPage />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </Router>

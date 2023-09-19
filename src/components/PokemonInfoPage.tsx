@@ -1,6 +1,6 @@
 import { usePokemonData, useSpeciesData } from '../utils/pokeApi';
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   TYPE_COLORS,
   STAT_COLORS,
@@ -12,7 +12,6 @@ import Header from './Header';
 
 export default function PokemonInfoPage() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [currentId, setCurrentId] = useState<number>(id ? parseInt(id) : 1);
   const {
     data: pokemonDetails,
@@ -30,32 +29,17 @@ export default function PokemonInfoPage() {
     gradient = getTypeColorGradient(pokemonDetails);
   }
 
-  const handleNextPokemon = () => {
-    setCurrentId(currentId + 1);
-    navigate('/pokemon/' + (currentId + 1));
-  };
-
-  const handlePreviousPokemon = () => {
-    setCurrentId(currentId - 1);
-    navigate('/pokemon/' + (currentId - 1));
-  };
-
   return (
     <>
       <Header />
       <div className="filler-div"></div>
       <div className="info-page-container">
-        
-        <div className="info-home-btn">
-        </div>
+        <div className="info-home-btn"></div>
         {isLoading && <div>Loading...</div>}
         {error || (speciesError && <div>Error fetching data </div>)}
         {pokemonDetails && speciesData && (
           <>
-            <div
-              className="info-pokemon-card"
-              style={{ background: gradient }}
-            >
+            <div className="info-pokemon-card" style={{ background: gradient }}>
               <div className="pokemon-name-id">
                 <h1>{formatPokemonName(pokemonDetails?.name)}</h1>
                 <h4 className="pokemon-text">
@@ -95,20 +79,24 @@ export default function PokemonInfoPage() {
               </div>
             </div>
             <div>
-              <button
-                onClick={handlePreviousPokemon}
-                disabled={currentId === 1}
-                className="prev-btn"
-              >
-                Prev
-              </button>
-              <button
-                onClick={handleNextPokemon}
-                disabled={currentId === MAX_NO_OF_POKEMON}
-                className="next-btn"
-              >
-                Next
-              </button>
+              <Link to={`/project1/pokemon/${(currentId - 1).toString()}`}>
+                <button
+                  onClick={() => setCurrentId(currentId - 1)}
+                  disabled={currentId === 1}
+                  className="prev-btn"
+                >
+                  Prev
+                </button>
+              </Link>
+              <Link to={`/project1/pokemon/${(currentId + 1).toString()}`}>
+                <button
+                  onClick={() => setCurrentId(currentId + 1)}
+                  disabled={currentId === MAX_NO_OF_POKEMON}
+                  className="next-btn"
+                >
+                  Next
+                </button>
+              </Link>
             </div>
             <div className="pokemon-description">
               <h5 className="pokemon-text info-text">Description</h5>
@@ -121,8 +109,7 @@ export default function PokemonInfoPage() {
                       .slice()
                       .reverse()
                       .find(
-                        (flavor: FlavorText) =>
-                          flavor?.language?.name === 'en'
+                        (flavor: FlavorText) => flavor?.language?.name === 'en'
                       )?.flavor_text
                   }
                 </p>
