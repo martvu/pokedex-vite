@@ -2,19 +2,86 @@ import { BiSearchAlt } from 'react-icons/bi';
 import { SORT_BY, TYPES } from '../utils/constants';
 import { MdFavorite, MdFavoriteBorder } from 'react-icons/md';
 import { GrPowerReset } from 'react-icons/gr';
+import { useEffect, useState } from 'react';
+import { Pokemon } from '../utils/pokeApiTypes';
+import { formatPokemonName } from '../utils/utils';
 
 interface FiltersProps {
-  updateFilters: (newFilters?: Record<string, unknown>) => void;
-  filters: {
-    search: string;
-    type: string;
-    showFavorites: boolean;
-    sortBy: string;
-  };
+  pokemonDataList: Pokemon[];
+  favoritesArray: number[];
+  setDisplayedPokemonList: (arg0: Pokemon[]) => void;
 }
+interface FilterType {
+  search: string;
+  showFavorites: boolean;
+  type: string;
+  sortBy: string;
+}
+const emptyFilters: FilterType = {
+  search: '',
+  showFavorites: false,
+  type: 'all',
+  sortBy: 'id',
+};
 
-function Filters({ updateFilters, filters }: FiltersProps) {
+function Filters({pokemonDataList, favoritesArray, setDisplayedPokemonList}: FiltersProps) {
   const savedFilters = JSON.parse(sessionStorage.getItem('filters') || '{}');
+
+  const [filters, setFilters] = useState(
+    sessionStorage.getItem('filters')
+      ? JSON.parse(sessionStorage.getItem('filters') || '{}')
+      : emptyFilters
+  );
+
+
+  const updateFilters = (newFilters?: Record<string, unknown>) => {
+    setFilters({ ...filters, ...newFilters });
+    // Store the updated filters in sessionStorage
+    sessionStorage.setItem(
+      'filters',
+      JSON.stringify({ ...filters, ...newFilters })
+    );
+  };
+  useEffect(() => {
+    // filter on type
+    let filteredPokemon = pokemonDataList?.filter((pokemon: Pokemon) => {
+      return (
+        filters.type === 'all' ||
+        pokemon.types
+          .map((type: { type: { name: string } }) => type.type.name)
+          .includes(filters.type)
+      );
+    });
+
+    // filter on search
+    if (filters?.search !== '') {
+      filteredPokemon =
+        pokemonDataList?.filter(
+          (pokemon: Pokemon) =>
+            formatPokemonName(pokemon.name)
+              ?.toLowerCase()
+              .includes(filters?.search.toLowerCase())
+        ) || [];
+    }
+    // filter on favorites
+    if (filters.showFavorites) {
+      filteredPokemon =
+        filteredPokemon?.filter((pokemon: Pokemon) =>
+          favoritesArray.includes(pokemon.id)
+        ) || [];
+    }
+    // Sort
+    if (filters.sortBy === 'A-Z') {
+      filteredPokemon?.sort((p1, p2) =>
+        p1.species.name.localeCompare(p2.species.name)
+      );
+    } else if (filters.sortBy === 'high to low') {
+      filteredPokemon?.sort((p1, p2) => p2.id - p1.id);
+    }
+
+    setDisplayedPokemonList(filteredPokemon || []);
+  }, [pokemonDataList, filters, favoritesArray]);
+
   return (
     <>
       <div className="filter-container">
@@ -62,11 +129,11 @@ function Filters({ updateFilters, filters }: FiltersProps) {
         </button>
         <div className="filter-options-container">
           <div className="filter-select">
-            <label htmlFor="filter-select" className="filter-text">
+            <label htmlFor="type-select" className="filter-text">
               Type:
             </label>
             <select
-              id="filter-select"
+              id="type-select"
               value={filters.type}
               onChange={e =>
                 updateFilters({
@@ -82,11 +149,11 @@ function Filters({ updateFilters, filters }: FiltersProps) {
             </select>
           </div>
           <div className="filter-select">
-            <label htmlFor="filter-select" className="filter-text">
+            <label htmlFor="sort-select" className="filter-text">
               Sort By
             </label>
             <select
-              id="filter-select"
+              id="sort-select"
               value={filters.sortBy}
               onChange={e =>
                 updateFilters({
@@ -108,3 +175,4 @@ function Filters({ updateFilters, filters }: FiltersProps) {
 }
 
 export default Filters;
+

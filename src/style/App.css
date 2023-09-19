@@ -11,9 +11,11 @@
   --gradient-one: rgb(255, 255, 255);
   --gradient-two:rgb(224, 223, 223);
   --header-text: #ffcb05;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 @font-face {
@@ -39,14 +41,13 @@
 }
 
 html, body {
-  height: 100%;
-  margin: 0px; 
-  background-color: var(--bg-color);
+    height: 100%;
+    margin: 0;
+    background-color: var(--bg-color);
 }
 
 html {
   font-size: 16px;
-  background-color: var(--bg-color);
   color: var(--text-color);
 }
 
@@ -67,8 +68,14 @@ body {
 }
 
 .app {
-  height: 100%;
-  background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .dark-mode {
@@ -333,16 +340,10 @@ body {
 
 /* PokemonList */
 .bg-container {
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  max-width: 1500px;
-  display: flex; 
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  flex-wrap: wrap;
+  height: 100%;
   background-color: var(--bg-color);
 }
 
@@ -362,6 +363,15 @@ body {
 
 .pokemon-list-container:empty {
   display: none;
+}
+
+.pokemon-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding-bottom: 4rem;
+  padding-top: 1rem;
 }
 
 /*Pokemon Card*/
@@ -489,8 +499,15 @@ body {
 }
 
 .pokemon-sprite:hover {
-  scale: 1.1;
+  transform: scale(1.1);
 }
+.info-pokemon-sprite{
+  transition: all 0.2s ease-in-out;
+}
+.info-pokemon-sprite:hover {
+  transform: scale(1.1);
+}
+
 /* PokemonInfoPage */
 .info-page-container {
   max-width: 700px;
@@ -500,6 +517,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding-bottom: 4rem;
 } 
 
 .info-bg-container h5 {

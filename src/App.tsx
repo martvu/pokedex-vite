@@ -8,7 +8,7 @@ import useDarkTheme from './context/useDarkTheme';
 function App() {
   const { darkMode } = useDarkTheme();
   return (
-    <div className={`app ${darkMode ? "dark-mode" : ""}`}>
+    <div className={`app bg-container ${darkMode ? "dark-mode" : ""}`}>
       <Router>
         <Routes>
           <Route path="/" element={<PokemonList />} />

@@ -19,7 +19,7 @@ export default function PokemonCard({
   const gradient = getTypeColorGradient(pokemonDetails);
 
   return (
-    <div className="pokemon-card-container" style={{ background: gradient }}>
+    <Link to={`/pokemon/${pokemonDetails.id}`} className="pokemon-card-container" style={{ background: gradient }}>
       <div className="poketext pokemon-name">
         {formatPokemonName(pokemonDetails.name) || 'Missing name'}
       </div>
@@ -44,7 +44,6 @@ export default function PokemonCard({
           alt="pokeball background"
         />
       </div>
-      <Link to={`/pokemon/${pokemonDetails.id}`}>
         <div className="sprite-container" data-testid="link-infopage">
           <img
             loading="lazy"
@@ -56,7 +55,6 @@ export default function PokemonCard({
             alt={pokemonDetails.name}
           />
         </div>
-      </Link>
       <div className="type-container">
         {pokemonDetails.types.map(type => (
           <span
@@ -75,6 +73,6 @@ export default function PokemonCard({
           </span>
         ))}
       </div>
-    </div>
+    </Link>
   );
 }
