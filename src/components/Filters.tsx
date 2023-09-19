@@ -24,7 +24,11 @@ const emptyFilters: FilterType = {
   sortBy: 'id',
 };
 
-function Filters({pokemonDataList, favoritesArray, setDisplayedPokemonList}: FiltersProps) {
+function Filters({
+  pokemonDataList,
+  favoritesArray,
+  setDisplayedPokemonList,
+}: FiltersProps) {
   const savedFilters = JSON.parse(sessionStorage.getItem('filters') || '{}');
 
   const [filters, setFilters] = useState(
@@ -32,7 +36,6 @@ function Filters({pokemonDataList, favoritesArray, setDisplayedPokemonList}: Fil
       ? JSON.parse(sessionStorage.getItem('filters') || '{}')
       : emptyFilters
   );
-
 
   const updateFilters = (newFilters?: Record<string, unknown>) => {
     setFilters({ ...filters, ...newFilters });
@@ -175,4 +178,3 @@ function Filters({pokemonDataList, favoritesArray, setDisplayedPokemonList}: Fil
 }
 
 export default Filters;
-

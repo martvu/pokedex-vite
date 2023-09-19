@@ -5,7 +5,6 @@ import App from '../App';
 import { ThemeProvider } from '../context/ThemeContext';
 const queryClient = new QueryClient();
 
-
 // Snapshot is of 'Not Found' page
 describe('Snapshot App', () => {
   test('snapshot of app', async () => {
@@ -19,5 +18,3 @@ describe('Snapshot App', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 });
-
-

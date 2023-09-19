@@ -30,7 +30,6 @@ describe('PokemonInfoPage', () => {
     await act(async () => {
       userEvent.click(screen.getByText(/Next/i));
     });
-
   });
 });
 

@@ -14,7 +14,7 @@ describe('PokemonList', () => {
         <ThemeProvider>
           <MemoryRouter initialEntries={['/project1']}>
             <Routes>
-              <Route path='/project1' element={<PokemonList />} />
+              <Route path="/project1" element={<PokemonList />} />
             </Routes>
           </MemoryRouter>
         </ThemeProvider>
@@ -46,4 +46,3 @@ describe('Snapshot PokemonList', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 });
-

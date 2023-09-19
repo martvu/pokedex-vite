@@ -1,15 +1,15 @@
 #root {
-  font-family: "Flexo-Demi", Arial, Helvetica, sans-serif;
+  font-family: 'Flexo-Demi', Arial, Helvetica, sans-serif;
   height: 100%;
   --bg-color: rgb(255, 255, 255);
   --card-color: rgba(146, 149, 158, 0.73);
-  --primary-color:#ba5050;
+  --primary-color: #ba5050;
   --secondary-color: rgb(255, 255, 255);
   --text-color: #333;
   --white-color: rgb(255, 255, 255, 0.87);
   --accent-color: #ffcb05;
   --gradient-one: rgb(255, 255, 255);
-  --gradient-two:rgb(224, 223, 223);
+  --gradient-two: rgb(224, 223, 223);
   --header-text: #ffcb05;
   align-items: center;
   min-height: 100vh;
@@ -19,18 +19,19 @@
 }
 
 @font-face {
-  font-family: "Flexo-Demi";
-  src: url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.eot");
-  src: url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.eot?#iefix")
-      format("embedded-opentype"),
-    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.woff2")
-      format("woff2"),
-    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.woff")
-      format("woff"),
-    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.ttf")
-      format("truetype"),
-    url("https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.svg#Flexo-Demi")
-      format("svg");
+  font-family: 'Flexo-Demi';
+  src: url('https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.eot');
+  src:
+    url('https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.woff2')
+      format('woff2'),
+    url('https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.woff')
+      format('woff'),
+    url('https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.ttf')
+      format('truetype'),
+    url('https://db.onlinewebfonts.com/t/073a3b73a63a87e100f6bb8f003fc0d3.svg#Flexo-Demi')
+      format('svg');
 }
 
 * {
@@ -40,10 +41,11 @@
   line-height: 1.5;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    background-color: var(--bg-color);
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background-color: var(--bg-color);
 }
 
 html {
@@ -54,8 +56,8 @@ html {
 body {
   overflow: auto;
   height: auto;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -68,13 +70,13 @@ body {
 }
 
 .app {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    background-color: var(--bg-color);
-    min-height: 100vh;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  align-items: center;
 }
 
 .dark-mode {
@@ -82,7 +84,7 @@ body {
   --card-color: rgb(63, 63, 63);
   --primary-color: rgb(78, 81, 92);
   --secondary-color: rgb(63, 63, 63);
-  --text-color: rgba(255,255,255,0.87);
+  --text-color: rgba(255, 255, 255, 0.87);
   --white-color: rgb(255, 255, 255, 0.87);
   --accent-colot: #606060;
   --gradient-one: rgb(63, 63, 63);
@@ -94,12 +96,12 @@ body {
   margin-top: 2rem;
 }
 
-.loading-screen img{
+.loading-screen img {
   width: 300px;
   filter: invert(0.7);
 }
 
-.dark-mode .loading-screen img{
+.dark-mode .loading-screen img {
   filter: invert(0);
 }
 
@@ -117,7 +119,7 @@ body {
   right: 0;
   z-index: 102;
   background-color: var(--secondary-color);
-  overflow:hidden;
+  overflow: hidden;
   box-shadow: 0 0 10px 1px rgb(0, 0, 0, 0.5);
 }
 
@@ -135,7 +137,8 @@ body {
   margin: 0.5rem 0;
   color: var(--header-text);
 
-  text-shadow: rgb(61, 125, 202) 2px 0 0,
+  text-shadow:
+    rgb(61, 125, 202) 2px 0 0,
     rgb(61, 125, 202) 1.75517px 0.958851px 0,
     rgb(61, 125, 202) 1.0806px 1.68294px 0,
     rgb(61, 125, 202) 0.141474px 1.99499px 0,
@@ -147,7 +150,8 @@ body {
     rgb(61, 125, 202) -0.421592px -1.95506px 0,
     rgb(61, 125, 202) 0.567324px -1.91785px 0,
     rgb(61, 125, 202) 1.41734px -1.41108px 0,
-    rgb(61, 125, 202) 1.92034px -0.558831px 0, rgb(0, 58, 112) 7px 0 0,
+    rgb(61, 125, 202) 1.92034px -0.558831px 0,
+    rgb(0, 58, 112) 7px 0 0,
     rgb(0, 58, 112) 6.92869px 0.996602px 0,
     rgb(0, 58, 112) 6.71622px 1.9729px 0,
     rgb(0, 58, 112) 6.36692px 2.909px 0,
@@ -220,7 +224,7 @@ body {
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
-  box-shadow: 0 0 5px 2px rgba(0,0,0, 0.3);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
   color: var(--text-color);
   background-color: var(--secondary-color);
 }
@@ -231,7 +235,7 @@ body {
 
 /* Filters */
 .filter-container {
-  padding: 5px 0;;
+  padding: 5px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -241,7 +245,7 @@ body {
   position: sticky;
   top: 80px;
   z-index: 103;
-  box-shadow:0 5px 10px 0.2px rgb(0, 0, 0, 0.5) ;
+  box-shadow: 0 5px 10px 0.2px rgb(0, 0, 0, 0.5);
 }
 
 .filter-reset-btn {
@@ -392,7 +396,7 @@ body {
 }
 
 .pokemon-name {
-  font-family: "Flexo-Demi", Arial, Helvetica, sans-serif;
+  font-family: 'Flexo-Demi', Arial, Helvetica, sans-serif;
   font-weight: 700;
   position: absolute;
   left: 10px;
@@ -430,14 +434,25 @@ body {
 }
 
 .pokemon-id {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
   position: absolute;
   bottom: 10px;
   left: 10px;
   opacity: 0.8;
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--white-color)
+  color: var(--white-color);
 }
 
 .type-container {
@@ -447,7 +462,18 @@ body {
 }
 
 .type-icon {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -457,7 +483,7 @@ body {
   padding: 0.2rem 0.5rem;
   margin-bottom: 0.4rem;
   box-shadow: 0 0 10px 1px rgb(0, 0, 0, 0.5);
-  color: var(--white-color)
+  color: var(--white-color);
 }
 
 .type-icon img {
@@ -499,7 +525,7 @@ body {
 .pokemon-sprite:hover {
   transform: scale(1.1);
 }
-.info-pokemon-sprite{
+.info-pokemon-sprite {
   transition: all 0.2s ease-in-out;
 }
 .info-pokemon-sprite:hover {
@@ -511,7 +537,7 @@ body {
   max-width: 700px;
   margin: 1rem 0;
   color: white;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -558,7 +584,8 @@ body {
   /* background: linear-gradient(to bottom, rgba(60, 60, 60, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%); */
 }
 
-.info-pokemon-card h1, h4 {
+.info-pokemon-card h1,
+h4 {
   text-align: center;
   text-transform: capitalize;
 }
@@ -587,7 +614,18 @@ body {
 }
 
 .info-type-badge {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Open Sans',
+    'Helvetica Neue',
+    sans-serif;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -597,7 +635,7 @@ body {
   padding: 0.2rem 0.5rem;
   margin: 0.2rem;
   box-shadow: 0 0 10px 1px rgb(0, 0, 0, 0.5);
-  color: var(--text-color)
+  color: var(--text-color);
 }
 
 .info-type-badge img {
@@ -616,14 +654,19 @@ body {
   border-radius: 0.5rem;
   box-shadow: 0 0 10px 1px rgb(0, 0, 0, 0.5);
   color: var(--text-color);
-  background: linear-gradient(to bottom, var(--gradient-one) 0%, var(--gradient-two) 100%);
+  background: linear-gradient(
+    to bottom,
+    var(--gradient-one) 0%,
+    var(--gradient-two) 100%
+  );
 }
 
 .pokemon-description h5 {
   margin: 0.5rem 0;
 }
 
-.next-btn, .prev-btn {
+.next-btn,
+.prev-btn {
   background-color: var(--accent-color); /* Darken the background color */
   border: solid 2px rgb(0, 58, 112);
   border-radius: 10px;
@@ -633,12 +676,15 @@ body {
   font-weight: 600;
   cursor: pointer;
   margin: 0 0.5rem;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
   transform: scale(1.1);
 }
 
-.next-btn:hover, .prev-btn:hover {
-   opacity: 0.8;
+.next-btn:hover,
+.prev-btn:hover {
+  opacity: 0.8;
 }
 
 .pokemon-dimensions {
@@ -648,13 +694,18 @@ body {
   margin: 10px 0;
 }
 
-.pokemon-height, .pokemon-weight {
+.pokemon-height,
+.pokemon-weight {
   border: solid 1px #a7a7a7;
   padding: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 10px 1px rgb(0, 0, 0, 0.5);
   color: var(--text-color);
-  background: linear-gradient(to bottom, var(--gradient-one) 0%, var(--gradient-two) 100%);
+  background: linear-gradient(
+    to bottom,
+    var(--gradient-one) 0%,
+    var(--gradient-two) 100%
+  );
 }
 
 .pokemon-stats {
@@ -669,7 +720,11 @@ body {
   border: solid 1px #a7a7a7;
   box-shadow: 0 0 10px 1px rgb(0, 0, 0, 0.5);
   color: var(--text-color);
-  background: linear-gradient(to bottom, var(--gradient-one) 0%, var(--gradient-two) 100%);
+  background: linear-gradient(
+    to bottom,
+    var(--gradient-one) 0%,
+    var(--gradient-two) 100%
+  );
 }
 
 .pokemon-stats h5 {
@@ -728,7 +783,6 @@ body {
   .search-bar {
     font-size: 1rem;
   }
-
 }
 
 @media screen and (max-width: 500px) {
@@ -736,7 +790,7 @@ body {
   .info-pokemon-card,
   .pokemon-description,
   .pokemon-stats,
-  .pokemon-card-info{
+  .pokemon-card-info {
     width: 90%;
   }
 }

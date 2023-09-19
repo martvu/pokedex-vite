@@ -6,13 +6,17 @@ type ThemeContextType = {
   toggleDarkMode: () => void;
 };
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined
+);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem('darkMode') === 'true'
+  );
 
   const toggleDarkMode = () => {
-    setDarkMode((prevDarkMode) => !prevDarkMode);
+    setDarkMode(prevDarkMode => !prevDarkMode);
     localStorage.setItem('darkMode', JSON.stringify(!darkMode));
   };
 
@@ -22,5 +26,3 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     </ThemeContext.Provider>
   );
 }
-
-
