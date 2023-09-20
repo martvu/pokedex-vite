@@ -6,7 +6,7 @@ import Header from './Header';
 import Filters from './Filters';
 import loadingIcon from '../assets/img/poke-loading.gif';
 
-interface FavoriteContextProps {
+export interface FavoriteContextProps {
   favoritesArray: number[];
   setFavoritesArray: (favoritesArray: number[]) => void;
 }
