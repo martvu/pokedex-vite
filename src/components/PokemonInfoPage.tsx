@@ -9,8 +9,8 @@ import {
 import { FlavorText, PokemonStat, PokemonType } from '../utils/pokeApiTypes';
 import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
 import Header from './Header';
-import {FavoriteIcon} from "./FavoriteIcon.tsx";
-import {FavoriteContext} from "./PokemonList.tsx";
+import { FavoriteIcon } from './FavoriteIcon.tsx';
+import { FavoriteContext } from './PokemonList.tsx';
 
 export default function PokemonInfoPage() {
   const { id } = useParams();
@@ -37,11 +37,11 @@ export default function PokemonInfoPage() {
   }
 
   return (
-    <FavoriteContext.Provider value={{favoritesArray, setFavoritesArray}}>
+    <FavoriteContext.Provider value={{ favoritesArray, setFavoritesArray }}>
       <Header />
       <div className="filler-div"></div>
       <div className="info-page-container">
-        {isLoading || isLoadingSpecies && <div>Loading...</div>}
+        {isLoading || (isLoadingSpecies && <div>Loading...</div>)}
         {error || (speciesError && <div>Error fetching data </div>)}
         {pokemonDetails && speciesData && (
           <>
@@ -105,16 +105,16 @@ export default function PokemonInfoPage() {
             </div>
             <div className="pokemon-description">
               <h5 className="pokemon-text info-text">Description</h5>
-                <p>
-                  {
-                    speciesData?.flavor_text_entries
-                      .slice()
-                      .reverse()
-                      .find(
-                        (flavor: FlavorText) => flavor?.language?.name === 'en'
-                      )?.flavor_text
-                  }
-                </p>
+              <p>
+                {
+                  speciesData?.flavor_text_entries
+                    .slice()
+                    .reverse()
+                    .find(
+                      (flavor: FlavorText) => flavor?.language?.name === 'en'
+                    )?.flavor_text
+                }
+              </p>
             </div>
             <div className="pokemon-dimensions">
               <div className="pokemon-height">

@@ -4,11 +4,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PokemonList from './components/PokemonList';
 import useDarkTheme from './context/useDarkTheme';
 
-
 function App() {
   const { darkMode } = useDarkTheme();
   return (
-    <div className={`app bg-container ${darkMode ? "dark-mode" : ""}`}>
+    <div className={`app bg-container ${darkMode ? 'dark-mode' : ''}`}>
       <Router>
         <Routes>
           <Route path="/project1" element={<PokemonList />} />

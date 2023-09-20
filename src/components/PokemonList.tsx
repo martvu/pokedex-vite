@@ -1,16 +1,18 @@
 import { usePokemonDataList } from '../utils/pokeApi';
 import PokemonCard from './PokemonCard';
-import {createContext, useState} from 'react';
+import { createContext, useState } from 'react';
 import { Pokemon } from '../utils/pokeApiTypes';
 import Header from './Header';
 import Filters from './Filters';
 import loadingIcon from '../assets/img/poke-loading.gif';
 
-interface FavoriteContextProps {
+export interface FavoriteContextProps {
   favoritesArray: number[];
   setFavoritesArray: (favoritesArray: number[]) => void;
 }
+
 export const FavoriteContext = createContext<FavoriteContextProps | undefined>(undefined);
+
 export default function PokemonList() {
   const NUM_POKEMON = 151;
   const {
@@ -31,9 +33,13 @@ export default function PokemonList() {
   }
 
   return (
-    <FavoriteContext.Provider value={{favoritesArray, setFavoritesArray}}>
+    <FavoriteContext.Provider value={{ favoritesArray, setFavoritesArray }}>
       <Header />
-      <Filters favoritesArray={favoritesArray} pokemonDataList={pokemonDataList as Pokemon[]} setDisplayedPokemonList={setDisplayedPokemonList} />
+      <Filters
+        favoritesArray={favoritesArray}
+        pokemonDataList={pokemonDataList as Pokemon[]}
+        setDisplayedPokemonList={setDisplayedPokemonList}
+      />
       {isLoading && (
         <div className={`loading-screen pokemon-text`}>
           <img src={loadingIcon} alt="loading icon" />
@@ -52,10 +58,7 @@ export default function PokemonList() {
       {!isLoading && (
         <ul className="pokemon-list-container">
           {displayedPokemonList?.map((pokemon: Pokemon) => (
-            <PokemonCard
-              key={pokemon.id}
-              pokemonDetails={pokemon}
-            />
+            <PokemonCard key={pokemon.id} pokemonDetails={pokemon} />
           ))}
         </ul>
       )}

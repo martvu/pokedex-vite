@@ -1,4 +1,4 @@
-import { NamedAPIResource } from './pokeApiTypes';
+import { NamedAPIResource, Pokemon } from './pokeApiTypes';
 import { useQuery } from '@tanstack/react-query';
 
 const BASE_URL = 'https://pokeapi.co/api/v2/pokemon';
@@ -6,24 +6,21 @@ const SPECIES_URL = 'https://pokeapi.co/api/v2/pokemon-species';
 
 // use this Hook to fetch a single pokemon (pokemonId can be either name or id of the pokemon)
 export function usePokemonData(pokemonId: string) {
-  return useQuery(
-    ['pokemonData', pokemonId], 
-    () => getPokemonData(BASE_URL + '/' + pokemonId + '/')
+  return useQuery<Pokemon>(['pokemonData', pokemonId], () =>
+    getPokemonData(BASE_URL + '/' + pokemonId + '/')
   );
 }
 
 // use this Hook to fetch a list of pokemon
 export function usePokemonDataList(limit: number) {
-  return useQuery(
-    ['pokemonDataList', limit.toString()], 
-    () => getPokemonDataList(BASE_URL + '?limit=' + limit.toString())
+  return useQuery<Pokemon[]>(['pokemonDataList', limit.toString()], () =>
+    getPokemonDataList(BASE_URL + '?limit=' + limit.toString())
   );
 }
-// use this Hook to fetch species data for a single pokemon  
+// use this Hook to fetch species data for a single pokemon
 export function useSpeciesData(pokemonId: string) {
-  return useQuery(
-    ['speciesData', pokemonId.toString()], 
-    () => getPokemonData(SPECIES_URL + '/' + pokemonId + '/')
+  return useQuery(['speciesData', pokemonId.toString()], () =>
+    getPokemonData(SPECIES_URL + '/' + pokemonId + '/')
   );
 }
 

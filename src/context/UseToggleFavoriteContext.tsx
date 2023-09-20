@@ -1,14 +1,16 @@
-import {Pokemon} from "../utils/pokeApiTypes.tsx";
-import {useContext, useEffect} from "react";
-import {FavoriteContext} from "./PokemonList.tsx";
+import { Pokemon } from '../utils/pokeApiTypes.tsx';
+import { useContext, useEffect } from 'react';
+import { FavoriteContext } from '../components/PokemonList.tsx';
 
 export function useToggleFavoriteContext(pokemonDetails: Pokemon) {
   const context = useContext(FavoriteContext);
 
   if (!context) {
-    throw new Error('useToggleFavoriteContext must be used within a FavoriteContextProvider');
+    throw new Error(
+      'useToggleFavoriteContext must be used within a FavoriteContextProvider'
+    );
   }
-  const {favoritesArray, setFavoritesArray} = context;
+  const { favoritesArray, setFavoritesArray } = context;
 
   // handle favoritesArray
   const onToggleFavorite = (pokemonId: number) => {

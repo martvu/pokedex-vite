@@ -1,7 +1,7 @@
-import {Pokemon} from '../utils/pokeApiTypes';
+import {Pokemon} from '../utils/pokeApiTypes.tsx';
 import {Link} from 'react-router-dom';
-import {TYPE_COLORS, TYPE_ICONS} from '../utils/constants';
-import {formatPokemonName, getTypeColorGradient} from '../utils/utils';
+import {TYPE_COLORS, TYPE_ICONS} from '../utils/constants.tsx';
+import {formatPokemonName, getTypeColorGradient} from '../utils/utils.tsx';
 import pokeballIcon from '../assets/img/pb-icon.svg';
 import {FavoriteIcon} from "./FavoriteIcon.tsx";
 

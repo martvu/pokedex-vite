@@ -41,7 +41,7 @@ export const handlers = [
                 name: 'attack',
                 url: 'https://pokeapi.co/api/v2/stat/2/',
               },
-            }
+            },
           ],
           sprites: {
             other: {
@@ -76,16 +76,6 @@ export const handlers = [
               },
             },
           ],
-        })
-      );
-    }
-    // Add more conditions for other Pokémon IDs as needed
-    if (id === '3') {
-      return res(
-        ctx.status(200), // Return a 404 response for unknown IDs
-        ctx.json({
-          id: 3,
-          name: 'Venusaur',
         })
       );
     }
@@ -220,41 +210,25 @@ export const handlers = [
                 },
               },
               {
-                genus: 'Seed Pokémon',
+                genus: 'Seede Pokémon',
+                language: {
+                  name: 'en',
+                },
+              },
+              {
+                genus: 'Seedy Pokémon',
+                language: {
+                  name: 'en',
+                },
+              },
+              {
+                genus: 'Seeda Pokémon',
                 language: {
                   name: 'en',
                 },
               },
               {
                 genus: 'Seed Pokémon',
-                language: {
-                  name: 'en',
-                },
-              },
-              {
-                genus: 'Seed Pokémon',
-                language: {
-                  name: 'en',
-                },
-              },
-              {
-                genus: 'Seed Pokémon',
-                language: {
-                  name: 'en',
-                },
-              },
-            ],
-          })
-        );
-      }
-      if (id === '3') {
-        return res(
-          ctx.status(200),
-          ctx.json({
-            flavor_text_entries: [
-              {
-                flavor_text:
-                  'There is a large flower on Venusaur’s back. The flower is said to take on vivid colors if it gets plenty of nutrition and sunlight. The flower’s aroma soothes the emotions of people.',
                 language: {
                   name: 'en',
                 },
@@ -266,12 +240,3 @@ export const handlers = [
     }
   ),
 ];
-
-/* rest.get('https://pokeapi.co/api/v2/pokemon/2/', (req, res, ctx) => {
-    return res(
-      ctx.json({
-        id: 2,
-        name: 'ivysaur',
-      })
-    );
-  }), */

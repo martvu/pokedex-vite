@@ -1,72 +1,59 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Snapshot test > snapshot 1`] = `
+exports[`PokemonInfoPage > snapshot of pokemonInfoPage 1`] = `
 <DocumentFragment>
-  <div
-    class="app"
+  <header
+    class="header"
   >
     <div
-      class="bg-container"
+      class="pokeball-header-icon"
     >
-      <header
-        class="header"
-      >
-        <div
-          class="pokeball-header-icon"
-        >
-          <img
-            alt="pokeball icon"
-            src="/src/assets/img/pb-icon.svg"
-          />
-          <div
-            class="header-link-container"
-          >
-            <a
-              class="link"
-              href="/"
-            >
-              <h1>
-                Pokedex
-              </h1>
-            </a>
-          </div>
-        </div>
-      </header>
+      <img
+        alt="pokeball icon"
+        src="/project1/src/assets/img/pb-icon.svg"
+      />
       <div
-        class="filter-container"
+        class="header-link-container"
       >
-        <div
-          class="search-bar-container"
+        <a
+          class="link"
+          href="/project1/"
         >
-          <svg
-            class="search-icon"
-            fill="currentColor"
-            height="1em"
-            stroke="currentColor"
-            stroke-width="0"
-            viewBox="0 0 24 24"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"
-            />
-            <path
-              d="M11.412 8.586c.379.38.588.882.588 1.414h2a3.977 3.977 0 0 0-1.174-2.828c-1.514-1.512-4.139-1.512-5.652 0l1.412 1.416c.76-.758 2.07-.756 2.826-.002z"
-            />
-          </svg>
-          <input
-            class="search-bar"
-            placeholder="Search Pokemon"
-            type="text"
-          />
-        </div>
+          <h1>
+            Pokedex
+          </h1>
+        </a>
+      </div>
+      <span
+        class="switch-container"
+      >
         <button
-          class="filter-favorite-btn "
-          title="Show Favorites"
+          class="theme-switch "
+        >
+          Turn Dark
+        </button>
+      </span>
+    </div>
+  </header>
+  <div
+    class="filler-div"
+  />
+  <div
+    class="info-page-container"
+  >
+    <div
+      class="info-pokemon-card"
+    >
+      <button
+        class="favorite-button"
+        data-testid="pokemon-details-1"
+        type="button"
+      >
+        <span
+          class="favorite-icon-inactive"
+          data-testid="test-favorite-icon"
         >
           <svg
-            class="favorite-icon"
             fill="currentColor"
             height="1em"
             stroke="currentColor"
@@ -83,339 +70,399 @@ exports[`Snapshot test > snapshot 1`] = `
               d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"
             />
           </svg>
-        </button>
-        <button
-          class="filter-reset-btn"
-          title="Reset Filters"
+        </span>
+      </button>
+      <div
+        class="pokemon-name-id"
+      >
+        <h1>
+          Bulbasaur
+        </h1>
+        <h4
+          class="pokemon-text"
         >
-          <svg
-            class="reset-icon"
-            fill="currentColor"
-            height="1em"
-            stroke="currentColor"
-            stroke-width="0"
-            viewBox="0 0 24 24"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M20,8 C18.5974037,5.04031171 15.536972,3 12,3 C7.02943725,3 3,7.02943725 3,12 C3,16.9705627 7.02943725,21 12,21 L12,21 C16.9705627,21 21,16.9705627 21,12 M21,3 L21,9 L15,9"
-              fill="none"
-              stroke="#000"
-              stroke-width="2"
-            />
-          </svg>
-        </button>
+          #001
+        </h4>
+      </div>
+      <div
+        class="info-pokemon-img"
+      >
+        <img
+          alt="bulbasaur"
+          class="info-pokemon-sprite"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+        />
+      </div>
+      <div
+        class="info-pokemon-data"
+      >
         <div
-          class="filter-options-container"
+          class="info-type-list"
         >
-          <div
-            class="filter-select"
+          <span
+            class="info-type-badge"
+            style="background-color: rgb(122, 199, 76);"
           >
-            <label
-              class="filter-text"
-              for="filter-select"
+            Grass
+          </span>
+          <span
+            class="info-type-badge"
+            style="background-color: rgb(163, 62, 161);"
+          >
+            Poison
+          </span>
+        </div>
+        <div
+          class="pokemon-genus"
+        >
+          Seed Pokémon
+        </div>
+      </div>
+    </div>
+    <div>
+      <a
+        href="/project1/pokemon/0"
+      >
+        <button
+          class="prev-btn"
+          disabled=""
+        >
+          Prev
+        </button>
+      </a>
+      <a
+        href="/project1/pokemon/2"
+      >
+        <button
+          class="next-btn"
+        >
+          Next
+        </button>
+      </a>
+    </div>
+    <div
+      class="pokemon-description"
+    >
+      <h5
+        class="pokemon-text info-text"
+      >
+        Description
+      </h5>
+      <p>
+        Bulbasaur can be seen napping in bright sunlight.
+There is a seed on its back. By soaking up the sun’s
+rays, the seed grows progressively larger.
+      </p>
+    </div>
+    <div
+      class="pokemon-dimensions"
+    >
+      <div
+        class="pokemon-height"
+      >
+        <h5>
+          Height
+        </h5>
+        <span>
+          NaNm
+        </span>
+      </div>
+      <div
+        class="pokemon-weight"
+      >
+        <h5>
+          Weight
+        </h5>
+        <span>
+          NaNkg
+        </span>
+      </div>
+    </div>
+    <div
+      class="pokemon-stats"
+    >
+      <h5
+        class="pokemon-text info-text"
+      >
+        Stats
+      </h5>
+      <div
+        class="parameter-container"
+      >
+        <div
+          class="parameter-section"
+        >
+          <h5
+            class="info-text"
+          >
+            hp
+          </h5>
+          <div
+            class="statbar-container"
+          >
+            <div
+              class="statbar-segment"
+              style="background-color: rgb(255, 1, 0); width: 17.647058823529413%;"
             >
-              Type:
-            </label>
-            <select
-              id="filter-select"
-            >
-              <option
-                value="all"
-              >
-                All
-              </option>
-              <option
-                value="normal"
-              >
-                Normal
-              </option>
-              <option
-                value="fire"
-              >
-                Fire
-              </option>
-              <option
-                value="water"
-              >
-                Water
-              </option>
-              <option
-                value="electric"
-              >
-                Electric
-              </option>
-              <option
-                value="grass"
-              >
-                Grass
-              </option>
-              <option
-                value="ice"
-              >
-                Ice
-              </option>
-              <option
-                value="fighting"
-              >
-                Fighting
-              </option>
-              <option
-                value="poison"
-              >
-                Poison
-              </option>
-              <option
-                value="ground"
-              >
-                Ground
-              </option>
-              <option
-                value="flying"
-              >
-                Flying
-              </option>
-              <option
-                value="psychic"
-              >
-                Psychic
-              </option>
-              <option
-                value="bug"
-              >
-                Bug
-              </option>
-              <option
-                value="rock"
-              >
-                Rock
-              </option>
-              <option
-                value="ghost"
-              >
-                Ghost
-              </option>
-              <option
-                value="dragon"
-              >
-                Dragon
-              </option>
-              <option
-                value="dark"
-              >
-                Dark
-              </option>
-              <option
-                value="steel"
-              >
-                Steel
-              </option>
-              <option
-                value="fairy"
-              >
-                Fairy
-              </option>
-            </select>
+              <span>
+                45
+              </span>
+            </div>
           </div>
-          <div
-            class="filter-select"
+        </div>
+        <div
+          class="parameter-section"
+        >
+          <h5
+            class="info-text"
           >
-            <label
-              class="filter-text"
-              for="filter-select"
+            attack
+          </h5>
+          <div
+            class="statbar-container"
+          >
+            <div
+              class="statbar-segment"
+              style="background-color: rgb(240, 128, 48); width: 19.215686274509807%;"
             >
-              Sort By
-            </label>
-            <select
-              id="filter-select"
-            >
-              <option
-                value="ID"
-              >
-                ID
-              </option>
-              <option
-                value="A-Z"
-              >
-                A-Z
-              </option>
-              <option
-                value="high to low"
-              >
-                High to low
-              </option>
-            </select>
+              <span>
+                49
+              </span>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Snapshot PokemonInfoPage > snapshot of pokemonInfoPage 1`] = `
+<DocumentFragment>
+  <header
+    class="header"
+  >
+    <div
+      class="pokeball-header-icon"
+    >
+      <img
+        alt="pokeball icon"
+        src="/project1/src/assets/img/pb-icon.svg"
+      />
       <div
-        class="pokemon-list"
+        class="header-link-container"
       >
-        <ul
-          class="pokemon-list-container"
+        <a
+          class="link"
+          href="/project1"
         >
+          <h1>
+            Pokedex
+          </h1>
+        </a>
+      </div>
+      <span
+        class="switch-container"
+      >
+        <button
+          class="theme-switch "
+        >
+          Turn Dark
+        </button>
+      </span>
+    </div>
+  </header>
+  <div
+    class="filler-div"
+  />
+  <div
+    class="info-page-container"
+  >
+    <div
+      class="info-pokemon-card"
+    >
+      <button
+        class="favorite-button"
+        type="button"
+      >
+        <svg
+          class="favorite-icon-inactive"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          stroke-width="0"
+          viewBox="0 0 24 24"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0 0h24v24H0z"
+            fill="none"
+          />
+          <path
+            d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"
+          />
+        </svg>
+      </button>
+      <div
+        class="pokemon-name-id"
+      >
+        <h1>
+          Bulbasaur
+        </h1>
+        <h4
+          class="pokemon-text"
+        >
+          #001
+        </h4>
+      </div>
+      <div
+        class="info-pokemon-img"
+      >
+        <img
+          alt="bulbasaur"
+          class="info-pokemon-sprite"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+        />
+      </div>
+      <div
+        class="info-pokemon-data"
+      >
+        <div
+          class="info-type-list"
+        >
+          <span
+            class="info-type-badge"
+            style="background-color: rgb(122, 199, 76);"
+          >
+            Grass
+          </span>
+          <span
+            class="info-type-badge"
+            style="background-color: rgb(163, 62, 161);"
+          >
+            Poison
+          </span>
+        </div>
+        <div
+          class="pokemon-genus"
+        >
+          Seed Pokémon
+        </div>
+      </div>
+    </div>
+    <div>
+      <a
+        href="/project1/pokemon/0"
+      >
+        <button
+          class="prev-btn"
+          disabled=""
+        >
+          Prev
+        </button>
+      </a>
+      <a
+        href="/project1/pokemon/2"
+      >
+        <button
+          class="next-btn"
+        >
+          Next
+        </button>
+      </a>
+    </div>
+    <div
+      class="pokemon-description"
+    >
+      <h5
+        class="pokemon-text info-text"
+      >
+        Description
+      </h5>
+      <p>
+        Bulbasaur can be seen napping in bright sunlight.
+There is a seed on its back. By soaking up the sun’s
+rays, the seed grows progressively larger.
+      </p>
+    </div>
+    <div
+      class="pokemon-dimensions"
+    >
+      <div
+        class="pokemon-height"
+      >
+        <h5>
+          Height
+        </h5>
+        <span>
+          NaNm
+        </span>
+      </div>
+      <div
+        class="pokemon-weight"
+      >
+        <h5>
+          Weight
+        </h5>
+        <span>
+          NaNkg
+        </span>
+      </div>
+    </div>
+    <div
+      class="pokemon-stats"
+    >
+      <h5
+        class="pokemon-text info-text"
+      >
+        Stats
+      </h5>
+      <div
+        class="parameter-container"
+      >
+        <div
+          class="parameter-section"
+        >
+          <h5
+            class="info-text"
+          >
+            hp
+          </h5>
           <div
-            class="pokemon-card-container"
+            class="statbar-container"
           >
             <div
-              class="poketext pokemon-name"
+              class="statbar-segment"
+              style="background-color: rgb(255, 1, 0); width: 17.647058823529413%;"
             >
-              Bulbasaur
-            </div>
-            <div
-              class="poketext pokemon-id"
-            >
-              #001
-            </div>
-            <div
-              class="favorite-button"
-            >
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium favorite-icon-inactive css-i4bv87-MuiSvgIcon-root"
-                data-testid="FavoriteBorderIcon"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"
-                />
-              </svg>
-            </div>
-            <div
-              class="sprite-bg-container"
-            >
-              <img
-                alt="pokeball background"
-                class="sprite-bg"
-                loading="lazy"
-                src="/src/assets/img/pb-icon.svg"
-              />
-            </div>
-            <a
-              href="/pokemon/1"
-            >
-              <div
-                class="sprite-container"
-                data-testid="link-infopage"
-              >
-                <img
-                  alt="bulbasaur"
-                  class="pokemon-sprite"
-                  loading="lazy"
-                  src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
-                />
-              </div>
-            </a>
-            <div
-              class="type-container"
-            >
-              <span
-                class="poketext type-icon"
-                style="background-color: rgb(122, 199, 76);"
-              >
-                <img
-                  alt="grass"
-                  loading="lazy"
-                  src="/icons/grass.svg"
-                />
-                Grass
-              </span>
-              <span
-                class="poketext type-icon"
-                style="background-color: rgb(163, 62, 161);"
-              >
-                <img
-                  alt="poison"
-                  loading="lazy"
-                  src="/icons/poison.svg"
-                />
-                Poison
+              <span>
+                45
               </span>
             </div>
           </div>
+        </div>
+        <div
+          class="parameter-section"
+        >
+          <h5
+            class="info-text"
+          >
+            attack
+          </h5>
           <div
-            class="pokemon-card-container"
+            class="statbar-container"
           >
             <div
-              class="poketext pokemon-name"
+              class="statbar-segment"
+              style="background-color: rgb(240, 128, 48); width: 19.215686274509807%;"
             >
-              Ivysaur
-            </div>
-            <div
-              class="poketext pokemon-id"
-            >
-              #002
-            </div>
-            <div
-              class="favorite-button"
-            >
-              <svg
-                aria-hidden="true"
-                class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium favorite-icon-inactive css-i4bv87-MuiSvgIcon-root"
-                data-testid="FavoriteBorderIcon"
-                focusable="false"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"
-                />
-              </svg>
-            </div>
-            <div
-              class="sprite-bg-container"
-            >
-              <img
-                alt="pokeball background"
-                class="sprite-bg"
-                loading="lazy"
-                src="/src/assets/img/pb-icon.svg"
-              />
-            </div>
-            <a
-              href="/pokemon/2"
-            >
-              <div
-                class="sprite-container"
-                data-testid="link-infopage"
-              >
-                <img
-                  alt="ivysaur"
-                  class="pokemon-sprite"
-                  loading="lazy"
-                  src="#"
-                />
-              </div>
-            </a>
-            <div
-              class="type-container"
-            >
-              <span
-                class="poketext type-icon"
-                style="background-color: rgb(122, 199, 76);"
-              >
-                <img
-                  alt="grass"
-                  loading="lazy"
-                  src="/icons/grass.svg"
-                />
-                Grass
-              </span>
-              <span
-                class="poketext type-icon"
-                style="background-color: rgb(163, 62, 161);"
-              >
-                <img
-                  alt="poison"
-                  loading="lazy"
-                  src="/icons/poison.svg"
-                />
-                Poison
+              <span>
+                49
               </span>
             </div>
           </div>
-        </ul>
+        </div>
       </div>
     </div>
   </div>
