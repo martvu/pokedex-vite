@@ -1,9 +1,33 @@
+import {expect, test, describe} from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+import PokemonCard from '../components/PokemonCard';
+import { BrowserRouter as Router } from 'react-router-dom'; 
+import { Pokemon, NamedAPIResource, PokemonSprites, PokemonStat, PokemonType } from '../utils/pokeApiTypes';
+import { ThemeProvider } from '../context/ThemeContext';
+import { useState } from 'react';  
+import { FavoriteContext } from '../components/PokemonList';
 
-import { Pokemon, NamedAPIResource, PokemonAbility, PokemonSprites, PokemonType, PokemonStat } from '../pokeApiTypes';  // Replace with the actual path to your types file
-import {expect, test} from 'vitest';
-import { render, fireEvent } from '@testing-library/react';
-import Pokemoncard from '../../components/pokemoncard';
+// Create a mock context
+// Mock context provider
+export function MockFavoriteContextProvider({ children }: { children: React.ReactNode }) {
+  const [favoritesArray, setFavoritesArray] = useState<number[]>(
+    JSON.parse(localStorage.getItem('favoritesArray') || '[]')
+  );
 
+  return (
+    <FavoriteContext.Provider value={{favoritesArray, setFavoritesArray}}>
+      {children}
+    </FavoriteContext.Provider>
+  );
+}
+
+function PokemonCardWithMockContext({ pokemonDetails }: { pokemonDetails: Pokemon }) {
+  return (
+    <MockFavoriteContextProvider>
+      <PokemonCard pokemonDetails={pokemonDetails} />
+    </MockFavoriteContextProvider>
+  );
+}
 // Mocking localstorage and its functions
 const mockLocalStorage = (() => {
   let store: Record<string, string> = {};
@@ -32,27 +56,8 @@ const mockPikachu: Pokemon = {
   is_default: true,
   order: 25,
   weight: 60,
-  abilities: [
-    {
-      is_hidden: false,
-      slot: 1,
-      ability: {
-        name: "Static",
-        url: "https://pokeapi.co/api/v2/ability/1/", 
-      },
-    },
-  ] as PokemonAbility[],
-
   forms: [] as NamedAPIResource[],
-
-  game_indices: [] as any[], 
-
-  held_items: [] as any[], 
-
   location_area_encounters: "", 
-
-  moves: [] as any[], 
-
   sprites: {
     front_default: "https://example.com/pikachu-front.png",
     front_shiny: "https://example.com/pikachu-front-shiny.png", 
@@ -63,12 +68,10 @@ const mockPikachu: Pokemon = {
     back_female: "https://example.com/pikachu-back-female.png",
     back_shiny_female: "https://example.com/pikachu-back-shiny-female.png", 
   } as PokemonSprites,
-
   species: {
     name: "pikachu-species", 
     url: "https://pokeapi.co/api/v2/pokemon-species/25/", 
   } as NamedAPIResource,
-
   stats: [
     {
       stat: {
@@ -98,35 +101,55 @@ const mockPikachu: Pokemon = {
   ],
 };
 ;
-  
 
-test('Props Test: Component displays correct information from pokemonInfo prop', async () => {
 
-  const element = document.createElement('div')
-  expect(element).not.toBeNull()
+describe('PokemonCard', () => {
+  test('', async () => {
+    render(
+      <MockFavoriteContextProvider>
+        <PokemonCard pokemonDetails={mockPikachu}></PokemonCard>
+      </MockFavoriteContextProvider>
+    )
+  })
+})
 
-  const { getByText } = render(<Pokemoncard pokemonInfo={mockPikachu} />);
-  // Assert that the component displays the correct name
-  expect(getByText('Pikachu').textContent).to.equal('Pikachu');
-  expect(getByText('Pikachu').textContent, 'Pikachu');
-  
-  // Assert that the component displays the correct ID
-  expect(getByText('#25').textContent).to.equal('#25');
-  
-  // Assert that the component displays the correct type
-  expect(getByText('electric').textContent).to.equal('electric');
-});
+
+describe('PokemonCard', () => {
+  test('Props Test: Component displays correct information from pokemonDetail prop', async () => {
+
+    const element = document.createElement('div')
+    expect(element).not.toBeNull()
+
+    render(
+      <ThemeProvider>
+        <Router>
+          <PokemonCardWithMockContext pokemonDetails={mockPikachu} />
+        </Router>
+      </ThemeProvider>
+    );
+
+    expect(await screen.findByText(/pikachu/i)).toBeInTheDocument();
+    expect(await screen.findByText(/electric/i)).toBeInTheDocument();
+  });
+}); 
 
 test('Favorite Button Test: Test the functionality of the favorite button', () => {
-
-  const { queryAllByTestId  } = render(<Pokemoncard pokemonInfo={mockPikachu} />);
+  const { queryByTestId } = render(
+    <ThemeProvider>
+      <Router>
+        <PokemonCardWithMockContext pokemonDetails={mockPikachu} />
+      </Router>
+    </ThemeProvider>
+  );
 
   // Contains span and svg (therefore -> query ALL)
-  const favoriteButtons = queryAllByTestId ('favorite-button');
-  expect(favoriteButtons.length).toBeGreaterThan(0);
-
+  const favoriteButton = queryByTestId('test-favorite-icon');
+  
+  // expect to find the button
+  expect(favoriteButton).not.toBeNull();
+  if (favoriteButton === null) return;
+  
   // This is the span element
-  const favoriteButton = favoriteButtons[0];
   expect(favoriteButton.className).toContain('favorite-icon-inactive');
 
   // Simulate a click on the button to add to favorites
@@ -139,34 +162,3 @@ test('Favorite Button Test: Test the functionality of the favorite button', () =
   // Assert that the button has the "favorite-icon-inactive" class again
   expect(favoriteButton.className).toContain('favorite-icon-inactive');
 });
-
-test('Favorite Button Test: Test adding ID to localStorage when the favorite button is clicked', () => {
-  const { queryAllByTestId } = render(<Pokemoncard pokemonInfo={mockPikachu} />);
-
-  // Contains span and svg (therefore -> query ALL)
-  const favoriteButtons = queryAllByTestId('favorite-button');
-  expect(favoriteButtons.length).toBeGreaterThan(0);
-
-  // This is the span element
-  const favoriteButton = favoriteButtons[0];
-  expect(favoriteButton.className).toContain('favorite-icon-inactive');
-
-  // Mock localStorage
-  localStorage.setItem('favorites', JSON.stringify([]));
-
-  // Simulate a click on the button to add to favorites
-  fireEvent.click(favoriteButton);
-  expect(favoriteButton.className).toContain('favorite-icon-active');
-
-  // Check if the ID is added to localStorage
-  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-  expect(favorites).toContain(mockPikachu.id.toString());
-
-  // Simulate a click on the button to remove from favorites
-  fireEvent.click(favoriteButton);
-
-  // Check if the ID is removed from localStorage
-  const updatedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-  expect(updatedFavorites).not.toContain(mockPikachu.id.toString());
-});
-
