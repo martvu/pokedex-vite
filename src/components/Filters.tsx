@@ -83,7 +83,7 @@ function Filters({
     }
 
     setDisplayedPokemonList(filteredPokemon || []);
-  }, [pokemonDataList, filters, favoritesArray]);
+  }, [pokemonDataList, filters, favoritesArray, setDisplayedPokemonList]);
 
   return (
     <>
