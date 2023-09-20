@@ -1,10 +1,11 @@
 # Prosjekt 1
 
+## Team 48
+
 ## Pokedex
+This is a Pokedex app, using data from the (PokeApi)[https://pokeapi.co/]. 
 
-### Team 48
-
-# How to run
+# How to run project
 
 ```
 npm install
@@ -15,6 +16,7 @@ npm run dev
 ```
 
 # Prettier
+We use prettier for code formatting
 
 To format all files in the project run:
 
@@ -28,7 +30,11 @@ To check if all files are formatted run:
 npx prettier . --check
 ```
 
-# Vitest
+# Testing
+
+Tests use Vitest, React testing library and jest-dom.
+Mocking API calls use Mocking Service Worker (msw).
+
 
 To run tests:
 
@@ -41,11 +47,6 @@ To run test coverage run:
 ```
 npm run coverage
 ```
-
-# Testing
-
-Tests use Vitest, React testing library and jest-dom.
-Mocking API calls use Mocking Service Worker (msw).
 
 ## Unit testing
 
@@ -71,7 +72,7 @@ The mainpage PokemonList is a list of all the Pokemons, and the user can click o
 
 To allow the user to filter PokemonCards, we have created a page "header" that contains filter and sorting functionality. Using this, the user is able to filter pokemons on type and to sort pokemon. When a filter is selected, the filter-value is added to session storage (technical requirement).
 
-A user can choose to favorite a Pokemon by clicking on a heart icon on the pokemon card. When the heart-icon is clicked, the id of the pokemon is added to a "favorites" array in localstorage. This allows the pokemon to remain favorited when the browser is restarted. The user can also filter on favorited pokemon, by clicking on the "favorites" button in the header. This will filter out all non-favorited pokemon.
+A user can choose to favorite a Pokemon by clicking on a heart icon on the pokemon card. When the heart-icon is clicked, the id of the pokemon is added to a "favorites" array in localstorage. This allows the pokemon to remain favorited when the browser is restarted. The user can also filter on favorited pokemon, by clicking on the "favorites" button in the header. This will filter out all non-favorited pokemon. We have a context for this to share state between PokemonList and PokemonInfoPage. 
 
 To make the website responsive, we utilize flex box and media queries with predefined width-settings based on screen-size. This makes the application self-adjustable. The application is responsive (technical requirement) on all screen sizes defined within the firefox inspector's Responsive Design Mode.
 
