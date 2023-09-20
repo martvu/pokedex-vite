@@ -13,16 +13,20 @@ export function FavoriteIcon({ pokemonDetails }: FavoriteIconProps) {
     <button
       type="button"
       className="favorite-button"
-      onClick={e => {
+      data-testid={`pokemon-details-${pokemonDetails.id}`}
+      onClick={(e) => {
         e.preventDefault();
         toggleFavorite(pokemonDetails.id);
       }}
     >
-      {isFavorite ? (
-        <MdFavorite className="favorite-icon-active" />
-      ) : (
-        <MdFavoriteBorder className="favorite-icon-inactive" />
-      )}
+      <span
+        className={
+          isFavorite ? 'favorite-icon-active' : 'favorite-icon-inactive'
+        }
+        data-testid="test-favorite-icon"
+      >
+        {isFavorite ? <MdFavorite /> : <MdFavoriteBorder />}
+      </span>   
     </button>
   );
 }

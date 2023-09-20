@@ -31,9 +31,7 @@ describe('PokemonInfoPage', () => {
       userEvent.click(screen.getByText(/Next/i));
     });
   });
-});
 
-describe('Snapshot PokemonInfoPage', () => {
   test('snapshot of pokemonInfoPage', async () => {
     const { asFragment } = render(
       <QueryClientProvider client={queryClient}>

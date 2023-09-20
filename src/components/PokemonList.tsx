@@ -6,13 +6,13 @@ import Header from './Header';
 import Filters from './Filters';
 import loadingIcon from '../assets/img/poke-loading.gif';
 
-interface FavoriteContextProps {
+export interface FavoriteContextProps {
   favoritesArray: number[];
   setFavoritesArray: (favoritesArray: number[]) => void;
 }
-export const FavoriteContext = createContext<FavoriteContextProps | undefined>(
-  undefined
-);
+
+export const FavoriteContext = createContext<FavoriteContextProps | undefined>(undefined);
+
 export default function PokemonList() {
   const NUM_POKEMON = 151;
   const {

@@ -8,9 +8,7 @@ describe('getPokemonData', () => {
     expect(result.id).toEqual(1);
     expect(result.name).toEqual('bulbasaur');
   });
-});
 
-describe('getPokemonDataList', () => {
   test('should return list of pokemon data', async () => {
     const url = 'https://pokeapi.co/api/v2/pokemon?limit=151';
     const result = await getPokemonDataList(url);
