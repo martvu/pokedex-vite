@@ -1,77 +1,172 @@
-/*
+
 import { Pokemon, NamedAPIResource, PokemonAbility, PokemonSprites, PokemonType, PokemonStat } from '../pokeApiTypes';  // Replace with the actual path to your types file
+import {expect, test} from 'vitest';
+import { render, fireEvent } from '@testing-library/react';
+import Pokemoncard from '../../components/pokemoncard';
+
+// Mocking localstorage and its functions
+const mockLocalStorage = (() => {
+  let store: Record<string, string> = {};
+
+  return {
+    getItem: (key: string) => store[key] || null,
+    setItem: (key: string, value: string) => {
+      store[key] = value;
+    },
+    removeItem: (key: string) => {
+      delete store[key];
+    },
+    clear: () => {
+      store = {};
+    },
+  };
+})();
+
+Object.defineProperty(window, 'localStorage', { value: mockLocalStorage });
 
 const mockPikachu: Pokemon = {
-    id: 25, 
-    name: "Pikachu", // Replace with the desired name
-    base_experience: 112, // Replace with the desired base experience
-    height: 4, // Replace with the desired height
-    is_default: true, // Replace with the desired value
-    order: 25, // Replace with the desired order
-    weight: 60, // Replace with the desired weight
-    abilities: [
-      {
-        is_hidden: false, // Replace with the desired value
-        slot: 1, // Replace with the desired slot
-        ability: {
-          name: "Static", // Replace with the ability name
-          url: "https://pokeapi.co/api/v2/ability/1/", // Replace with the actual URL
-        },
+  id: 25, 
+  name: "Pikachu", // Replace with the desired name
+  base_experience: 112, // Replace with the desired base experience
+  height: 4, // Replace with the desired height
+  is_default: true, // Replace with the desired value
+  order: 25, // Replace with the desired order
+  weight: 60, // Replace with the desired weight
+  abilities: [
+    {
+      is_hidden: false, // Replace with the desired value
+      slot: 1, // Replace with the desired slot
+      ability: {
+        name: "Static", // Replace with the ability name
+        url: "https://pokeapi.co/api/v2/ability/1/", // Replace with the actual URL
       },
-    ] as PokemonAbility[],
+    },
+  ] as PokemonAbility[],
+
+  forms: [] as NamedAPIResource[], // Replace with the desired forms
+
+  game_indices: [] as any[], // Replace with the desired game indices
+
+  held_items: [] as any[], // Replace with the desired held items
+
+  location_area_encounters: "", // Replace with the desired location area encounters
+
+  moves: [] as any[], // Replace with the desired moves
+
+  sprites: {
+    front_default: "https://example.com/pikachu-front.png", // Replace with the desired sprite URLs
+    front_shiny: "https://example.com/pikachu-front-shiny.png", // Replace with the desired sprite URLs
+    front_female: "https://example.com/pikachu-front-female.png", // Replace with the desired sprite URLs
+    front_shiny_female: "https://example.com/pikachu-front-shiny-female.png", // Replace with the desired sprite URLs
+    back_default: "https://example.com/pikachu-back.png", // Replace with the desired sprite URLs
+    back_shiny: "https://example.com/pikachu-back-shiny.png", // Replace with the desired sprite URLs
+    back_female: "https://example.com/pikachu-back-female.png", // Replace with the desired sprite URLs
+    back_shiny_female: "https://example.com/pikachu-back-shiny-female.png", // Replace with the desired sprite URLs
+  } as PokemonSprites,
+
+  species: {
+    name: "pikachu-species", // Replace with the species name
+    url: "https://pokeapi.co/api/v2/pokemon-species/25/", // Replace with the actual URL
+  } as NamedAPIResource,
+
+  stats: [
+    {
+      stat: {
+        name: "hp", // Replace with the stat name
+        url: "https://pokeapi.co/api/v2/stat/1/", // Replace with the actual URL
+      },
+      effort: 0, // Replace with the effort value
+      base_stat: 35, // Replace with the base stat value
+    } as PokemonStat,
+  ],
+
+  types: [
+    {
+      slot: 1, 
+      type: {
+        name: "electric", 
+        url: "https://pokeapi.co/api/v2/type/13/", 
+      },
+    } as PokemonType,
+    {
+      slot: 2, 
+      type: {
+        name: "fire",
+        url: "https://pokeapi.co/api/v2/type/13/", 
+      },
+    } as PokemonType,
+  ],
+};
+;
   
-    forms: [] as NamedAPIResource[], // Replace with the desired forms
+
+test('Props Test: Component displays correct information from pokemonInfo prop', async () => {
+
+  const element = document.createElement('div')
+  expect(element).not.toBeNull()
+
+  const { getByText } = render(<Pokemoncard pokemonInfo={mockPikachu} />);
+  // Assert that the component displays the correct name
+  expect(getByText('Pikachu').textContent).to.equal('Pikachu');
+  expect(getByText('Pikachu').textContent, 'Pikachu');
   
-    game_indices: [] as any[], // Replace with the desired game indices
+  // Assert that the component displays the correct ID
+  expect(getByText('#25').textContent).to.equal('#25');
   
-    held_items: [] as any[], // Replace with the desired held items
-  
-    location_area_encounters: "", // Replace with the desired location area encounters
-  
-    moves: [] as any[], // Replace with the desired moves
-  
-    sprites: {
-      front_default: "https://example.com/pikachu-front.png", // Replace with the desired sprite URLs
-      front_shiny: "https://example.com/pikachu-front-shiny.png", // Replace with the desired sprite URLs
-      front_female: "https://example.com/pikachu-front-female.png", // Replace with the desired sprite URLs
-      front_shiny_female: "https://example.com/pikachu-front-shiny-female.png", // Replace with the desired sprite URLs
-      back_default: "https://example.com/pikachu-back.png", // Replace with the desired sprite URLs
-      back_shiny: "https://example.com/pikachu-back-shiny.png", // Replace with the desired sprite URLs
-      back_female: "https://example.com/pikachu-back-female.png", // Replace with the desired sprite URLs
-      back_shiny_female: "https://example.com/pikachu-back-shiny-female.png", // Replace with the desired sprite URLs
-    } as PokemonSprites,
-  
-    species: {
-      name: "pikachu-species", // Replace with the species name
-      url: "https://pokeapi.co/api/v2/pokemon-species/25/", // Replace with the actual URL
-    } as NamedAPIResource,
-  
-    stats: [
-      {
-        stat: {
-          name: "hp", // Replace with the stat name
-          url: "https://pokeapi.co/api/v2/stat/1/", // Replace with the actual URL
-        },
-        effort: 0, // Replace with the effort value
-        base_stat: 35, // Replace with the base stat value
-      } as PokemonStat,
-    ],
-  
-    types: [
-      {
-        slot: 1, 
-        type: {
-          name: "electric", 
-          url: "https://pokeapi.co/api/v2/type/13/", 
-        },
-      } as PokemonType,
-      {
-        slot: 2, 
-        type: {
-          name: "fire",
-          url: "https://pokeapi.co/api/v2/type/13/", 
-        },
-      } as PokemonType,
-    ],
-  };
-  */
+  // Assert that the component displays the correct type
+  expect(getByText('electric').textContent).to.equal('electric');
+});
+
+test('Favorite Button Test: Test the functionality of the favorite button', () => {
+
+  const { queryAllByTestId  } = render(<Pokemoncard pokemonInfo={mockPikachu} />);
+
+  // Contains span and svg (therefore -> query ALL)
+  const favoriteButtons = queryAllByTestId ('favorite-button');
+  expect(favoriteButtons.length).toBeGreaterThan(0);
+
+  // This is the span element
+  const favoriteButton = favoriteButtons[0];
+  expect(favoriteButton.className).toContain('favorite-icon-inactive');
+
+  // Simulate a click on the button to add to favorites
+  fireEvent.click(favoriteButton);
+  expect(favoriteButton.className).toContain('favorite-icon-active');
+
+  // Simulate a click on the button to remove from favorites
+  fireEvent.click(favoriteButton);
+
+  // Assert that the button has the "favorite-icon-inactive" class again
+  expect(favoriteButton.className).toContain('favorite-icon-inactive');
+});
+
+test('Favorite Button Test: Test adding ID to localStorage when the favorite button is clicked', () => {
+  const { queryAllByTestId } = render(<Pokemoncard pokemonInfo={mockPikachu} />);
+
+  // Contains span and svg (therefore -> query ALL)
+  const favoriteButtons = queryAllByTestId('favorite-button');
+  expect(favoriteButtons.length).toBeGreaterThan(0);
+
+  // This is the span element
+  const favoriteButton = favoriteButtons[0];
+  expect(favoriteButton.className).toContain('favorite-icon-inactive');
+
+  // Mock localStorage
+  localStorage.setItem('favorites', JSON.stringify([]));
+
+  // Simulate a click on the button to add to favorites
+  fireEvent.click(favoriteButton);
+  expect(favoriteButton.className).toContain('favorite-icon-active');
+
+  // Check if the ID is added to localStorage
+  const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+  expect(favorites).toContain(mockPikachu.id.toString());
+
+  // Simulate a click on the button to remove from favorites
+  fireEvent.click(favoriteButton);
+
+  // Check if the ID is removed from localStorage
+  const updatedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+  expect(updatedFavorites).not.toContain(mockPikachu.id.toString());
+});
+

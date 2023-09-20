@@ -52,6 +52,7 @@ export default function Pokemoncard({ pokemonInfo }: PokemoncardProps) {
             className={
               isFavorited ? 'favorite-icon-active' : 'favorite-icon-inactive'
             }
+            data-testid="favorite-button"
           >
             <FavoriteBorderIcon />
           </span>
