@@ -3,7 +3,7 @@
 ## Team 48
 
 ## Pokedex
-This is a Pokedex app, using data from the (PokeApi)[https://pokeapi.co/]. 
+This is a Pokedex app, using data from the [PokeApi](https://pokeapi.co/). 
 
 # How to run project
 
