@@ -1,27 +1,22 @@
-import './App.css';
-import PokemonCard from './components/PokemonCard';
-import { usePokemonData } from './utils/pokeApi';
+import './style/App.css';
+import PokemonInfoPage from './components/PokemonInfoPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PokemonList from './components/PokemonList';
+import useDarkTheme from './context/useDarkTheme';
 
 function App() {
-  // access data from the usePokemonData hook
-  const { data, isError, isLoading, error } = usePokemonData('bulbasaur');
-  console.log(data);
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-  if (isError) {
-    const castedError = error as Error;
-    return <div>There was an error {castedError.message} </div>
-  }
-
-  if (!data) {
-    return <div>No data available yet...</div>;
-  }
+  const { darkMode } = useDarkTheme();
   return (
-    <div className='container'>
-      <PokemonCard pokemonInfo={data}/>
+    <div className={`app bg-container ${darkMode ? 'dark-mode' : ''}`}>
+      <Router>
+        <Routes>
+          <Route path="/project1" element={<PokemonList />} />
+          <Route path="/project1/pokemon/:id" element={<PokemonInfoPage />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
+        </Routes>
+      </Router>
     </div>
-  )
+  );
 }
 
 export default App;
