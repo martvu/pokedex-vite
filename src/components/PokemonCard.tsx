@@ -1,6 +1,6 @@
 import { Pokemon } from '../utils/pokeApiTypes';
 import { Link } from 'react-router-dom';
-import { TYPE_COLORS, TYPE_ICONS } from '../utils/constants';
+import { TYPE_COLORS } from '../utils/constants';
 import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
 import pokeballIcon from '../assets/img/pb-icon.svg';
 import { FavoriteIcon } from './FavoriteIcon.tsx';
@@ -53,9 +53,7 @@ export default function PokemonCard({ pokemonDetails }: PokemonCardProps) {
           >
             <img
               loading="lazy"
-              src={
-                TYPE_ICONS[type.type.name]
-              } /* { '../assets/icons/' + type.type.name + '.svg'} */
+              src={'./icons/' + type.type.name + '.svg'}
               alt={type.type.name}
             />
             {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}

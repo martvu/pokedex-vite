@@ -1,7 +1,7 @@
 // ThemeContext.tsx
 import { createContext, useState, ReactNode } from 'react';
 
-type ThemeContextType = {
+interface ThemeContextType {
   darkMode: boolean;
   toggleDarkMode: () => void;
 };
