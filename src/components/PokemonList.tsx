@@ -11,7 +11,9 @@ export interface FavoriteContextProps {
   setFavoritesArray: (favoritesArray: number[]) => void;
 }
 
-export const FavoriteContext = createContext<FavoriteContextProps | undefined>(undefined);
+export const FavoriteContext = createContext<FavoriteContextProps | undefined>(
+  undefined
+);
 
 export default function PokemonList() {
   const NUM_POKEMON = 151;

@@ -14,7 +14,7 @@ export function FavoriteIcon({ pokemonDetails }: FavoriteIconProps) {
       type="button"
       className="favorite-button"
       data-testid={`pokemon-details-${pokemonDetails.id}`}
-      onClick={(e) => {
+      onClick={e => {
         e.preventDefault();
         toggleFavorite(pokemonDetails.id);
       }}
@@ -26,7 +26,7 @@ export function FavoriteIcon({ pokemonDetails }: FavoriteIconProps) {
         data-testid="test-favorite-icon"
       >
         {isFavorite ? <MdFavorite /> : <MdFavoriteBorder />}
-      </span>   
+      </span>
     </button>
   );
 }

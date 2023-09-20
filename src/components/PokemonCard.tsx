@@ -1,30 +1,30 @@
-import {Pokemon} from '../utils/pokeApiTypes.tsx';
-import {Link} from 'react-router-dom';
-import {TYPE_COLORS, TYPE_ICONS} from '../utils/constants.tsx';
-import {formatPokemonName, getTypeColorGradient} from '../utils/utils.tsx';
+import { Pokemon } from '../utils/pokeApiTypes.tsx';
+import { Link } from 'react-router-dom';
+import { TYPE_COLORS, TYPE_ICONS } from '../utils/constants.tsx';
+import { formatPokemonName, getTypeColorGradient } from '../utils/utils.tsx';
 import pokeballIcon from '../assets/img/pb-icon.svg';
-import {FavoriteIcon} from "./FavoriteIcon.tsx";
+import { FavoriteIcon } from './FavoriteIcon.tsx';
 
 export interface PokemonCardProps {
   pokemonDetails: Pokemon;
 }
 
-export default function PokemonCard({
-  pokemonDetails
-}: PokemonCardProps) {
+export default function PokemonCard({ pokemonDetails }: PokemonCardProps) {
   const gradient = getTypeColorGradient(pokemonDetails);
 
-
   return (
-    <Link to={`/project1/pokemon/${pokemonDetails.id}`} className="pokemon-card-container"
-          style={{background: gradient}}>
+    <Link
+      to={`/project1/pokemon/${pokemonDetails.id}`}
+      className="pokemon-card-container"
+      style={{ background: gradient }}
+    >
       <div className="poketext pokemon-name">
         {formatPokemonName(pokemonDetails.name) || 'Missing name'}
       </div>
       <div className="poketext pokemon-id">
         {'#' + ('00' + pokemonDetails.id).slice(-3)}
       </div>
-      <FavoriteIcon pokemonDetails={pokemonDetails}/>
+      <FavoriteIcon pokemonDetails={pokemonDetails} />
       <div className="sprite-bg-container">
         <img
           loading="lazy"
@@ -49,7 +49,7 @@ export default function PokemonCard({
           <span
             key={type.slot}
             className="poketext type-icon"
-            style={{backgroundColor: `${TYPE_COLORS[type.type.name]}`}}
+            style={{ backgroundColor: `${TYPE_COLORS[type.type.name]}` }}
           >
             <img
               loading="lazy"
