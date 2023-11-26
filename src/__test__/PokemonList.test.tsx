@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PokemonList from '../pages/PokemonList';
-import { MemoryRouter, Routes, Route } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from '../context/ThemeContext';
 
 const queryClient = new QueryClient();
@@ -13,9 +13,7 @@ describe('PokemonList', () => {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <MemoryRouter initialEntries={['/project1']}>
-            <Routes>
-              <Route path="/project1" element={<PokemonList />} />
-            </Routes>
+            <PokemonList />
           </MemoryRouter>
         </ThemeProvider>
       </QueryClientProvider>
@@ -36,9 +34,7 @@ describe('Snapshot PokemonList', () => {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <MemoryRouter initialEntries={['/project1']}>
-            <Routes>
-              <Route path="/project1" element={<PokemonList />} />
-            </Routes>
+            <PokemonList />
           </MemoryRouter>
         </ThemeProvider>
       </QueryClientProvider>

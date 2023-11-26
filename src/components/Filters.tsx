@@ -83,7 +83,7 @@ function Filters({
     }
 
     setDisplayedPokemonList(filteredPokemon || []);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemonDataList, filters, favoritesArray]);
 
   return (

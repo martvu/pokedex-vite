@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import PokemonInfoPage from '../pages/PokemonInfoPage';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { ThemeProvider } from '../context/ThemeContext';
 import { act } from 'react-dom/test-utils';
 import { userEvent } from '@testing-library/user-event';
@@ -13,11 +13,9 @@ describe('PokemonInfoPage', () => {
     render(
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
-          <Router>
-            <Routes>
-              <Route path="/" element={<PokemonInfoPage />} />
-            </Routes>
-          </Router>
+          <MemoryRouter initialEntries={['/project1']}>
+            <PokemonInfoPage />
+          </MemoryRouter>
         </ThemeProvider>
       </QueryClientProvider>
     );
@@ -36,11 +34,9 @@ describe('PokemonInfoPage', () => {
     const { asFragment } = render(
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
-          <Router>
-            <Routes>
-              <Route path="/" element={<PokemonInfoPage />} />
-            </Routes>
-          </Router>
+          <MemoryRouter initialEntries={['/project1']}>
+            <PokemonInfoPage />
+          </MemoryRouter>
         </ThemeProvider>
       </QueryClientProvider>
     );

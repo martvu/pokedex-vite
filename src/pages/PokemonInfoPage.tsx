@@ -15,8 +15,7 @@ import { formatPokemonName, getTypeColorGradient } from '../utils/utils.tsx';
 import Header from '../components/Header.tsx';
 import { FavoriteIcon } from '../components/FavoriteIcon.tsx';
 import { FavoriteContext } from './PokemonList.tsx';
-import { HiMiniHome } from "react-icons/hi2";
-
+import { HiMiniHome } from 'react-icons/hi2';
 
 export default function PokemonInfoPage() {
   const { id } = useParams();
@@ -47,8 +46,9 @@ export default function PokemonInfoPage() {
       <Header />
       <div className="filler-div">
         <Link to="/">
-          <button className="link-home-btn"><HiMiniHome size={20}/>
-</button>
+          <button className="link-home-btn">
+            <HiMiniHome size={20} />
+          </button>
         </Link>
       </div>
       <div className="info-page-container">
