@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, test } from 'vitest';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import PokemonInfoPage from '../components/PokemonInfoPage';
+import PokemonInfoPage from '../pages/PokemonInfoPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '../context/ThemeContext';
 import { act } from 'react-dom/test-utils';

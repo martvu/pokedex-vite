@@ -14,7 +14,7 @@ export default function PokemonCard({ pokemonDetails }: PokemonCardProps) {
 
   return (
     <Link
-      to={`/project1/pokemon/${pokemonDetails.id}`}
+      to={`/pokemon/${pokemonDetails.id}`}
       className="pokemon-card-container"
       style={{ background: gradient }}
     >

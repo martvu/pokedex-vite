@@ -1,4 +1,5 @@
 import useTheme from '../context/useDarkTheme';
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
 function ThemeSwitch() {
   const { darkMode, toggleDarkMode } = useTheme();
@@ -8,7 +9,7 @@ function ThemeSwitch() {
       onClick={toggleDarkMode}
       className={`theme-switch ${darkMode ? 'dark-mode' : ''}`}
     >
-      {darkMode ? 'Turn Light' : 'Turn Dark'}
+      {darkMode ? <MdOutlineLightMode size={20}/> : <MdOutlineDarkMode size={20} />}
     </button>
   );
 }
