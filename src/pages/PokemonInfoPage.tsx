@@ -33,9 +33,7 @@ export default function PokemonInfoPage() {
   const [favoritesArray, setFavoritesArray] = useState<number[]>(
     JSON.parse(localStorage.getItem('favoritesArray') || '[]')
   );
-  if (error) {
-    return <div>Error fetching data </div>;
-  }
+  
   let gradient = 'black';
   if (pokemonDetails) {
     gradient = getTypeColorGradient(pokemonDetails);

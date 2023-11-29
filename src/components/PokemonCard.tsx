@@ -55,7 +55,7 @@ export default function PokemonCard({ pokemonDetails }: PokemonCardProps) {
               loading="lazy"
               src={
                 TYPE_ICONS[type.type.name]
-              } /* { '../assets/icons/' + type.type.name + '.svg'} */
+              } 
               alt={type.type.name}
             />
             {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
