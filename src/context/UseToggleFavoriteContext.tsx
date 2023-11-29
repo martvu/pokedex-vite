@@ -1,6 +1,6 @@
 import { Pokemon } from '../utils/pokeApiTypes.tsx';
 import { useContext, useEffect } from 'react';
-import { FavoriteContext } from '../components/PokemonList.tsx';
+import { FavoriteContext } from '../pages/PokemonList.tsx';
 
 export function useToggleFavoriteContext(pokemonDetails: Pokemon) {
   const context = useContext(FavoriteContext);

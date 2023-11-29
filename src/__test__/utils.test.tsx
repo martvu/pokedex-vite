@@ -19,7 +19,7 @@ describe('formatPokemonName', () => {
 });
 
 describe('getTypeColorGradient', () => {
-  test('should return a string with the first letter capitalized', () => {
+  test('should return the correct color gradient (grass)', () => {
     const result = getTypeColorGradient({
       types: [
         {
@@ -37,12 +37,8 @@ describe('getTypeColorGradient', () => {
       is_default: false,
       order: 0,
       weight: 0,
-      abilities: [],
       forms: [],
-      game_indices: [],
-      held_items: [],
       location_area_encounters: '',
-      moves: [],
       sprites: {
         front_default: '',
         other: { 'official-artwork': { front_default: '' } },

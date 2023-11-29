@@ -8,7 +8,7 @@ function Header() {
       <div className="pokeball-header-icon">
         <img src={pokeball} alt="pokeball icon" />
         <div className="header-link-container">
-          <Link className="link" to="/project1/">
+          <Link className="link" to="/">
             <h1>Pokedex</h1>
           </Link>
         </div>

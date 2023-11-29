@@ -11,7 +11,7 @@ import {
 } from '../utils/pokeApiTypes';
 import { ThemeProvider } from '../context/ThemeContext';
 import { useState } from 'react';
-import { FavoriteContext } from '../components/PokemonList';
+import { FavoriteContext } from '../pages/PokemonList';
 
 // Create a mock context
 // Mock context provider
