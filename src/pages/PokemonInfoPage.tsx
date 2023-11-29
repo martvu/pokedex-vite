@@ -1,16 +1,21 @@
-import { usePokemonData, useSpeciesData } from '../utils/pokeApi';
+import { usePokemonData, useSpeciesData } from '../utils/pokeApi.tsx';
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
   TYPE_COLORS,
   STAT_COLORS,
   MAX_NO_OF_POKEMON,
-} from '../utils/constants';
-import { FlavorText, PokemonStat, PokemonType } from '../utils/pokeApiTypes';
-import { formatPokemonName, getTypeColorGradient } from '../utils/utils';
-import Header from './Header';
-import { FavoriteIcon } from './FavoriteIcon.tsx';
+} from '../utils/constants.tsx';
+import {
+  FlavorText,
+  PokemonStat,
+  PokemonType,
+} from '../utils/pokeApiTypes.tsx';
+import { formatPokemonName, getTypeColorGradient } from '../utils/utils.tsx';
+import Header from '../components/Header.tsx';
+import { FavoriteIcon } from '../components/FavoriteIcon.tsx';
 import { FavoriteContext } from './PokemonList.tsx';
+import { HiMiniHome } from 'react-icons/hi2';
 
 export default function PokemonInfoPage() {
   const { id } = useParams();
@@ -28,7 +33,7 @@ export default function PokemonInfoPage() {
   const [favoritesArray, setFavoritesArray] = useState<number[]>(
     JSON.parse(localStorage.getItem('favoritesArray') || '[]')
   );
-  
+
   let gradient = 'black';
   if (pokemonDetails) {
     gradient = getTypeColorGradient(pokemonDetails);
@@ -37,7 +42,13 @@ export default function PokemonInfoPage() {
   return (
     <FavoriteContext.Provider value={{ favoritesArray, setFavoritesArray }}>
       <Header />
-      <div className="filler-div"></div>
+      <div className="filler-div">
+        <Link to="/">
+          <button className="link-home-btn">
+            <HiMiniHome size={20} />
+          </button>
+        </Link>
+      </div>
       <div className="info-page-container">
         {isLoading || (isLoadingSpecies && <div>Loading...</div>)}
         {error || (speciesError && <div>Error fetching data </div>)}
@@ -82,7 +93,7 @@ export default function PokemonInfoPage() {
               </div>
             </div>
             <div>
-              <Link to={`/project1/pokemon/${(currentId - 1).toString()}`}>
+              <Link to={`/pokemon/${(currentId - 1).toString()}`}>
                 <button
                   onClick={() => setCurrentId(currentId - 1)}
                   disabled={currentId === 1}
@@ -91,7 +102,7 @@ export default function PokemonInfoPage() {
                   Prev
                 </button>
               </Link>
-              <Link to={`/project1/pokemon/${(currentId + 1).toString()}`}>
+              <Link to={`/pokemon/${(currentId + 1).toString()}`}>
                 <button
                   onClick={() => setCurrentId(currentId + 1)}
                   disabled={currentId === MAX_NO_OF_POKEMON}

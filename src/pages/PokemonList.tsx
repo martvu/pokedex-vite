@@ -1,9 +1,9 @@
 import { usePokemonDataList } from '../utils/pokeApi';
-import PokemonCard from './PokemonCard';
+import PokemonCard from '../components/PokemonCard';
 import { createContext, useState } from 'react';
 import { Pokemon } from '../utils/pokeApiTypes';
-import Header from './Header';
-import Filters from './Filters';
+import Header from '../components/Header';
+import Filters from '../components/Filters';
 import loadingIcon from '../assets/img/poke-loading.gif';
 
 export interface FavoriteContextProps {

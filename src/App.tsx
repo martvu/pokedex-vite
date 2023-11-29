@@ -1,17 +1,17 @@
 import './style/App.css';
-import PokemonInfoPage from './components/PokemonInfoPage';
+import PokemonInfoPage from './pages/PokemonInfoPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import PokemonList from './components/PokemonList';
+import PokemonList from './pages/PokemonList';
 import useDarkTheme from './context/useDarkTheme';
 
 function App() {
   const { darkMode } = useDarkTheme();
   return (
     <div className={`app bg-container ${darkMode ? 'dark-mode' : ''}`}>
-      <Router>
+      <Router basename="/project1">
         <Routes>
-          <Route path="/project1" element={<PokemonList />} />
-          <Route path="/project1/pokemon/:id" element={<PokemonInfoPage />} />
+          <Route path="/" element={<PokemonList />} />
+          <Route path="/pokemon/:id" element={<PokemonInfoPage />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </Router>

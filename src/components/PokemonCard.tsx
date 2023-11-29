@@ -14,7 +14,7 @@ export default function PokemonCard({ pokemonDetails }: PokemonCardProps) {
 
   return (
     <Link
-      to={`/project1/pokemon/${pokemonDetails.id}`}
+      to={`/pokemon/${pokemonDetails.id}`}
       className="pokemon-card-container"
       style={{ background: gradient }}
     >
@@ -53,9 +53,7 @@ export default function PokemonCard({ pokemonDetails }: PokemonCardProps) {
           >
             <img
               loading="lazy"
-              src={
-                TYPE_ICONS[type.type.name]
-              } 
+              src={TYPE_ICONS[type.type.name]}
               alt={type.type.name}
             />
             {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
