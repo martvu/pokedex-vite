@@ -30,7 +30,6 @@ describe('PokemonList', () => {
     expect(await screen.findByText(/type/i)).toBeInTheDocument();
     expect(await screen.findByText(/pokedex/i)).toBeInTheDocument();
   });
-
 });
 
 describe('Snapshot PokemonList', () => {
@@ -38,5 +37,4 @@ describe('Snapshot PokemonList', () => {
     const { asFragment } = renderPokemonList();
     expect(asFragment()).toMatchSnapshot();
   });
-
 });

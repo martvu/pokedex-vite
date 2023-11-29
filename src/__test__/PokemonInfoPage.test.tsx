@@ -16,7 +16,7 @@ const renderPokemonInfoPage = () => {
       </ThemeProvider>
     </QueryClientProvider>
   );
-}
+};
 
 describe('PokemonInfoPage', () => {
   test('pokemonInfoPage renders', async () => {
@@ -26,11 +26,10 @@ describe('PokemonInfoPage', () => {
     expect(await screen.findByText(/Seed Pokémon/i)).toBeInTheDocument();
     expect(await screen.findByText(/Grass/i)).toBeInTheDocument();
     expect(await screen.findByText(/Description/i)).toBeInTheDocument();
-
   });
 
   test('snapshot of pokemonInfoPage', async () => {
-    const { asFragment } = renderPokemonInfoPage()
+    const { asFragment } = renderPokemonInfoPage();
     expect(asFragment()).toMatchSnapshot();
   });
 });

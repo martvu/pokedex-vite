@@ -3,7 +3,8 @@
 ## Team 48
 
 ## Pokedex
-This is a Pokedex app, using data from the [PokeApi](https://pokeapi.co/). 
+
+This is a Pokedex app, using data from the [PokeApi](https://pokeapi.co/).
 
 # How to run project
 
@@ -16,6 +17,7 @@ npm run dev
 ```
 
 # Prettier
+
 We use prettier for code formatting
 
 To format all files in the project run:
@@ -34,7 +36,6 @@ npx prettier . --check
 
 Tests use Vitest, React testing library and jest-dom.
 Mocking API calls use Mocking Service Worker (msw).
-
 
 To run tests:
 
@@ -70,9 +71,9 @@ For the tests, we have mocked the API calls using msw. This is done in the setup
 
 The mainpage PokemonList is a list of all the Pokemons, and the user can click on a Pokemon to go directly to that Pokemons PokemonInfoPage. We decided to only include the 151 first pokemon for this small project to limit the amount of data fetched from the API. We use React Router in our app and Link to navigate between PokemonList and PokemonInfoPage. On the PokemonInfoPage the user can easily go back and forth between the Pokemons by clicking on a 'Back' and 'Next' button. Data is fetched from the Poke API. We have implemented custom hooks using the useQuery (Tanstack Query) hook to fetch data from the API.
 
-To allow the user to filter PokemonCards, we have created a page "header" that contains filter and sorting functionality. Using this, the user is able to filter pokemons on type and to sort pokemon. When a filter is selected, the filter-value is added to session storage (technical requirement). There is also a search functionality to easily find the pokemon you want to see. 
+To allow the user to filter PokemonCards, we have created a page "header" that contains filter and sorting functionality. Using this, the user is able to filter pokemons on type and to sort pokemon. When a filter is selected, the filter-value is added to session storage (technical requirement). There is also a search functionality to easily find the pokemon you want to see.
 
-A user can choose to favorite a Pokemon by clicking on a heart icon on the pokemon card. When the heart-icon is clicked, the id of the pokemon is added to a "favorites" array in localstorage. This allows the pokemon to remain favorited when the browser is restarted. The user can also filter on favorited pokemon, by clicking on the "favorites" button in the header. This will filter out all non-favorited pokemon. We have a context for this to share state between PokemonList and PokemonInfoPage. 
+A user can choose to favorite a Pokemon by clicking on a heart icon on the pokemon card. When the heart-icon is clicked, the id of the pokemon is added to a "favorites" array in localstorage. This allows the pokemon to remain favorited when the browser is restarted. The user can also filter on favorited pokemon, by clicking on the "favorites" button in the header. This will filter out all non-favorited pokemon. We have a context for this to share state between PokemonList and PokemonInfoPage.
 
 To make the website responsive, we utilize flex box and media queries with predefined width-settings based on screen-size. This makes the application self-adjustable. The application is responsive (technical requirement) on all screen sizes defined within the firefox inspector's Responsive Design Mode.
 

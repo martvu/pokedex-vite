@@ -53,9 +53,7 @@ export default function PokemonCard({ pokemonDetails }: PokemonCardProps) {
           >
             <img
               loading="lazy"
-              src={
-                TYPE_ICONS[type.type.name]
-              } 
+              src={TYPE_ICONS[type.type.name]}
               alt={type.type.name}
             />
             {type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}
