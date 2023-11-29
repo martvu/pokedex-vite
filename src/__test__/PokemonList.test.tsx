@@ -7,17 +7,21 @@ import { ThemeProvider } from '../context/ThemeContext';
 
 const queryClient = new QueryClient();
 
+const renderPokemonList = () => {
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <MemoryRouter initialEntries={['/project1']}>
+          <PokemonList />
+        </MemoryRouter>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+};
+
 describe('PokemonList', () => {
   test('pokemonlist renders', async () => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <MemoryRouter initialEntries={['/project1']}>
-            <PokemonList />
-          </MemoryRouter>
-        </ThemeProvider>
-      </QueryClientProvider>
-    );
+    renderPokemonList();
 
     expect(await screen.findByText(/bulbasaur/i)).toBeInTheDocument();
     expect(await screen.findByText(/ivysaur/i)).toBeInTheDocument();
@@ -26,19 +30,13 @@ describe('PokemonList', () => {
     expect(await screen.findByText(/type/i)).toBeInTheDocument();
     expect(await screen.findByText(/pokedex/i)).toBeInTheDocument();
   });
+
 });
 
 describe('Snapshot PokemonList', () => {
   test('snapshot of pokemonlist', async () => {
-    const { asFragment } = render(
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <MemoryRouter initialEntries={['/project1']}>
-            <PokemonList />
-          </MemoryRouter>
-        </ThemeProvider>
-      </QueryClientProvider>
-    );
+    const { asFragment } = renderPokemonList();
     expect(asFragment()).toMatchSnapshot();
   });
+
 });
