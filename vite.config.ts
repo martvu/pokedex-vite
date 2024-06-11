@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react-swc';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/project1',
+  base: '/pokedex-vite/',
   test: {
     globals: true,
     setupFiles: ['src/setupTests.ts'],
