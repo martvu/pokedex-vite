@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.35.0",
-    "@vitejs/plugin-react-swc": "^3.3.2",
+    "@vitejs/plugin-react-swc": "^3.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",

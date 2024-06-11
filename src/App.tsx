@@ -8,7 +8,7 @@ function App() {
   const { darkMode } = useDarkTheme();
   return (
     <div className={`app bg-container ${darkMode ? 'dark-mode' : ''}`}>
-      <Router basename="/project1">
+      <Router basename="/pokedex-vite">
         <Routes>
           <Route path="/" element={<PokemonList />} />
           <Route path="/pokemon/:id" element={<PokemonInfoPage />} />
