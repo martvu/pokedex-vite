@@ -24,6 +24,12 @@ export function useSpeciesData(pokemonId: string) {
   );
 }
 
+export function useTypeData(typeId: string) {
+  return useQuery(['typeData', typeId], () =>
+    getPokemonData('https://pokeapi.co/api/v2/type/' + typeId + '/')
+  );
+}
+
 export const getPokemonData = async (url: string) => {
   try {
     const response = await fetch(url);

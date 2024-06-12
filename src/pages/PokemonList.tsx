@@ -5,6 +5,7 @@ import { Pokemon } from '../utils/pokeApiTypes';
 import Header from '../components/Header';
 import Filters from '../components/Filters';
 import loadingIcon from '../assets/img/poke-loading.gif';
+import { MAX_NO_OF_POKEMON } from '../utils/constants';
 
 export interface FavoriteContextProps {
   favoritesArray: number[];
@@ -16,12 +17,11 @@ export const FavoriteContext = createContext<FavoriteContextProps | undefined>(
 );
 
 export default function PokemonList() {
-  const NUM_POKEMON = 151;
   const {
     data: pokemonDataList,
     isLoading,
     error,
-  } = usePokemonDataList(NUM_POKEMON);
+  } = usePokemonDataList(MAX_NO_OF_POKEMON);
   // handle filters
   const [displayedPokemonList, setDisplayedPokemonList] = useState<Pokemon[]>(
     []

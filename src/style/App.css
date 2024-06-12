@@ -636,6 +636,15 @@ h4 {
   animation: fadeIn 1s ease-in-out;
 }
 
+.info-pokemon-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+}
+
 .info-type-list {
   display: flex;
   justify-content: center;
@@ -673,6 +682,14 @@ h4 {
   width: 10px;
   height: 10px;
   margin-right: 3px;
+}
+
+.weakness-list, .resistant-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0.5rem;
 }
 
 .pokemon-description {

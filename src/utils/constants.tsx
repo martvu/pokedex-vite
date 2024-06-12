@@ -115,3 +115,4 @@ export const STAT_COLORS: Record<string, string> = {
   'special-defense': '#78c84f',
   speed: '#f95887',
 };
+

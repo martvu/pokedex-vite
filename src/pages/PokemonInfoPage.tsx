@@ -1,5 +1,5 @@
 import { usePokemonData, useSpeciesData } from '../utils/pokeApi.tsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
   TYPE_COLORS,
@@ -16,6 +16,7 @@ import Header from '../components/Header.tsx';
 import { FavoriteIcon } from '../components/FavoriteIcon.tsx';
 import { FavoriteContext } from './PokemonList.tsx';
 import { HiMiniHome } from 'react-icons/hi2';
+import Weaknesses from '../components/Weaknesses.tsx';
 
 export default function PokemonInfoPage() {
   const { id } = useParams();
@@ -33,6 +34,13 @@ export default function PokemonInfoPage() {
   const [favoritesArray, setFavoritesArray] = useState<number[]>(
     JSON.parse(localStorage.getItem('favoritesArray') || '[]')
   );
+  const [types, setTypes] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (pokemonDetails) {
+      setTypes(pokemonDetails.types.map((type: PokemonType) => type.type.name));
+    }
+  }, [pokemonDetails]);
 
   let gradient = 'black';
   if (pokemonDetails) {
@@ -73,22 +81,28 @@ export default function PokemonInfoPage() {
                 />
               </div>
               <div className="info-pokemon-data">
+              <div className="pokemon-genus">
+                  {speciesData?.genera[7]?.genus}
+                </div>
                 <div className="info-type-list">
-                  {pokemonDetails.types.map((type: PokemonType) => (
+                  {types.map(type => (
                     <span
-                      key={type.slot}
+                      key={type}
                       className="info-type-badge"
                       style={{
-                        backgroundColor: `${TYPE_COLORS[type.type.name]}`,
+                        backgroundColor: `${TYPE_COLORS[type]}`,
+                        // capitalize
+                        textTransform: 'capitalize',
+                        // text color white
+                        color: 'white',
                       }}
                     >
-                      {type.type.name.charAt(0).toUpperCase() +
-                        type.type.name.slice(1)}
+                      {type}
                     </span>
                   ))}
                 </div>
-                <div className="pokemon-genus">
-                  {speciesData?.genera[7]?.genus}
+                <div>
+                  <Weaknesses types={types} />
                 </div>
               </div>
             </div>
