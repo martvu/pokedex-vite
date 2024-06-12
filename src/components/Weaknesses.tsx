@@ -27,8 +27,7 @@ export default function Weaknesses({ types }: { types: string[] }) {
     setWeaknesses(weak);
     setResistances(resistant);
   }, [types]);
-
-  console.log(weaknesses, resistances);
+  
   return (
     <div className="info-pokemon-data">
       <p>Weak to:</p>
